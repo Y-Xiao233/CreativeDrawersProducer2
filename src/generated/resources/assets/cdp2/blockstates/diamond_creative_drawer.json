@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "subfacing=east": {
+      "model": "cdp2:block/creative_drawer",
+      "y": 90
+    },
+    "subfacing=north": {
+      "model": "cdp2:block/creative_drawer"
+    },
+    "subfacing=south": {
+      "model": "cdp2:block/creative_drawer",
+      "y": 180
+    },
+    "subfacing=west": {
+      "model": "cdp2:block/creative_drawer",
+      "y": 270
+    }
+  }
+}

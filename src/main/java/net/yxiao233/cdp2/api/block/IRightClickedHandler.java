@@ -1,0 +1,9 @@
+package net.yxiao233.cdp2.api.block;
+
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+
+public interface IRightClickedHandler {
+    void onRightClicked(LivingEntity entity, BlockEntity blockEntity);
+}
