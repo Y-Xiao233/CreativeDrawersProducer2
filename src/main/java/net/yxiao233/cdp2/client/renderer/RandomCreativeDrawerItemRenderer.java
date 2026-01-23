@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
 import net.yxiao233.cdp2.api.renderer.CDPItemRenderer;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
-import net.yxiao233.cdp2.util.RendererUtil;
+import net.yxiao233.cdp2.util.RenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class RandomCreativeDrawerItemRenderer extends CDPItemRenderer {
     @SuppressWarnings("all")
     @Override
     public void renderByItem(@NotNull ItemStack stack, @NotNull ItemDisplayContext displayContext, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        RendererUtil.renderBlockItem(drawersMap.values().stream().toList().getFirst().asItem().getDefaultInstance(), displayContext, poseStack, buffer, packedLight, packedOverlay, ModelData.EMPTY, (pose) -> {
+        RenderUtil.renderBlockItem(drawersMap.values().stream().toList().getFirst().asItem().getDefaultInstance(), displayContext, poseStack, buffer, packedLight, packedOverlay, ModelData.EMPTY, (pose) -> {
             pose.mulPose(Axis.YP.rotationDegrees(180));
             pose.mulPose(Axis.XN.rotationDegrees(90));
             pose.mulPose(Axis.YP.rotationDegrees(90));
@@ -65,7 +65,7 @@ public class RandomCreativeDrawerItemRenderer extends CDPItemRenderer {
                 poseStack.translate(0,0,0.16f);
             }
             poseStack.translate(0,0.1f,0.05f);
-            RendererUtil.renderText(poseStack,buffer,packedLight, Component.literal("2.14G"),0.6f);
+            RenderUtil.renderText(poseStack,buffer,packedLight, Component.literal("2.14G"),0.6f);
         }
 
 

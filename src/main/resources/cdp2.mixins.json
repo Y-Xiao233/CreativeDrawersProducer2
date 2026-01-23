@@ -4,6 +4,9 @@
   "package": "net.yxiao233.cdp2.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "mekanism.BlockMekanismMixin",
+    "mekanism.ItemUpgradeMixin",
+    "mekanism.TileComponentUpgradeMixin"
   ],
   "client": [
   ],

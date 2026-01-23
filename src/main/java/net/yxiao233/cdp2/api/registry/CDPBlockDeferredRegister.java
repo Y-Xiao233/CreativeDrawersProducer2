@@ -4,7 +4,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
@@ -28,6 +27,12 @@ public class CDPBlockDeferredRegister {
     public static CDPBlockDeferredRegister registrySimple(String name, Supplier<? extends Block> sup, @Nullable Item.Properties itemProperties){
         DeferredHolder<Block,Block> block = registryBlock(name,sup);
         CDPItemDeferredRegister item = registryItem(name,block,itemProperties);
+        return new CDPBlockDeferredRegister(block,item);
+    }
+
+    public static CDPBlockDeferredRegister register(String name, Supplier<? extends Block> blockSupplier, BlockItemSupplier blockItemSupplier){
+        DeferredHolder<Block, Block> block = registryBlock(name,blockSupplier);
+        CDPItemDeferredRegister item = CDPItemDeferredRegister.registryItem(name,blockItemSupplier.accept(block));
         return new CDPBlockDeferredRegister(block,item);
     }
 
@@ -76,5 +81,10 @@ public class CDPBlockDeferredRegister {
 
     public CDPItemDeferredRegister getItemRegister() {
         return itemRegister;
+    }
+
+    @FunctionalInterface
+    public interface BlockItemSupplier{
+        Supplier<? extends BlockItem> accept(Supplier<Block> blockSupplier);
     }
 }

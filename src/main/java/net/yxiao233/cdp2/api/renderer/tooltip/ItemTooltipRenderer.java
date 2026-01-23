@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.yxiao233.cdp2.util.RendererUtil;
+import net.yxiao233.cdp2.util.RenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
@@ -27,6 +27,6 @@ public class ItemTooltipRenderer implements ClientTooltipComponent {
     @Override
     public void renderImage(@NotNull Font font, int x, int y, @NotNull GuiGraphics guiGraphics) {
         guiGraphics.renderFakeItem(component.stack(),x,y);
-        RendererUtil.renderSizeLabel(guiGraphics, font, x, y, "2.14G", false);
+        RenderUtil.renderSizeLabel(guiGraphics, font, x, y, "2.14G", false);
     }
 }

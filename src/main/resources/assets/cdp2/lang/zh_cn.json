@@ -1,0 +1,33 @@
+{
+  "itemGroup.cdp2.drawer": "Creative Drawers Producer 2: Drawer",
+  "itemGroup.cdp2.content": "Creative Drawers Producer 2: Content",
+  "itemGroup.cdp2.machine": "Creative Drawers Producer 2: Machine",
+
+  "block.cpd2.creative_drawer": " 创造抽屉",
+  "block.cdp2.upgrade_station": "机器升级站",
+
+  "item.cdp2.random_creative_drawer": "随机创造抽屉",
+  "item.cdp2.creative_shard_1": "创造碎片 Tier 1",
+  "item.cdp2.creative_shard_2": "创造碎片 Tier 2",
+  "item.cdp2.creative_shard_3": "创造碎片 Tier 3",
+  "item.cdp2.creative_shard_4": "创造碎片 Tier 4",
+
+  "tooltip.cdp2.infinity": "Infinity!",
+
+  "tip.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
+
+  "gui.cdp2.input": "Input",
+  "gui.cdp2.range": "增加工作范围",
+  "gui.cdp.points": " = %s point%s",
+  "gui.cdp2.preview": "预览范围",
+  "gui.cdp2.hide": "隐藏范围",
+  "gui.cdp2.tab_main": "主要",
+  "gui.cdp2.tab_mekanism": "通用机械",
+  "gui.cdp2.tab_basic": "基础",
+  "gui.cdp2.decrease": "减少 §a1 §rpoint",
+  "gui.cdp2.increase": "增加 §a1 §rpoint",
+  "gui.cdp2.show_information": "展示信息",
+  "gui.cdp2.hide_information": "隐藏信息",
+  "gui.cdp2.reset": "重置当前页面所有点数",
+  "gui.cdp2.total_points": "研究点数: %d"
+}

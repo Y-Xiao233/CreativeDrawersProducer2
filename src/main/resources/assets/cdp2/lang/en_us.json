@@ -1,9 +1,33 @@
 {
   "itemGroup.cdp2.drawer": "Creative Drawers Producer 2: Drawer",
+  "itemGroup.cdp2.content": "Creative Drawers Producer 2: Content",
+  "itemGroup.cdp2.machine": "Creative Drawers Producer 2: Machine",
 
   "block.cpd2.creative_drawer": " Creative Drawer",
+  "block.cdp2.upgrade_station": "Upgrade Station",
 
   "item.cdp2.random_creative_drawer": "Random Creative Drawer",
+  "item.cdp2.creative_shard_1": "Creative Shard Tier 1",
+  "item.cdp2.creative_shard_2": "Creative Shard Tier 2",
+  "item.cdp2.creative_shard_3": "Creative Shard Tier 3",
+  "item.cdp2.creative_shard_4": "Creative Shard Tier 4",
 
-  "tooltip.cdp2.infinity": "Infinity!"
+  "tooltip.cdp2.infinity": "Infinity!",
+
+  "tip.cdp2.mek_upgrade": "Need to use Upgrade Station to upgrade this machine",
+
+  "gui.cdp2.input": "Input",
+  "gui.cdp2.range": "Add Working Range",
+  "gui.cdp.points": " = %s point%s",
+  "gui.cdp2.preview": "Preview Range",
+  "gui.cdp2.hide": "Hide Range",
+  "gui.cdp2.tab_main": "Main",
+  "gui.cdp2.tab_mekanism": "mekanism",
+  "gui.cdp2.tab_basic": "Basic",
+  "gui.cdp2.decrease": "Decrease §a1 §rpoint",
+  "gui.cdp2.increase": "Increase §a1 §rpoint",
+  "gui.cdp2.show_information": "Show Information",
+  "gui.cdp2.hide_information": "Hide Information",
+  "gui.cdp2.reset": "Reset All points(only for this page)",
+  "gui.cdp2.total_points": "Research points: %d"
 }

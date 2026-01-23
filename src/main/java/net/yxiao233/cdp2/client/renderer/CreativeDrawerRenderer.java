@@ -14,7 +14,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.yxiao233.cdp2.api.block.property.RotationHandler;
 import net.yxiao233.cdp2.api.renderer.CDPBaseBlockEntityRenderer;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
-import net.yxiao233.cdp2.util.RendererUtil;
+import net.yxiao233.cdp2.util.RenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
@@ -57,7 +57,7 @@ public class CreativeDrawerRenderer extends CDPBaseBlockEntityRenderer<CreativeD
             poseStack.translate(0,0,0.16f);
         }
         poseStack.translate(0,0.1f,0.05f);
-        RendererUtil.renderText(poseStack,multiBufferSource,combinedLight, Component.literal("2.14G"),0.6f);
+        RenderUtil.renderText(poseStack,multiBufferSource,combinedLight, Component.literal("2.14G"),0.6f);
 
         poseStack.popPose();
     }

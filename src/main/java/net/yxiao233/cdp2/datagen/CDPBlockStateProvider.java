@@ -11,10 +11,13 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.api.block.property.IRotatableBlock;
 import net.yxiao233.cdp2.api.block.property.RotationHandler;
 import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
+import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
+import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
 
@@ -31,6 +34,8 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         });
 
         builtinEntityItem(CDPItem.RANDOM_CREATIVE_DRAWER);
+        fourWayBlockState(CDPBlock.UPGRADE_STATION);
+        onlyItem(CDPBlock.UPGRADE_STATION);
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){
@@ -66,32 +71,50 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         );
     }
 
-    private void drawerBlockState(CDPBlockEntityDeferredRegister<?> register){
+    private void fourWayBlockState(CDPBlockEntityDeferredRegister<?> register, String modelPath){
+        if(register.asBlock() instanceof IRotatableBlock rotatableBlock) {
+            fourWayBlockState((Block & IRotatableBlock) rotatableBlock, modelPath);
+        }
+    }
+
+    private void fourWayBlockState(CDPBlockEntityDeferredRegister<?> register){
+        fourWayBlockState(register,BuiltInRegistries.BLOCK.getKey(register.asBlock()).getPath());
+    }
+    private <T extends Block & IRotatableBlock> void fourWayBlockState(T block, String modelPath){
+        fourWayBlockState(block,ResourceLocation.fromNamespaceAndPath(CreativeDrawersProducer2.MODID, "block/" + modelPath));
+    }
+
+    private <T extends Block & IRotatableBlock> void fourWayBlockState(T block, ResourceLocation modelPath){
         Property<Direction> property = RotationHandler.FACING_HORIZONTAL;
-        ResourceLocation modelLocation = ResourceLocation.fromNamespaceAndPath(CreativeDrawersProducer2.MODID, "block/creative_drawer");
-        getVariantBuilder(register.asBlock())
+        getVariantBuilder(block)
                 .partialState().with(property, Direction.NORTH)
                 .modelForState()
-                .modelFile(models().getExistingFile(modelLocation))
+                .modelFile(models().getExistingFile(modelPath))
                 .rotationY(0)
                 .addModel()
 
                 .partialState().with(property, Direction.EAST)
                 .modelForState()
-                .modelFile(models().getExistingFile(modelLocation))
+                .modelFile(models().getExistingFile(modelPath))
                 .rotationY(90)
                 .addModel()
 
                 .partialState().with(property, Direction.SOUTH)
                 .modelForState()
-                .modelFile(models().getExistingFile(modelLocation))
+                .modelFile(models().getExistingFile(modelPath))
                 .rotationY(180)
                 .addModel()
 
                 .partialState().with(property, Direction.WEST)
                 .modelForState()
-                .modelFile(models().getExistingFile(modelLocation))
+                .modelFile(models().getExistingFile(modelPath))
                 .rotationY(270)
                 .addModel();
+    }
+
+    private void drawerBlockState(CDPBlockEntityDeferredRegister<?> register){
+        if(register.asBlock() instanceof CreativeDrawerBlock drawerBlock){
+            fourWayBlockState(drawerBlock,"creative_drawer");
+        }
     }
 }

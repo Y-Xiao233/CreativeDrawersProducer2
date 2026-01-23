@@ -1,6 +1,7 @@
 package net.yxiao233.cdp2.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,5 +16,12 @@ public class LevelUtil {
         double d3 = (double)pos.getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
         ItemEntity item = new ItemEntity(level, d1, d2, d3, stack);
         level.addFreshEntity(item);
+    }
+
+    public static boolean checkDimension(ResourceKey<Level> dimension1, ResourceKey<Level> dimension2) {
+        if (dimension1 == null || dimension2 == null) {
+            return false;
+        }
+        return dimension1.equals(dimension2);
     }
 }

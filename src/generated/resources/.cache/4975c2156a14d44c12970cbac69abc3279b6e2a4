@@ -1,3 +1,4 @@
-// 1.21.1	2026-01-15T16:41:00.3757613	Tags for minecraft:block mod id cdp2
+// 1.21.1	2026-01-23T01:36:48.4328697	Tags for minecraft:block mod id cdp2
 efcbd672bc6891d59e5edcdd88d2b8004618e2d5 data/cdp2/tags/block/creative_drawers.json
 efcbd672bc6891d59e5edcdd88d2b8004618e2d5 data/minecraft/tags/block/mineable/axe.json
+6102cf8317caf3d8a753aab53506ba6e19c3feb7 data/minecraft/tags/block/mineable/pickaxe.json

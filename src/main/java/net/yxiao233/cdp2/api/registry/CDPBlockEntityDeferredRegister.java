@@ -1,5 +1,6 @@
 package net.yxiao233.cdp2.api.registry;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -33,6 +34,12 @@ public class CDPBlockEntityDeferredRegister<T extends BlockEntity> {
 
     public static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, Supplier<? extends Block> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, Item.Properties itemProperties){
         CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.registrySimple(name, blockSupplier, itemProperties);
+        DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> blockEntityType = CDPBlock.BLOCK_ENTITIES.register(name,() -> BlockEntityType.Builder.of(blockEntitySupplier,blockWithItem.asBlock()).build(null));
+        return new CDPBlockEntityDeferredRegister<>(blockWithItem,blockEntityType);
+    }
+
+    public static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> register(String name, Supplier<? extends Block> blockSupplier, CDPBlockDeferredRegister.BlockItemSupplier blockItemSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
+        CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.register(name,blockSupplier,blockItemSupplier);
         DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> blockEntityType = CDPBlock.BLOCK_ENTITIES.register(name,() -> BlockEntityType.Builder.of(blockEntitySupplier,blockWithItem.asBlock()).build(null));
         return new CDPBlockEntityDeferredRegister<>(blockWithItem,blockEntityType);
     }

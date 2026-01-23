@@ -35,6 +35,9 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(drawers);
 
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(CDPBlock.UPGRADE_STATION.asBlock());
+
         this.tag(CDPTag.Blocks.CREATIVE_DRAWERS)
                 .add(drawers);
     }

@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.common.registry.CDPItem;
 import org.jetbrains.annotations.NotNull;
 
 public class CDPItemModelProvider extends ItemModelProvider {
@@ -19,5 +20,6 @@ public class CDPItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        CDPItem.SHARDS.values().forEach(register -> basicItem(register.asItem()));
     }
 }

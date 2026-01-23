@@ -10,6 +10,7 @@ import net.yxiao233.cdp2.CreativeDrawersProducer2;
 public class CDPTag {
     public static class Items{
         public static final TagKey<Item> CREATIVE_DRAWERS = createTag("creative_drawers");
+        public static final TagKey<Item> CREATIVE_SHARDS = createTag("creative_shards");
         private static TagKey<Item> createTag(String name){
             return ItemTags.create(CreativeDrawersProducer2.makeId(name));
         }

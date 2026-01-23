@@ -5,7 +5,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.registry.CDPTag;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,5 +31,8 @@ public class CDPItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(CDPTag.Items.CREATIVE_DRAWERS)
                 .add(getDrawers());
+
+        tag(CDPTag.Items.CREATIVE_SHARDS)
+                .add(CDPItem.SHARDS.values().stream().map(CDPItemDeferredRegister::asItem).toArray(Item[]::new));
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "subfacing=east": {
+      "model": "cdp2:block/upgrade_station",
+      "y": 90
+    },
+    "subfacing=north": {
+      "model": "cdp2:block/upgrade_station"
+    },
+    "subfacing=south": {
+      "model": "cdp2:block/upgrade_station",
+      "y": 180
+    },
+    "subfacing=west": {
+      "model": "cdp2:block/upgrade_station",
+      "y": 270
+    }
+  }
+}
