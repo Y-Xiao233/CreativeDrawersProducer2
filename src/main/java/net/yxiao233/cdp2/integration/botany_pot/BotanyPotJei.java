@@ -14,16 +14,12 @@ public class BotanyPotJei {
     public static final List<Block> POTS = List.of(
             get("botanypots:terracotta_botany_pot"),
             get("botanypots:terracotta_hopper_botany_pot"),
-            get("botanypots:terracotta_waxed_botany_pot"),
             get("botanypotstiers:elite_terracotta_botany_pot"),
             get("botanypotstiers:elite_terracotta_hopper_botany_pot"),
-            get("botanypotstiers:elite_terracotta_waxed_botany_pot"),
             get("botanypotstiers:ultra_terracotta_botany_pot"),
             get("botanypotstiers:ultra_terracotta_hopper_botany_pot"),
-            get("botanypotstiers:ultra_terracotta_waxed_botany_pot"),
             get("botanypotstiers:mega_terracotta_botany_pot"),
-            get("botanypotstiers:mega_terracotta_hopper_botany_pot"),
-            get("botanypotstiers:mega_terracotta_waxed_botany_pot")
+            get("botanypotstiers:mega_terracotta_hopper_botany_pot")
     );
     public static void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration){
         POTS.forEach(pot -> registration.addRecipeCatalyst(pot,BotanyPotsJEIPlugin.CROP));
