@@ -104,7 +104,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if(player == null){
+        if(player == null && ownerUUID != null){
             player = level.getPlayerByUUID(ownerUUID);
         }
         if(!level.isClientSide()){
