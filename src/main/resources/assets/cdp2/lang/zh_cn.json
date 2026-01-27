@@ -5,12 +5,21 @@
 
   "block.cpd2.creative_drawer": " 创造抽屉",
   "block.cdp2.upgrade_station": "机器升级站",
+  "block.cdp2.absolute_farmland": "绝对耕地",
 
   "item.cdp2.random_creative_drawer": "随机创造抽屉",
   "item.cdp2.creative_shard_1": "创造碎片 Tier 1",
   "item.cdp2.creative_shard_2": "创造碎片 Tier 2",
   "item.cdp2.creative_shard_3": "创造碎片 Tier 3",
   "item.cdp2.creative_shard_4": "创造碎片 Tier 4",
+  "item.cdp2.absolute_essence": "绝对精华",
+
+  "cropTier.cdp2.7": "7",
+
+  "potType.cdp2.basic": "植物盆栽",
+  "potType.cdp2.hopper": "漏式植物盆栽",
+  "potType.cdp2.waxed": "涂蜡的植物盆栽",
+  "potTier.cdp2.absolute": "§e绝对",
 
   "tooltip.cdp2.infinity": "Infinity!",
 

@@ -107,11 +107,11 @@ dependencies {
     implementation "curse.maven:applied-energistics-2-223794:7027323"
     implementation "curse.maven:guideme-1173950:7127444"
 
-    //function storage
-    implementation "curse.maven:functional-storage-556861:7061714"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"
+    //function storage
+    implementation "curse.maven:functional-storage-556861:7061714"
 
     //mekanism
     implementation "curse.maven:mekanism-268560:7132168"
@@ -123,6 +123,25 @@ dependencies {
     //KubeJS
     implementation "curse.maven:kubejs-238086:7255073"
     implementation "curse.maven:rhino-416294:7104526"
+
+    //bookshelf
+    implementation "curse.maven:bookshelf-228525:7335846"
+    //prickle
+    implementation "curse.maven:prickle-1023259:6961457"
+    //botany pot
+    implementation "curse.maven:botany-pots-353928:7115287"
+    //botany pot tiers
+    implementation "curse.maven:botany-pots-tiers-526754:7209522"
+
+    //cucumber
+    implementation "curse.maven:cucumber-272335:7180790"
+    //mystical agriculture
+    implementation "curse.maven:mystical-agriculture-246640:7397787"
+    //mystical agradditions
+    implementation "curse.maven:mystical-agradditions-256247:7397775"
+
+    //botany pots mystical agriculture compat
+    implementation "curse.maven:botany-pots-mystical-agriculture-compat-1329409:7208646"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

@@ -1,5 +1,6 @@
 package net.yxiao233.cdp2.client.event;
 
+import net.darkhax.botanypots.common.impl.block.BotanyPotRenderer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,8 +17,12 @@ public class BlockRendererEvent {
     @SubscribeEvent
     @SuppressWarnings("unchecked")
     public static void registerBlockEntityRenderer(EntityRenderersEvent.RegisterRenderers event){
-        CDPBlock.CREATIVE_DRAWERS_MAP.values().stream().toList().forEach(register -> {
+        CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(register -> {
             event.registerBlockEntityRenderer((BlockEntityType<? extends CreativeDrawerBlockEntity>) register.asBlockEntityType(), CreativeDrawerRenderer::new);
+        });
+        
+        CDPBlock.POTS_MAP.values().forEach(register -> {
+            event.registerBlockEntityRenderer(register.asBlockEntityType(), BotanyPotRenderer::new);
         });
     }
 }

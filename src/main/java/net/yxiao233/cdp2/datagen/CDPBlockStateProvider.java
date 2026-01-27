@@ -1,10 +1,14 @@
 package net.yxiao233.cdp2.datagen;
 
+import com.blakebr0.mysticalagriculture.block.InfusedFarmlandBlock;
+import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -17,9 +21,9 @@ import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
-import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
+import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
 
 public class CDPBlockStateProvider extends BlockStateProvider {
     public CDPBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -36,6 +40,8 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         builtinEntityItem(CDPItem.RANDOM_CREATIVE_DRAWER);
         fourWayBlockState(CDPBlock.UPGRADE_STATION);
         onlyItem(CDPBlock.UPGRADE_STATION);
+        infusedFarmlandBlockState(CDPBlock.ABSOLUTE_FARMLAND);
+        botanyPots();
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){
@@ -116,5 +122,73 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         if(register.asBlock() instanceof CreativeDrawerBlock drawerBlock){
             fourWayBlockState(drawerBlock,"creative_drawer");
         }
+    }
+
+    private void infusedFarmlandBlockState(CDPBlockDeferredRegister register){
+        if(register.asBlock() instanceof InfusedFarmlandBlock infusedFarmlandBlock){
+            IntegerProperty property = FarmBlock.MOISTURE;
+            ResourceLocation path0 = ResourceLocation.parse("cdp2:block/infused_farmland");
+            ResourceLocation path1 = ResourceLocation.parse("cdp2:block/infused_farmland_moist");
+            getVariantBuilder(infusedFarmlandBlock)
+                    .partialState().with(property, 0)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 1)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 2)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 3)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 4)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 5)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 6)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path0))
+                    .addModel()
+
+                    .partialState().with(property, 7)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(path1))
+                    .addModel();
+
+
+            itemModels().getBuilder(BuiltInRegistries.ITEM.getKey(register.asItem()).toString()).parent(models().getExistingFile(ResourceLocation.parse("cdp2:block/infused_farmland")));
+        }
+    }
+
+
+    private void botanyPots(){
+        CDPBlock.POTS_MAP.forEach(((location, register) -> {
+            if(register.asBlock() instanceof CDPBotanyPotEntityBlock pot){
+                String prefix = pot.getPotType().equals(PotType.HOPPER) ? "hopper_pot" : "pot";
+                models().getBuilder(location.toString())
+                        .parent(models().getExistingFile(ResourceLocation.parse("cdp2:block/template/" + prefix)))
+                        .renderType("minecraft:cutout")
+                        .texture("material","minecraft:block/terracotta")
+                        .texture("material_top","cdp2:block/terracotta_pot_top")
+                        .texture("stripe","cdp2:block/" + pot.getPotTier().getName());
+                getVariantBuilder(register.asBlock()).partialState().modelForState().modelFile(models().getExistingFile(ResourceLocation.parse("cdp2:block/" + location.getPath()))).addModel();
+                itemModels().getBuilder(location.toString()).parent(models().getExistingFile(ResourceLocation.parse("cdp2:block/" + location.getPath())));
+            }
+        }));
     }
 }

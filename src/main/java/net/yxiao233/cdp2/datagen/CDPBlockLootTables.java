@@ -18,9 +18,9 @@ public class CDPBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        CDPBlock.CREATIVE_DRAWERS_MAP.forEach((location, register) -> {
-            this.dropSelf(register.asBlock());
-        });
+        CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(drawer -> this.dropSelf(drawer.asBlock()));
+        CDPBlock.POTS_MAP.values().forEach(pot -> this.dropSelf(pot.asBlock()));
+        this.dropSelf(CDPBlock.ABSOLUTE_FARMLAND.asBlock());
     }
 
     @Override

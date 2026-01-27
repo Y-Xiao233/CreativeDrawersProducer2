@@ -1,5 +1,6 @@
 package net.yxiao233.cdp2.api.registry;
 
+import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -10,6 +11,9 @@ import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.item.CreativeDrawerBlockItem;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotBlockItem;
+import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
+import net.yxiao233.cdp2.integration.botany_pot.CDPPotTier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,6 +43,12 @@ public class CDPBlockDeferredRegister {
     public static CDPBlockDeferredRegister registerCreativeDrawer(String name, Supplier<ItemStack> infinityItem){
         DeferredHolder<Block,Block> block = registryBlock(name,() -> new CreativeDrawerBlock(infinityItem, CreativeDrawersProducer2.makeId(name)));
         CDPItemDeferredRegister item = CDPItemDeferredRegister.registryItem(name,() -> new CreativeDrawerBlockItem(block.get(), infinityItem, new Item.Properties()));
+        return new CDPBlockDeferredRegister(block,item);
+    }
+
+    public static CDPBlockDeferredRegister registerPot(String name, PotType type, CDPPotTier potTier){
+        DeferredHolder<Block,Block> block = registryBlock(name,() -> new CDPBotanyPotEntityBlock(CreativeDrawersProducer2.makeId(name),type,potTier));
+        CDPItemDeferredRegister item = CDPItemDeferredRegister.registryItem(name,() -> new CDPBotanyPotBlockItem(type,potTier,block.get(),new Item.Properties()));
         return new CDPBlockDeferredRegister(block,item);
     }
 

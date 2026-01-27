@@ -1,5 +1,7 @@
 package net.yxiao233.cdp2.api.registry;
 
+import net.darkhax.botanypots.common.impl.block.PotType;
+import net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -10,6 +12,9 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotBlockEntity;
+import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
+import net.yxiao233.cdp2.integration.botany_pot.CDPPotTier;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -50,6 +55,12 @@ public class CDPBlockEntityDeferredRegister<T extends BlockEntity> {
         return new CDPBlockEntityDeferredRegister<>(blockWithItem,blockEntityType);
     }
 
+    public static CDPBlockEntityDeferredRegister<CDPBotanyPotBlockEntity> registerPot(String name, PotType potType, CDPPotTier potTier){
+        CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.registerPot(name,potType,potTier);
+        DeferredHolder<BlockEntityType<?>,BlockEntityType<CDPBotanyPotBlockEntity>> blockEntityType = CDPBlock.BLOCK_ENTITIES.register(name,() -> BlockEntityType.Builder.of((pos,state) -> new CDPBotanyPotBlockEntity(pos,state,potTier,CreativeDrawersProducer2.makeId(name)),blockWithItem.asBlock()).build(null));
+        return new CDPBlockEntityDeferredRegister<>(blockWithItem,blockEntityType);
+    }
+
     public static CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> registerCreativeDrawer(String name, Supplier<ItemStack> infinityItem){
         return registerCreativeDrawer(name,infinityItem,false);
     }
@@ -70,6 +81,11 @@ public class CDPBlockEntityDeferredRegister<T extends BlockEntity> {
 
     public BlockEntityType<T> asBlockEntityType() {
         return entityType.get();
+    }
+
+    @SuppressWarnings("unchecked")
+    public Supplier<BlockEntityType<BotanyPotBlockEntity>> asPotEntityType(){
+        return () -> (BlockEntityType<BotanyPotBlockEntity>) entityType.get();
     }
 
     public CDPBlockDeferredRegister getBlockDeferredHolder() {

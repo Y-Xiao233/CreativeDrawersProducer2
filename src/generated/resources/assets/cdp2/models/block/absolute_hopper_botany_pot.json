@@ -1,0 +1,9 @@
+{
+  "parent": "cdp2:block/template/hopper_pot",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "material": "minecraft:block/terracotta",
+    "material_top": "cdp2:block/terracotta_pot_top",
+    "stripe": "cdp2:block/absolute"
+  }
+}

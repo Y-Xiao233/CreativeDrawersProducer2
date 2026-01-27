@@ -21,5 +21,6 @@ public class CDPItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         CDPItem.SHARDS.values().forEach(register -> basicItem(register.asItem()));
+        basicItem(CDPItem.ABSOLUTE_ESSENCE.asItem());
     }
 }
