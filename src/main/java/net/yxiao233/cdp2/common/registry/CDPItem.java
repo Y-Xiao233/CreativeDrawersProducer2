@@ -5,12 +5,14 @@ import com.blakebr0.mysticalagriculture.item.EssenceItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.item.CreativeShardItem;
 import net.yxiao233.cdp2.common.item.CreativeShardTier;
+import net.yxiao233.cdp2.common.item.VoidOmniToolItem;
 import net.yxiao233.cdp2.common.item.RandomCreativeDrawerItem;
 import net.yxiao233.cdp2.integration.mysticalagriculture.CDPCropTier;
 
@@ -26,6 +28,7 @@ public class CDPItem{
     public static final CDPItemDeferredRegister COSMIC_ESSENCE = registerEssence(CDPCropTier.NINE);
     public static final CDPItemDeferredRegister INFINITE_ESSENCE = registerEssence(CDPCropTier.TEN);
     public static final CDPItemDeferredRegister VOID_MATTER = CDPItemDeferredRegister.registrySimpleItem("void_matter").addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPItemDeferredRegister VOID_OMNI_TOOL = CDPItemDeferredRegister.registryItem("void_omni_tool", () -> new VoidOmniToolItem(Tiers.NETHERITE)).addToTab(CDPTab.CONTENT_TAB);
     static CDPItemDeferredRegister registerEssence(CropTier cropTier){
         return CDPItemDeferredRegister.registryItem(cropTier.getName() + "_essence",() -> new EssenceItem(cropTier)).addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.MYSTICAL_AGRICULTURE_TAB);
     }
