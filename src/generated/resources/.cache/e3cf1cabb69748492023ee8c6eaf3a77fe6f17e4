@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-29T10:48:56.2813196	cdp2 - ItemModel
+// 1.21.1	2026-01-29T15:08:58.4296564	cdp2 - ItemModel
 cd18baed2fbc351fef1a0bc2e14e9457a8104434 assets/cdp2/models/item/absolute_essence.json
 96a6790751c959d4f20dbffb3525590230dd607e assets/cdp2/models/item/cosmic_essence.json
 fc20dffc74c33196a093cc89ce4c20174ebe8988 assets/cdp2/models/item/creative_shard_1.json
@@ -7,3 +7,4 @@ fc20dffc74c33196a093cc89ce4c20174ebe8988 assets/cdp2/models/item/creative_shard_
 5484c7d9bbd573a617fc4ce7b297af896b3f4eb2 assets/cdp2/models/item/creative_shard_4.json
 ec38b79807cfe5e80a46f95393430e5e8c9a9e60 assets/cdp2/models/item/infinite_essence.json
 704e48ae85da3a9c067c3eefb0f515ac1636a7de assets/cdp2/models/item/supreme_essence.json
+83e486d66bf072a18007bbd43d19217d0bfac373 assets/cdp2/models/item/void_matter.json

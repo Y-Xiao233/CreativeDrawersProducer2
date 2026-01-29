@@ -38,6 +38,7 @@ public class CDPBlock {
     public static final HashMap<ResourceLocation,CDPBlockEntityDeferredRegister<CDPBotanyPotBlockEntity>> POTS_MAP = registerAllPots(false);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> DIAMOND_CREATIVE_DRAWER = registerCreativeDrawer("diamond_creative_drawer", Items.DIAMOND::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
+    public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> VOID_MATTER_CREATIVE_DRAWER = registerCreativeDrawer("void_matter_creative_drawer", CDPItem.VOID_MATTER::asStack);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register(
             "upgrade_station",
             () -> new UpgradeStationBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noLootTable()),

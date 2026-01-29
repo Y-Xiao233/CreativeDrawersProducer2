@@ -9,7 +9,7 @@
   "block.cdp2.upgrade_station": "机器升级站",
   "block.cdp2.absolute_farmland": "§e绝对耕地",
   "block.cdp2.supreme_farmland": "§4至尊耕地",
-  "block.cdp2.cosmic_farmland": "§d寰宇耕地",
+  "block.cdp2.cosmic_farmland": "§d寰宇支配耕地",
   "block.cdp2.infinite_farmland": "§4悖§c论§e无§b限§f耕地",
 
   "item.cdp2.random_creative_drawer": "随机创造抽屉",
@@ -19,8 +19,9 @@
   "item.cdp2.creative_shard_4": "创造碎片 Tier 4",
   "item.cdp2.absolute_essence": "§e绝对精华",
   "item.cdp2.supreme_essence": "§4至尊精华",
-  "item.cdp2.cosmic_essence": "§d寰宇精华",
+  "item.cdp2.cosmic_essence": "§d寰宇支配精华",
   "item.cdp2.infinite_essence": "§4悖§c论§e无§b限§f精华",
+  "item.cdp2.void_matter": "§8虚空物质",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
@@ -32,7 +33,7 @@
   "potType.cdp2.waxed": "涂蜡的植物盆栽",
   "potTier.cdp2.absolute": "§e绝对",
   "potTier.cdp2.supreme": "§4至尊",
-  "potTier.cdp2.cosmic": "§d寰宇",
+  "potTier.cdp2.cosmic": "§d寰宇支配",
   "potTier.cdp2.infinite": "§4悖§c论§e无§b限",
 
   "tooltip.cdp2.infinity": "Infinity!",
