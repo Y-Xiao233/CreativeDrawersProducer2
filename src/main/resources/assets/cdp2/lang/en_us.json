@@ -5,21 +5,33 @@
 
   "block.cpd2.creative_drawer": " Creative Drawer",
   "block.cdp2.upgrade_station": "Upgrade Station",
-  "block.cdp2.absolute_farmland": "Absolute Farmland",
+  "block.cdp2.absolute_farmland": "§eAbsolute Farmland",
+  "block.cdp2.supreme_farmland": "§4Supreme Farmland",
+  "block.cdp2.cosmic_farmland": "§dCosmic Farmland",
+  "block.cdp2.infinite_farmland": "§4I§cn§ef§bi§7n§3i§5t§9e §fFarmland",
 
   "item.cdp2.random_creative_drawer": "Random Creative Drawer",
   "item.cdp2.creative_shard_1": "Creative Shard Tier 1",
   "item.cdp2.creative_shard_2": "Creative Shard Tier 2",
   "item.cdp2.creative_shard_3": "Creative Shard Tier 3",
   "item.cdp2.creative_shard_4": "Creative Shard Tier 4",
-  "item.cdp2.absolute_essence": "Absolute Essence",
+  "item.cdp2.absolute_essence": "§eAbsolute Essence",
+  "item.cdp2.supreme_essence": "§4Supreme Essence",
+  "item.cdp2.cosmic_essence": "§dCosmic Essence",
+  "item.cdp2.infinite_essence": "§4I§cn§ef§bi§7n§3i§5t§9e §fEssence",
 
   "cropTier.cdp2.7": "7",
+  "cropTier.cdp2.8": "8",
+  "cropTier.cdp2.9": "9",
+  "cropTier.cdp2.10": "10",
 
   "potType.cdp2.basic": " Botany Pot",
   "potType.cdp2.hopper": " Hopper Botany Pot",
   "potType.cdp2.waxed": " Botany Pot",
   "potTier.cdp2.absolute": "§eAbsolute",
+  "potTier.cdp2.supreme": "§4Supreme",
+  "potTier.cdp2.cosmic": "§dCosmic",
+  "potTier.cdp2.infinite": "§4I§cn§ef§bi§7n§3i§5t§9e",
 
   "tooltip.cdp2.infinity": "Infinity!",
 

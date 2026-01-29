@@ -1,0 +1,8 @@
+{
+  "parent": "mysticalagriculture:block/infused_farmland",
+  "textures": {
+    "particle": "cdp2:block/infinite_farmland_side",
+    "dirt": "cdp2:block/infinite_farmland_side",
+    "top": "cdp2:block/infinite_farmland_moist"
+  }
+}

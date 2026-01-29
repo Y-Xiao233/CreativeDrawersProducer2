@@ -36,11 +36,16 @@ public class CDPBlockStateProvider extends BlockStateProvider {
             builtinEntityItem(register);
             drawerBlockState(register);
         });
-
         builtinEntityItem(CDPItem.RANDOM_CREATIVE_DRAWER);
+
         fourWayBlockState(CDPBlock.UPGRADE_STATION);
         onlyItem(CDPBlock.UPGRADE_STATION);
+
         infusedFarmlandBlockState(CDPBlock.ABSOLUTE_FARMLAND);
+        infusedFarmlandBlockState(CDPBlock.SUPREME_FARMLAND);
+        infusedFarmlandBlockState(CDPBlock.COSMIC_FARMLAND);
+        onlyItem(CDPBlock.INFINITE_FARMLAND);
+
         botanyPots();
     }
 

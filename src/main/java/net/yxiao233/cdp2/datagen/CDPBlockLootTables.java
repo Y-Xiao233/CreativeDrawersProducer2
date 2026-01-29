@@ -21,6 +21,9 @@ public class CDPBlockLootTables extends BlockLootSubProvider {
         CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(drawer -> this.dropSelf(drawer.asBlock()));
         CDPBlock.POTS_MAP.values().forEach(pot -> this.dropSelf(pot.asBlock()));
         this.dropSelf(CDPBlock.ABSOLUTE_FARMLAND.asBlock());
+        this.dropSelf(CDPBlock.SUPREME_FARMLAND.asBlock());
+        this.dropSelf(CDPBlock.COSMIC_FARMLAND.asBlock());
+        this.dropSelf(CDPBlock.INFINITE_FARMLAND.asBlock());
     }
 
     @Override

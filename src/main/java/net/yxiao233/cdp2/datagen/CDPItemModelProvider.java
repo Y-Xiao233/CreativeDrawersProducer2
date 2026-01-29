@@ -22,5 +22,8 @@ public class CDPItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         CDPItem.SHARDS.values().forEach(register -> basicItem(register.asItem()));
         basicItem(CDPItem.ABSOLUTE_ESSENCE.asItem());
+        basicItem(CDPItem.SUPREME_ESSENCE.asItem());
+        basicItem(CDPItem.COSMIC_ESSENCE.asItem());
+        basicItem(CDPItem.INFINITE_ESSENCE.asItem());
     }
 }

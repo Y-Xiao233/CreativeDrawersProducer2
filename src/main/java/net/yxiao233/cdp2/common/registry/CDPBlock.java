@@ -24,7 +24,7 @@ import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
 import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotBlockEntity;
 import net.yxiao233.cdp2.integration.botany_pot.CDPPotTier;
-import net.yxiao233.cdp2.integration.mystical_agriculture.AddonCropTier;
+import net.yxiao233.cdp2.integration.mystical_agriculture.CDPCropTier;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,7 +38,10 @@ public class CDPBlock {
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> DIAMOND_CREATIVE_DRAWER = registerCreativeDrawer("diamond_creative_drawer", Items.DIAMOND::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register("upgrade_station", () -> new UpgradeStationBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noLootTable()), blockSupplier -> () -> new UpgradeStationBlockItem(blockSupplier,new Item.Properties()),UpgradeStationBlockEntity::new).addToTab(CDPTab.MACHINE_TAB);
-    public static final CDPBlockDeferredRegister ABSOLUTE_FARMLAND = CDPBlockDeferredRegister.register("absolute_farmland", () -> new InfusedFarmlandBlock(AddonCropTier.SEVEN), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister ABSOLUTE_FARMLAND = CDPBlockDeferredRegister.register("absolute_farmland", () -> new InfusedFarmlandBlock(CDPCropTier.SEVEN), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister SUPREME_FARMLAND = CDPBlockDeferredRegister.register("supreme_farmland", () -> new InfusedFarmlandBlock(CDPCropTier.EIGHT), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister COSMIC_FARMLAND = CDPBlockDeferredRegister.register("cosmic_farmland", () -> new InfusedFarmlandBlock(CDPCropTier.NINE), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister INFINITE_FARMLAND = CDPBlockDeferredRegister.register("infinite_farmland", () -> new InfusedFarmlandBlock(CDPCropTier.TEN), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB);
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());

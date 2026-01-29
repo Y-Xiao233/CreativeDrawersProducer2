@@ -8,11 +8,11 @@ import com.blakebr0.mysticalagriculture.api.registry.ICropRegistry;
 public class CDPMysticalAgriculturePlugin implements IMysticalAgriculturePlugin {
     @Override
     public void onRegisterCrops(ICropRegistry registry) {
-        AddonCropTier.onRegisterCrops(registry);
+        CDPCropTier.onRegisterCrops(registry);
     }
 
     @Override
     public void onPostRegisterCrops(ICropRegistry registry) {
-        AddonCropTier.onPostRegisterCrops(registry);
+        CDPCropTier.onPostRegisterCrops(registry);
     }
 }

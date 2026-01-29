@@ -1,6 +1,15 @@
-// 1.21.1	2026-01-27T16:50:43.2638116	Loot Tables
+// 1.21.1	2026-01-29T10:48:56.2853332	Loot Tables
 e59291b7a485cfd3a438e175121c0b3c2bd118e4 data/cdp2/loot_table/blocks/absolute_botany_pot.json
 e114083eb2a7e0c54b00fb9dc155926c667e466a data/cdp2/loot_table/blocks/absolute_farmland.json
 25a1cdb0be266d15afffdee6e3cdf7067124da01 data/cdp2/loot_table/blocks/absolute_hopper_botany_pot.json
+8b52ec6dec93a89e61b5bf74f1a2eb89d7f621f6 data/cdp2/loot_table/blocks/cosmic_botany_pot.json
+32f3802c7c32e13cc402de965e7ee336b21d9728 data/cdp2/loot_table/blocks/cosmic_farmland.json
+6e190d7527c34a158d003588e0d852e11704402a data/cdp2/loot_table/blocks/cosmic_hopper_botany_pot.json
 191caacfac3ebfd2169369a44aa753ae46a052dd data/cdp2/loot_table/blocks/diamond_creative_drawer.json
+f680a472c28a4a7ca4577a45aaa6269f4905d391 data/cdp2/loot_table/blocks/infinite_botany_pot.json
+db2ce186ddff54f7a4bf79ecf6a3ee898f2d529f data/cdp2/loot_table/blocks/infinite_farmland.json
+8e2f0f1ee308154e7fe919efbc58a71b0ebe2f2a data/cdp2/loot_table/blocks/infinite_hopper_botany_pot.json
 5e7f4411daa1299285193a19ec9303c4a1c09a52 data/cdp2/loot_table/blocks/oak_log_creative_drawer.json
+7a626128dffedc82f17d4305589b7cd2a4b4a347 data/cdp2/loot_table/blocks/supreme_botany_pot.json
+ba4d976a8abdd7eec6db8e8d4ffa2b857ad21121 data/cdp2/loot_table/blocks/supreme_farmland.json
+fc6f956c76d9cfb87de7a2f39f4901d401931f28 data/cdp2/loot_table/blocks/supreme_hopper_botany_pot.json

@@ -4,7 +4,10 @@ import com.ultramega.botanypotstiers.common.impl.PotTier;
 import org.jetbrains.annotations.Nullable;
 
 public enum CDPPotTier {
-    ABSOLUTE("absolute",6,12);
+    ABSOLUTE("absolute",12,12),
+    SUPREME("supreme",16,16),
+    COSMIC("cosmic",32,32),
+    INFINITE("infinite",64,64);
     private final String name;
     private final int outputMultiplier;
     private final int speedMultiplier;
