@@ -1,12 +1,9 @@
 package net.yxiao233.cdp2.api.block;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yxiao233.cdp2.api.block.entity.ITickableBlockEntity;
 import org.jetbrains.annotations.NotNull;

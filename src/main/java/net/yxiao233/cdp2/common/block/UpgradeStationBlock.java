@@ -1,13 +1,10 @@
 package net.yxiao233.cdp2.common.block;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -23,12 +20,9 @@ import net.yxiao233.cdp2.api.block.property.RotationType;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPDataComponentTypes;
-import net.yxiao233.cdp2.misc.UpgradeStationSavedData;
 import net.yxiao233.cdp2.util.LevelUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
 
 @AutoRegistryBlockCapabilities
 public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlockEntity> implements IRotatableBlock{

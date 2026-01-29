@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.mystical_agriculture;
+package net.yxiao233.cdp2.integration.mysticalagriculture;
 
 import com.blakebr0.mysticalagriculture.api.IMysticalAgriculturePlugin;
 import com.blakebr0.mysticalagriculture.api.MysticalAgriculturePlugin;

@@ -12,6 +12,8 @@ public class CDPTab {
     public static final CDPCreativeModeTabDeferredRegister DRAWER_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("drawer",() -> CDPBlock.DIAMOND_CREATIVE_DRAWER.getBlockDeferredHolder().getItemRegister());
     public static final CDPCreativeModeTabDeferredRegister MACHINE_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("machine", () -> CDPBlock.UPGRADE_STATION.getBlockDeferredHolder().getItemRegister());
     public static final CDPCreativeModeTabDeferredRegister CONTENT_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("content", () -> CDPItem.SHARDS.values().stream().toList().getFirst());
+    public static final CDPCreativeModeTabDeferredRegister MYSTICAL_AGRICULTURE_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("mystical_agriculture", () -> CDPItem.INFINITE_ESSENCE);
+    public static final CDPCreativeModeTabDeferredRegister BOTANY_POT_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("botany_pot", () -> CDPBlock.POTS_MAP.values().stream().toList().getLast().getBlockDeferredHolder().getItemRegister());
     public static void init(IEventBus eventBus){
         TABS.register(eventBus);
     }

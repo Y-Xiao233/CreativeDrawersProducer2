@@ -6,7 +6,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
-import net.yxiao233.cdp2.integration.botany_pot.BotanyPotJei;
+import net.yxiao233.cdp2.integration.botanypot.BotanyPotJei;
 import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin

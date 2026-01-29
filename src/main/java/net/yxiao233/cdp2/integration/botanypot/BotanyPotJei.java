@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.botany_pot;
+package net.yxiao233.cdp2.integration.botanypot;
 
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import net.darkhax.botanypots.common.addons.jei.BotanyPotsJEIPlugin;

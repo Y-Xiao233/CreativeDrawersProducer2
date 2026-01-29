@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.mystical_agriculture;
+package net.yxiao233.cdp2.integration.mysticalagriculture;
 
 import com.blakebr0.mysticalagriculture.api.crop.CropTier;
 import com.blakebr0.mysticalagriculture.api.registry.ICropRegistry;
@@ -11,10 +11,10 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 public class CDPCropTier {
-    public static final CropTier SEVEN = new CropTier(CreativeDrawersProducer2.makeId("7"),7,16776960, ChatFormatting.YELLOW);
-    public static final CropTier EIGHT = new CropTier(CreativeDrawersProducer2.makeId("8"),8,11141120, ChatFormatting.DARK_RED);
-    public static final CropTier NINE = new CropTier(CreativeDrawersProducer2.makeId("9"),9,16733695, ChatFormatting.LIGHT_PURPLE);
-    public static final CropTier TEN = new CropTier(CreativeDrawersProducer2.makeId("10"),10,16733695, ChatFormatting.DARK_PURPLE);
+    public static final CropTier SEVEN = new CropTier(CreativeDrawersProducer2.makeId("absolute"),7,16776960, ChatFormatting.YELLOW);
+    public static final CropTier EIGHT = new CropTier(CreativeDrawersProducer2.makeId("supreme"),8,11141120, ChatFormatting.DARK_RED);
+    public static final CropTier NINE = new CropTier(CreativeDrawersProducer2.makeId("cosmic"),9,16733695, ChatFormatting.LIGHT_PURPLE);
+    public static final CropTier TEN = new CropTier(CreativeDrawersProducer2.makeId("infinite"),10,16733695, ChatFormatting.DARK_PURPLE);
 
     public static void onRegisterCrops(ICropRegistry registry) {
         Arrays.stream(CDPCropTier.class.getFields()).toList().forEach(field -> {
@@ -32,5 +32,8 @@ public class CDPCropTier {
     }
     public static void onPostRegisterCrops(ICropRegistry registry) {
         SEVEN.setFarmland(CDPBlock.ABSOLUTE_FARMLAND.getBlock()).setEssence(CDPItem.ABSOLUTE_ESSENCE.getItemHolder());
+        EIGHT.setFarmland(CDPBlock.SUPREME_FARMLAND.getBlock()).setEssence(CDPItem.SUPREME_ESSENCE.getItemHolder());
+        NINE.setFarmland(CDPBlock.COSMIC_FARMLAND.getBlock()).setEssence(CDPItem.COSMIC_ESSENCE.getItemHolder());
+        TEN.setFarmland(CDPBlock.INFINITE_FARMLAND.getBlock()).setEssence(CDPItem.INFINITE_ESSENCE.getItemHolder());
     }
 }

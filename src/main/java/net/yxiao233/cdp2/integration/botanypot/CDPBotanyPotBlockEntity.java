@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.botany_pot;
+package net.yxiao233.cdp2.integration.botanypot;
 
 import net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity;
 import net.minecraft.core.BlockPos;

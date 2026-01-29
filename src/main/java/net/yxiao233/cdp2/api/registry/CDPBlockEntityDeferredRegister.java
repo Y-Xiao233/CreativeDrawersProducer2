@@ -2,7 +2,6 @@ package net.yxiao233.cdp2.api.registry;
 
 import net.darkhax.botanypots.common.impl.block.PotType;
 import net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +11,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
-import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotBlockEntity;
-import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
-import net.yxiao233.cdp2.integration.botany_pot.CDPPotTier;
+import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotBlockEntity;
+import net.yxiao233.cdp2.integration.botanypot.CDPPotTier;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

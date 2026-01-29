@@ -23,7 +23,7 @@ import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
-import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
+import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotEntityBlock;
 
 public class CDPBlockStateProvider extends BlockStateProvider {
     public CDPBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {

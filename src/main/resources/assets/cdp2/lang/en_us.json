@@ -2,6 +2,8 @@
   "itemGroup.cdp2.drawer": "Creative Drawers Producer 2: Drawer",
   "itemGroup.cdp2.content": "Creative Drawers Producer 2: Content",
   "itemGroup.cdp2.machine": "Creative Drawers Producer 2: Machine",
+  "itemGroup.cdp2.mystical_agriculture": "Creative Drawers Producer 2: More Essence",
+  "itemGroup.cdp2.botany_pot": "Creative Drawers Producer 2: More Botany Pot",
 
   "block.cpd2.creative_drawer": " Creative Drawer",
   "block.cdp2.upgrade_station": "Upgrade Station",
@@ -20,10 +22,10 @@
   "item.cdp2.cosmic_essence": "§dCosmic Essence",
   "item.cdp2.infinite_essence": "§4I§cn§ef§bi§7n§3i§5t§9e §fEssence",
 
-  "cropTier.cdp2.7": "7",
-  "cropTier.cdp2.8": "8",
-  "cropTier.cdp2.9": "9",
-  "cropTier.cdp2.10": "10",
+  "cropTier.cdp2.absolute": "7",
+  "cropTier.cdp2.supreme": "8",
+  "cropTier.cdp2.cosmic": "9",
+  "cropTier.cdp2.infinite": "10",
 
   "potType.cdp2.basic": " Botany Pot",
   "potType.cdp2.hopper": " Hopper Botany Pot",

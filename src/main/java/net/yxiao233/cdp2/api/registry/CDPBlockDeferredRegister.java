@@ -11,9 +11,9 @@ import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.item.CreativeDrawerBlockItem;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
-import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotBlockItem;
-import net.yxiao233.cdp2.integration.botany_pot.CDPBotanyPotEntityBlock;
-import net.yxiao233.cdp2.integration.botany_pot.CDPPotTier;
+import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotBlockItem;
+import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotEntityBlock;
+import net.yxiao233.cdp2.integration.botanypot.CDPPotTier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

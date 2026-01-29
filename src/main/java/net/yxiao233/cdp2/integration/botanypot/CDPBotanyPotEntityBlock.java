@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.botany_pot;
+package net.yxiao233.cdp2.integration.botanypot;
 
 import net.darkhax.botanypots.common.api.context.BotanyPotContext;
 import net.darkhax.botanypots.common.api.data.recipes.crop.Crop;
