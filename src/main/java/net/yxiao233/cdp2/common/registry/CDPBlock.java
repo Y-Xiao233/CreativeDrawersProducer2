@@ -10,6 +10,7 @@ import com.hrznstudio.titanium.module.BlockWithTile;
 import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -73,7 +74,7 @@ public class CDPBlock {
     }
 
     static BlockWithTile registerIF(String name, Supplier<? extends IndustrialBlock<?>> block, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> entity){
-        CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.register(name,block,blockSupplier -> () -> new IndustrialBlockItem(blockSupplier.get(), ModuleCore.TAB_CORE));
+        CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.register(name,block,blockSupplier -> () -> new BlockItem(blockSupplier.get(),new Item.Properties()));
         DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> blockEntityType = CDPBlock.BLOCK_ENTITIES.register(name,() -> BlockEntityType.Builder.of(entity,blockWithItem.asBlock()).build(null));
         blockWithItem.addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.MACHINE_TAB);
         return new BlockWithTile(blockWithItem.getBlock(),blockEntityType);
