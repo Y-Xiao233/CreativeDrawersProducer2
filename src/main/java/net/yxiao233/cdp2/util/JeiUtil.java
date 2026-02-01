@@ -5,7 +5,7 @@ import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.world.item.ItemStack;
-import net.yxiao233.cdp2.integration.jei.CDPJeiPlugin;
+import net.yxiao233.cdp2.common.integration.jei.CDPJeiPlugin;
 
 import java.util.Optional;
 

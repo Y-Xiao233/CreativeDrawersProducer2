@@ -1,10 +1,11 @@
-package net.yxiao233.cdp2.integration.botanypot;
+package net.yxiao233.cdp2.common.integration.botanypot.item;
 
 import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
 import org.jetbrains.annotations.NotNull;
 
 public class CDPBotanyPotBlockItem extends BlockItem {

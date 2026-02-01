@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.ldlib;
+package net.yxiao233.cdp2.common.integration.ldlib;
 
 import com.lowdragmc.lowdraglib2.plugin.ILDLibPlugin;
 import com.lowdragmc.lowdraglib2.plugin.LDLibPlugin;

@@ -31,7 +31,7 @@ public class ItemUpgradeMixin {
         if (player != null && player.isShiftKeyDown() && level.isClientSide()) {
             BlockEntity tile = WorldUtils.getTileEntity(level, context.getClickedPos());
             if (tile instanceof IUpgradeTile) {
-                player.sendSystemMessage(Component.translatable("tip.cdp2.mek_upgrade").withStyle(ChatFormatting.RED));
+                player.sendSystemMessage(Component.translatable("message.cdp2.mek_upgrade").withStyle(ChatFormatting.RED));
             }
         }
         cir.setReturnValue(InteractionResult.PASS);

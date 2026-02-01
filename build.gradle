@@ -93,6 +93,16 @@ repositories{
     maven {
         url = "https://maven.firstdark.dev/snapshots"
     }
+
+    //modrinth
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+
+        }
+    }
 }
 
 dependencies {
@@ -112,6 +122,8 @@ dependencies {
     implementation "curse.maven:titanium-287342:6875285"
     //function storage
     implementation "curse.maven:functional-storage-556861:7061714"
+    //industrial foregoing
+    implementation("maven.modrinth:industrial-foregoing:${industrialforegoing_version}")
 
     //mekanism
     implementation "curse.maven:mekanism-268560:7132168"

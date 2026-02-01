@@ -3,6 +3,10 @@ package net.yxiao233.cdp2.common.registry;
 import com.blakebr0.cucumber.item.BaseBlockItem;
 import com.blakebr0.mysticalagriculture.api.crop.CropTier;
 import com.blakebr0.mysticalagriculture.block.InfusedFarmlandBlock;
+import com.buuz135.industrial.block.IndustrialBlock;
+import com.buuz135.industrial.block.IndustrialBlockItem;
+import com.buuz135.industrial.module.ModuleCore;
+import com.hrznstudio.titanium.module.BlockWithTile;
 import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
@@ -23,9 +28,11 @@ import net.yxiao233.cdp2.common.block.UpgradeStationBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
-import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotBlockEntity;
-import net.yxiao233.cdp2.integration.botanypot.CDPPotTier;
-import net.yxiao233.cdp2.integration.mysticalagriculture.CDPCropTier;
+import net.yxiao233.cdp2.common.integration.botanypot.block.entity.CDPBotanyPotBlockEntity;
+import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.VoidSieveBlockEntity;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.VoidSieveEntityBlock;
+import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCropTier;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,6 +56,7 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister SUPREME_FARMLAND = registerFarmland(CDPCropTier.EIGHT);
     public static final CDPBlockDeferredRegister COSMIC_FARMLAND = registerFarmland(CDPCropTier.NINE);
     public static final CDPBlockDeferredRegister INFINITE_FARMLAND = registerFarmland(CDPCropTier.TEN);
+    public static final BlockWithTile VOID_SIEVE = registerIF("void_sieve", VoidSieveEntityBlock::new, VoidSieveBlockEntity::new);
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());
@@ -62,6 +70,13 @@ public class CDPBlock {
 
     static CDPBlockDeferredRegister registerFarmland(CropTier cropTier){
         return CDPBlockDeferredRegister.register(cropTier.getName() + "_farmland",() -> new InfusedFarmlandBlock(cropTier), blockSupplier -> () -> new BaseBlockItem(blockSupplier.get())).addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.MYSTICAL_AGRICULTURE_TAB);
+    }
+
+    static BlockWithTile registerIF(String name, Supplier<? extends IndustrialBlock<?>> block, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> entity){
+        CDPBlockDeferredRegister blockWithItem = CDPBlockDeferredRegister.register(name,block,blockSupplier -> () -> new IndustrialBlockItem(blockSupplier.get(), ModuleCore.TAB_CORE));
+        DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> blockEntityType = CDPBlock.BLOCK_ENTITIES.register(name,() -> BlockEntityType.Builder.of(entity,blockWithItem.asBlock()).build(null));
+        blockWithItem.addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.MACHINE_TAB);
+        return new BlockWithTile(blockWithItem.getBlock(),blockEntityType);
     }
 
     @SuppressWarnings("all")

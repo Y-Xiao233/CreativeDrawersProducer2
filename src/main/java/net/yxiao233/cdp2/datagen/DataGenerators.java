@@ -27,5 +27,6 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new CDPItemModelProvider(packOutput,existingFileHelper));
         CDPBlockTagProvider blockTagProvider = generator.addProvider(event.includeClient(),new CDPBlockTagProvider(packOutput,lookupProvider,existingFileHelper));
         generator.addProvider(event.includeClient(), new CDPItemTagProvider(packOutput,lookupProvider,blockTagProvider.contentsGetter()));
+        generator.addProvider(true,new CDPRecipeProvider(packOutput,lookupProvider));
     }
 }

@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.ldlib;
+package net.yxiao233.cdp2.common.integration.ldlib;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
@@ -7,7 +7,6 @@ import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.event.HoverTooltips;
-import com.mojang.datafixers.types.Func;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -18,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class UIEntry {

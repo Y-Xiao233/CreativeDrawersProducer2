@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.botanypot;
+package net.yxiao233.cdp2.common.integration.botanypot.block.entity;
 
 import net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
 
 public class CDPBotanyPotBlockEntity extends BotanyPotBlockEntity {
     private final CDPPotTier potTier;

@@ -18,6 +18,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
@@ -225,5 +226,24 @@ public class RenderUtil {
     @OnlyIn(Dist.CLIENT)
     public static void renderVerticalLine(PoseStack poseStack, VertexConsumer consumer, BlockPos verticalPos, int high, BlockPos entityPos, Color color, double prefixX, double prefixY, double prefixZ){
         LevelRenderer.renderLineBox(poseStack,consumer,new AABB(verticalPos.getX(),verticalPos.getY(),verticalPos.getZ(),verticalPos.getX(),verticalPos.getY() + high,verticalPos.getZ()).move(-entityPos.getX() + prefixX,-entityPos.getY() + prefixY,-entityPos.getZ() + prefixZ),(float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, 0.5F);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void renderBlock(BlockState blockState, BlockPos pos, PoseStack poseStack, MultiBufferSource multiBufferSource, PoseBack back){
+        Minecraft minecraft = Minecraft.getInstance();
+        Level level = minecraft.level;
+        if(level == null){
+            return;
+        }
+        poseStack.pushPose();
+        back.apply(poseStack);
+        minecraft.getBlockRenderer().renderBatched(blockState,pos,level,poseStack, multiBufferSource.getBuffer(RenderType.CUTOUT),false,level.random);
+        poseStack.popPose();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @FunctionalInterface
+    public interface PoseBack{
+        void apply(PoseStack poseStack);
     }
 }

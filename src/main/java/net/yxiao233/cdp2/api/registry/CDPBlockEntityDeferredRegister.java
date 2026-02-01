@@ -11,8 +11,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
-import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotBlockEntity;
-import net.yxiao233.cdp2.integration.botanypot.CDPPotTier;
+import net.yxiao233.cdp2.common.integration.botanypot.block.entity.CDPBotanyPotBlockEntity;
+import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

@@ -7,8 +7,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.client.integration.industrialforegoing.renderer.VoidSieveRenderer;
 import net.yxiao233.cdp2.client.renderer.CreativeDrawerRenderer;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.VoidSieveBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 
 @SuppressWarnings({"removal","unused"})
@@ -24,5 +26,7 @@ public class BlockRendererEvent {
         CDPBlock.POTS_MAP.values().forEach(register -> {
             event.registerBlockEntityRenderer(register.asBlockEntityType(), BotanyPotRenderer::new);
         });
+
+        event.registerBlockEntityRenderer((BlockEntityType<? extends VoidSieveBlockEntity>) CDPBlock.VOID_SIEVE.type().get(), VoidSieveRenderer::new);
     }
 }

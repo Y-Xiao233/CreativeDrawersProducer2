@@ -23,7 +23,7 @@ import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
-import net.yxiao233.cdp2.integration.botanypot.CDPBotanyPotEntityBlock;
+import net.yxiao233.cdp2.common.integration.botanypot.block.CDPBotanyPotEntityBlock;
 
 public class CDPBlockStateProvider extends BlockStateProvider {
     public CDPBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -47,6 +47,7 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         onlyItem(CDPBlock.INFINITE_FARMLAND);
 
         botanyPots();
+        stateAndItem(CDPBlock.VOID_SIEVE.getBlock());
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){
@@ -58,8 +59,12 @@ public class CDPBlockStateProvider extends BlockStateProvider {
     }
 
     private void onlyItem(DeferredHolder<Block,Block> registryObject){
-        simpleBlockItem(registryObject.get(),new ModelFile.UncheckedModelFile(CreativeDrawersProducer2.MODID +
-                ":block/" + BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath()));
+        onlyItem(registryObject.get());
+    }
+
+    private void onlyItem(Block block){
+        simpleBlockItem(block,new ModelFile.UncheckedModelFile(CreativeDrawersProducer2.MODID +
+                ":block/" + BuiltInRegistries.BLOCK.getKey(block).getPath()));
     }
 
     private void onlyItem(CDPBlockDeferredRegister register){
@@ -195,5 +200,14 @@ public class CDPBlockStateProvider extends BlockStateProvider {
                 itemModels().getBuilder(location.toString()).parent(models().getExistingFile(ResourceLocation.parse("cdp2:block/" + location.getPath())));
             }
         }));
+    }
+
+    private void onlyBlockState(Block block){
+        getVariantBuilder(block).partialState().modelForState().modelFile(models().getExistingFile(ResourceLocation.parse("cdp2:block/" + BuiltInRegistries.BLOCK.getKey(block).getPath()))).addModel();
+    }
+
+    private void stateAndItem(Block block){
+        onlyBlockState(block);
+        onlyItem(block);
     }
 }

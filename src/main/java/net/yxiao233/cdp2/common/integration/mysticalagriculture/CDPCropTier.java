@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.integration.mysticalagriculture;
+package net.yxiao233.cdp2.common.integration.mysticalagriculture;
 
 import com.blakebr0.mysticalagriculture.api.crop.CropTier;
 import com.blakebr0.mysticalagriculture.api.registry.ICropRegistry;

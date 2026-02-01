@@ -14,7 +14,7 @@ import net.yxiao233.cdp2.common.item.CreativeShardItem;
 import net.yxiao233.cdp2.common.item.CreativeShardTier;
 import net.yxiao233.cdp2.common.item.VoidOmniToolItem;
 import net.yxiao233.cdp2.common.item.RandomCreativeDrawerItem;
-import net.yxiao233.cdp2.integration.mysticalagriculture.CDPCropTier;
+import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCropTier;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -11,6 +11,7 @@
   "block.cdp2.supreme_farmland": "§4至尊耕地",
   "block.cdp2.cosmic_farmland": "§d寰宇支配耕地",
   "block.cdp2.infinite_farmland": "§4悖§c论§e无§b限§f耕地",
+  "block.cdp2.void_sieve": "虚空筛子",
 
   "item.cdp2.random_creative_drawer": "随机创造抽屉",
   "item.cdp2.creative_shard_1": "创造碎片 Tier 1",
@@ -38,8 +39,9 @@
   "potTier.cdp2.infinite": "§4悖§c论§e无§b限",
 
   "tooltip.cdp2.infinity": "Infinity!",
+  "tooltip.cdp2.void_power": "§e虚空动力驱动!",
 
-  "tip.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
+  "message.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
 
   "gui.cdp2.input": "Input",
   "gui.cdp2.range": "增加工作范围",
@@ -54,5 +56,12 @@
   "gui.cdp2.show_information": "展示信息",
   "gui.cdp2.hide_information": "隐藏信息",
   "gui.cdp2.reset": "重置当前页面所有点数",
-  "gui.cdp2.total_points": "研究点数: %d"
+  "gui.cdp2.total_points": "研究点数: %d",
+
+
+  "jei.cdp2.power": "Power: ",
+  "jei.cdp2.progress": "Progress: ",
+  "jei.cdp2.total": "Total: ",
+  "jei.cdp2.chance": "概率: %d",
+  "jei.cdp2.catalyst": "Catalyst"
 }
