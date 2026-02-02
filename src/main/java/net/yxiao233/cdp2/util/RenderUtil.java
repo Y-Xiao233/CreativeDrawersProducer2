@@ -111,6 +111,10 @@ public class RenderUtil {
     }
 
     public static void renderSizeLabel(GuiGraphics guiGraphics, Font fontRenderer, float xPos, float yPos, String text, boolean largeFonts) {
+        renderSizeLabel(guiGraphics,fontRenderer,xPos,yPos,Component.literal(text),largeFonts);
+    }
+
+    public static void renderSizeLabel(GuiGraphics guiGraphics, Font fontRenderer, float xPos, float yPos, Component text, boolean largeFonts) {
         float scaleFactor = largeFonts ? 0.85F : 0.666F;
         PoseStack stack = guiGraphics.pose();
         stack.pushPose();
@@ -119,8 +123,7 @@ public class RenderUtil {
         renderSizeLabel(stack.last().pose(), fontRenderer, xPos, yPos, text, largeFonts);
         stack.popPose();
     }
-
-    private static void renderSizeLabel(Matrix4f matrix, Font fontRenderer, float xPos, float yPos, String text, boolean largeFonts) {
+    private static void renderSizeLabel(Matrix4f matrix, Font fontRenderer, float xPos, float yPos, Component text, boolean largeFonts) {
         float scaleFactor = largeFonts ? 0.85F : 0.666F;
         float inverseScaleFactor = 1.0F / scaleFactor;
         int offset = largeFonts ? 0 : -1;
@@ -132,6 +135,10 @@ public class RenderUtil {
         fontRenderer.drawInBatch(text, (float)X, (float)Y, 16777215, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, 15728880);
         buffer.endBatch();
         RenderSystem.enableBlend();
+    }
+
+    private static void renderSizeLabel(Matrix4f matrix, Font fontRenderer, float xPos, float yPos, String text, boolean largeFonts) {
+        renderSizeLabel(matrix,fontRenderer,xPos,yPos,Component.literal(text),largeFonts);
     }
 
     @OnlyIn(Dist.CLIENT)

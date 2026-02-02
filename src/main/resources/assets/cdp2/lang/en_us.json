@@ -24,6 +24,7 @@
   "item.cdp2.infinite_essence": "§4I§cn§ef§bi§7n§3i§5t§9e §fEssence",
   "item.cdp2.void_matter": "§8Void Matter",
   "item.cdp2.void_omni_tool": "§8Void Omni Tool",
+  "item.cdp2.configuration_card": "Configuration Card",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
@@ -40,8 +41,18 @@
 
   "tooltip.cdp2.infinity": "Infinity!",
   "tooltip.cdp2.void_power": "§ePowered by Void!",
+  "tooltip.cdp2.configuration_card.tip0": "* SHIFT + Right Click the pot to save configuration",
+  "tooltip.cdp2.configuration_card.tip1": "* SHIFT + Right Click air to reset configuration",
 
   "message.cdp2.mek_upgrade": "Need to use Upgrade Station to upgrade this machine",
+  "message.cdp2.configuration_card.error": "Configuration information error, please reset and try again",
+  "message.cdp2.configuration_card.success": "Configuration successful",
+  "message.cdp2.configuration_card.miss_seed": "Missing seed",
+  "message.cdp2.configuration_card.miss_soil": "Missing soil",
+  "message.cdp2.configuration_card.save": "Successfully saved configuration",
+  "message.cdp2.configuration_card.null_seed": "Seed in the pot is null",
+  "message.cdp2.configuration_card.null_soil": "Soil in the pot is null",
+  "message.cdp2.configuration_card.reset": "Reset successful",
 
   "gui.cdp2.input": "Input",
   "gui.cdp2.range": "Add Working Range",

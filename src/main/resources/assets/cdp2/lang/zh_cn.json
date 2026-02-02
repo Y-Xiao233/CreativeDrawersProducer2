@@ -24,6 +24,7 @@
   "item.cdp2.infinite_essence": "§4悖§c论§e无§b限§f精华",
   "item.cdp2.void_matter": "§8虚空物质",
   "item.cdp2.void_omni_tool": "§8虚空全能工具",
+  "item.cdp2.configuration_card": "配置卡",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
@@ -40,8 +41,18 @@
 
   "tooltip.cdp2.infinity": "Infinity!",
   "tooltip.cdp2.void_power": "§e虚空动力驱动!",
+  "tooltip.cdp2.configuration_card.tip0": "* 潜行右键植物盆保存配置",
+  "tooltip.cdp2.configuration_card.tip1": "* 潜行右键空气重置配置",
 
   "message.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
+  "message.cdp2.configuration_card.error": "配置信息错误,请重置后重新尝试",
+  "message.cdp2.configuration_card.success": "配置成功",
+  "message.cdp2.configuration_card.miss_seed": "玩家背包缺失对应种子",
+  "message.cdp2.configuration_card.miss_soil": "玩家背包缺失对应土壤",
+  "message.cdp2.configuration_card.save": "成功保存配置",
+  "message.cdp2.configuration_card.null_seed": "植物盆内种子为空",
+  "message.cdp2.configuration_card.null_soil": "植物盆内土壤为空",
+  "message.cdp2.configuration_card.reset": "成功清除配置",
 
   "gui.cdp2.input": "Input",
   "gui.cdp2.range": "增加工作范围",
