@@ -13,20 +13,20 @@ import net.yxiao233.cdp2.common.registry.CDPDataComponentTypes;
 
 import java.util.HashMap;
 
-public class PotSettingAction {
-    public static final PotSettingAction EMPTY = new PotSettingAction(null,null);
+public class PotConfigurationAction {
+    public static final PotConfigurationAction EMPTY = new PotConfigurationAction(null,null);
     public static HashMap<Integer, Component> applyOrSave;
     public static HashMap<Integer, Component> reset;
     private final ItemStack card;
     private final BotanyPotBlockEntity entity;
-    private PotSettingAction(ItemStack stack, BotanyPotBlockEntity entity){
+    private PotConfigurationAction(ItemStack stack, BotanyPotBlockEntity entity){
         this.card = stack;
         this.entity = entity;
     }
 
-    public static PotSettingAction create(ItemStack card, BlockEntity blockEntity){
+    public static PotConfigurationAction create(ItemStack card, BlockEntity blockEntity){
         if(card.getItem() instanceof ConfigurationCardItem && blockEntity instanceof BotanyPotBlockEntity potBlockEntity){
-            return new PotSettingAction(card,potBlockEntity);
+            return new PotConfigurationAction(card,potBlockEntity);
         }
         return EMPTY;
     }
@@ -42,7 +42,7 @@ public class PotSettingAction {
         }else{
             messageValue = getSetting();
         }
-        Component message = PotSettingAction.applyOrSave.get(messageValue);
+        Component message = PotConfigurationAction.applyOrSave.get(messageValue);
         player.displayClientMessage(message,true);
     }
 
@@ -57,9 +57,11 @@ public class PotSettingAction {
         ItemStack soil = potInfo.soil().copy();
         if(potSeed.isEmpty() || !ItemStack.isSameItemSameComponents(potSeed,seed)){
             int seedSlot = player.getInventory().findSlotMatchingItem(seed);
-            if (seedSlot != -1) {
+            if (seedSlot != -1 || player.isCreative()) {
                 entity.setSeed(seed);
-                player.getInventory().getItem(seedSlot).shrink(1);
+                if(!player.isCreative()){
+                    player.getInventory().getItem(seedSlot).shrink(1);
+                }
             }else{
                 return 1;
             }
@@ -69,9 +71,11 @@ public class PotSettingAction {
         }
         if(potSoil.isEmpty() || !ItemStack.isSameItemSameComponents(potSoil,soil)){
             int soilSlot = player.getInventory().findSlotMatchingItem(soil);
-            if (soilSlot != -1) {
+            if (soilSlot != -1 || player.isCreative()) {
                 entity.setSoilItem(soil);
-                player.getInventory().getItem(soilSlot).shrink(1);
+                if(!player.isCreative()){
+                    player.getInventory().getItem(soilSlot).shrink(1);
+                }
             }else{
                 return 2;
             }

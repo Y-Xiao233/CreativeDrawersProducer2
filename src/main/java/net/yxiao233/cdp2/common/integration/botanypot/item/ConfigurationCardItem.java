@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
 import net.yxiao233.cdp2.api.renderer.tooltip.ConfigurationCardTooltipComponent;
-import net.yxiao233.cdp2.common.integration.botanypot.PotSettingAction;
+import net.yxiao233.cdp2.common.integration.botanypot.PotConfigurationAction;
 import net.yxiao233.cdp2.common.integration.botanypot.datacomponent.PotInfo;
 import net.yxiao233.cdp2.common.registry.CDPDataComponentTypes;
 import net.yxiao233.cdp2.util.EntityUtil;
@@ -36,7 +36,7 @@ public class ConfigurationCardItem extends Item {
         ItemStack card = context.getItemInHand();
         Player player = context.getPlayer();
         if(player != null && player.isShiftKeyDown()){
-            PotSettingAction.create(card,blockEntity).action(player);
+            PotConfigurationAction.create(card,blockEntity).action(player);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -53,7 +53,7 @@ public class ConfigurationCardItem extends Item {
             if(card.has(CDPDataComponentTypes.POT_INFO)){
                 card.remove(CDPDataComponentTypes.POT_INFO);
             }
-            player.displayClientMessage(PotSettingAction.reset.get(0),true);
+            player.displayClientMessage(PotConfigurationAction.reset.get(0),true);
             return InteractionResultHolder.success(card);
         }
         return InteractionResultHolder.pass(card);
