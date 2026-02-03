@@ -3,6 +3,8 @@ package net.yxiao233.cdp2.common.integration.jei;
 import com.hrznstudio.titanium.util.RecipeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -57,6 +59,7 @@ public class CDPJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
         IModPlugin.super.registerRecipeCatalysts(registration);
         BotanyPotJei.registerRecipeCatalysts(registration);
+        registration.addRecipeCatalyst(CDPBlock.VOID_CRAFTING_TABLE.asBlock(), RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(CDPBlock.VOID_SIEVE,CDPRecipeType.VOID_SIEVE);
     }
 }

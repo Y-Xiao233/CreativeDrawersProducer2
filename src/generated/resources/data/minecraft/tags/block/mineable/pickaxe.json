@@ -11,6 +11,7 @@
     "cdp2:cosmic_botany_pot",
     "cdp2:void_block",
     "cdp2:void_sieve",
-    "cdp2:void_crafting_table"
+    "cdp2:void_crafting_table",
+    "cdp2:frame"
   ]
 }

@@ -32,27 +32,31 @@ public class CDPBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        //drawer
         CDPBlock.CREATIVE_DRAWERS_MAP.forEach((location, register) -> {
             builtinEntityItem(register);
             drawerBlockState(register);
         });
+        //random drawer
         builtinEntityItem(CDPItem.RANDOM_CREATIVE_DRAWER);
-
+        //upgrade station
         fourWayBlockState(CDPBlock.UPGRADE_STATION);
         onlyItem(CDPBlock.UPGRADE_STATION);
-
+        //infused farmland
         infusedFarmlandBlockState(CDPBlock.ABSOLUTE_FARMLAND);
         infusedFarmlandBlockState(CDPBlock.SUPREME_FARMLAND);
         infusedFarmlandBlockState(CDPBlock.COSMIC_FARMLAND);
         onlyItem(CDPBlock.INFINITE_FARMLAND);
-
+        //pot
         botanyPots();
-
+        //void sieve
         stateAndItem(CDPBlock.VOID_SIEVE.getBlock());
-
+        //void block
         cubeAll(CDPBlock.VOID_BLOCK);
-
+        //void crafting table
         stateAndItem(CDPBlock.VOID_CRAFTING_TABLE.asBlock());
+        //frame
+        cubeAll(CDPBlock.FRAME);
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){

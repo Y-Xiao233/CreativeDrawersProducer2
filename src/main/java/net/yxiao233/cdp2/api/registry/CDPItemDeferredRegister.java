@@ -4,9 +4,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.registry.CDPItem;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -16,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 
-public class CDPItemDeferredRegister {
+public class CDPItemDeferredRegister implements ItemLike {
     private final DeferredHolder<Item,Item> itemDeferredHolder;
     private static final Map<ResourceLocation, List<CDPItemDeferredRegister>> map = new ConcurrentHashMap<>();
     private CDPItemDeferredRegister(DeferredHolder<Item,Item> itemDeferredHolder){
@@ -60,7 +62,8 @@ public class CDPItemDeferredRegister {
         return itemDeferredHolder;
     }
 
-    public Item asItem(){
+    @Override
+    public @NotNull Item asItem(){
         return itemDeferredHolder.get();
     }
 

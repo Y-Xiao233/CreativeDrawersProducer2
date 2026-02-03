@@ -4,6 +4,7 @@ import net.darkhax.botanypots.common.impl.block.PotType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -14,12 +15,13 @@ import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.integration.botanypot.item.CDPBotanyPotBlockItem;
 import net.yxiao233.cdp2.common.integration.botanypot.block.CDPBotanyPotEntityBlock;
 import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class CDPBlockDeferredRegister {
+public class CDPBlockDeferredRegister implements ItemLike {
     private final CDPItemDeferredRegister itemRegister;
     private final DeferredHolder<Item,Item> itemDeferredHolder;
     private final DeferredHolder<Block,Block> blockBlockDeferredHolder;
@@ -73,7 +75,8 @@ public class CDPBlockDeferredRegister {
         return this.blockBlockDeferredHolder;
     }
 
-    public Item asItem(){
+    @Override
+    public @NotNull Item asItem(){
         return this.itemDeferredHolder.get();
     }
 

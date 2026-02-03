@@ -22,6 +22,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.api.block.FullCopyBlock;
 import net.yxiao233.cdp2.api.block.SimpleBlock;
 import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
@@ -48,8 +49,8 @@ public class CDPBlock {
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> DIAMOND_CREATIVE_DRAWER = registerCreativeDrawer("diamond_creative_drawer", Items.DIAMOND::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> VOID_MATTER_CREATIVE_DRAWER = registerCreativeDrawer("void_matter_creative_drawer", CDPItem.VOID_MATTER::asStack);
-    public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
-    public static final CDPBlockDeferredRegister VOID_CRAFTING_TABLE = CDPBlockDeferredRegister.registrySimple("void_crafting_table", VoidCraftingTableBlock::new,new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", () -> new FullCopyBlock(Blocks.AMETHYST_BLOCK),null).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister VOID_CRAFTING_TABLE = CDPBlockDeferredRegister.registrySimple("void_crafting_table", VoidCraftingTableBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register(
             "upgrade_station",
             () -> new UpgradeStationBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noLootTable()),
@@ -61,6 +62,7 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister COSMIC_FARMLAND = registerFarmland(CDPCropTier.NINE);
     public static final CDPBlockDeferredRegister INFINITE_FARMLAND = registerFarmland(CDPCropTier.TEN);
     public static final BlockWithTile VOID_SIEVE = registerIF("void_sieve", VoidSieveEntityBlock::new, VoidSieveBlockEntity::new);
+    public static final CDPBlockDeferredRegister FRAME = CDPBlockDeferredRegister.registrySimple("frame",SimpleBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());
