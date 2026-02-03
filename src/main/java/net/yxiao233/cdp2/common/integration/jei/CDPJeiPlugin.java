@@ -65,7 +65,6 @@ public class CDPJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
-        IModPlugin.super.registerRecipeCatalysts(registration);
         BotanyPotJei.registerRecipeCatalysts(registration);
         registration.addRecipeCatalyst(CDPBlock.VOID_CRAFTING_TABLE.asBlock(), RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(CDPBlock.VOID_SIEVE,CDPRecipeType.VOID_SIEVE);
