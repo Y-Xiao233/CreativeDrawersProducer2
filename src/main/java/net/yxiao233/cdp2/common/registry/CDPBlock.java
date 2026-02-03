@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,6 +26,7 @@ import net.yxiao233.cdp2.api.block.SimpleBlock;
 import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
 import net.yxiao233.cdp2.common.block.UpgradeStationBlock;
+import net.yxiao233.cdp2.common.block.VoidCraftingTableBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
@@ -46,7 +48,8 @@ public class CDPBlock {
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> DIAMOND_CREATIVE_DRAWER = registerCreativeDrawer("diamond_creative_drawer", Items.DIAMOND::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> VOID_MATTER_CREATIVE_DRAWER = registerCreativeDrawer("void_matter_creative_drawer", CDPItem.VOID_MATTER::asStack);
-    public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", SimpleBlock::new,new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister VOID_CRAFTING_TABLE = CDPBlockDeferredRegister.registrySimple("void_crafting_table", VoidCraftingTableBlock::new,new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register(
             "upgrade_station",
             () -> new UpgradeStationBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noLootTable()),

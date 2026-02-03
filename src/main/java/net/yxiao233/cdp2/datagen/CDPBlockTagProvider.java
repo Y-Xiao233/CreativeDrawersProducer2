@@ -31,7 +31,8 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
                 .add(CDPBlock.UPGRADE_STATION.asBlock())
                 .add(pots)
                 .add(CDPBlock.VOID_BLOCK.asBlock())
-                .add(CDPBlock.VOID_SIEVE.getBlock());
+                .add(CDPBlock.VOID_SIEVE.getBlock())
+                .add(CDPBlock.VOID_CRAFTING_TABLE.asBlock());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(CDPBlock.ABSOLUTE_FARMLAND.asBlock())

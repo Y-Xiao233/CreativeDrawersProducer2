@@ -51,6 +51,8 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         stateAndItem(CDPBlock.VOID_SIEVE.getBlock());
 
         cubeAll(CDPBlock.VOID_BLOCK);
+
+        stateAndItem(CDPBlock.VOID_CRAFTING_TABLE.asBlock());
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){
