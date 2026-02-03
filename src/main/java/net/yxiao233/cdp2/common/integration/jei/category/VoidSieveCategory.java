@@ -68,7 +68,7 @@ public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
                 y += 18;
             }
             if(recipe.outputs.size() > i){
-                float chance = recipe.outputs.get(i).chance();
+                double chance = recipe.outputs.get(i).chance();
                 if(chance >= 1){
                     AllGuiTextures.BASIC_SLOT.render(guiGraphics,x,y);
                 }else{

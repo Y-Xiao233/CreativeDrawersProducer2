@@ -9,19 +9,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-public record ChanceIngredient(SizedIngredient sizedIngredient, float chance) {
+public record ChanceIngredient(SizedIngredient sizedIngredient, double chance) {
     @HideFromJS
     public static final Codec<ChanceIngredient> CODEC = Codec.lazyInitialized(() -> {
         return RecordCodecBuilder.create(builder ->{
             return builder.group(
                     SizedIngredient.FLAT_CODEC.fieldOf("ingredient").forGetter(ChanceIngredient::sizedIngredient),
-                    Codec.FLOAT.optionalFieldOf("chance",1f).xmap(to -> to < 0f ? 1f : to, from -> from).forGetter(ChanceIngredient::chance)
+                    Codec.DOUBLE.optionalFieldOf("chance",1d).xmap(to -> to < 0d ? 1d : to, from -> from).forGetter(ChanceIngredient::chance)
             ).apply(builder, ChanceIngredient::new);
         });
     });
 
-    @Info("ItemLike item, int count, float chance")
-    public static ChanceIngredient of(ItemLike item, int count, float chance){
+    @Info("ItemLike item, int count, double chance")
+    public static ChanceIngredient of(ItemLike item, int count, double chance){
         return new ChanceIngredient(SizedIngredient.of(item,count),chance);
     }
 
@@ -35,8 +35,8 @@ public record ChanceIngredient(SizedIngredient sizedIngredient, float chance) {
         return of(item,1,1);
     }
 
-    @Info("TagKey<Item> tag, int count, float chance")
-    public static ChanceIngredient of(TagKey<Item> tag, int count, float chance){
+    @Info("TagKey<Item> tag, int count, double chance")
+    public static ChanceIngredient of(TagKey<Item> tag, int count, double chance){
         return new ChanceIngredient(SizedIngredient.of(tag,count),chance);
     }
     @Info("TagKey<Item> tag, int count, default chance = 1")
