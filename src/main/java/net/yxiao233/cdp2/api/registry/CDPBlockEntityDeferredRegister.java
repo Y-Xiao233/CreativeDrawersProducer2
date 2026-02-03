@@ -4,6 +4,7 @@ import net.darkhax.botanypots.common.impl.block.PotType;
 import net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -13,13 +14,14 @@ import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.integration.botanypot.block.entity.CDPBotanyPotBlockEntity;
 import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public class CDPBlockEntityDeferredRegister<T extends BlockEntity> {
+public class CDPBlockEntityDeferredRegister<T extends BlockEntity> implements ItemLike {
     private static final ArrayList<CDPBlockEntityDeferredRegister<?>> LIST = new ArrayList<>();
     private final CDPBlockDeferredRegister blockDeferredRegister;
     private final DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> entityType;
@@ -100,8 +102,12 @@ public class CDPBlockEntityDeferredRegister<T extends BlockEntity> {
     public DeferredHolder<Item,Item> getItem(){
         return this.blockDeferredRegister.getItem();
     }
-    public Item asItem(){
+    @Override
+    public @NotNull Item asItem(){
         return this.blockDeferredRegister.asItem();
+    }
+    public ItemStack asStack(){
+        return asItem().getDefaultInstance();
     }
 
     public static ArrayList<CDPBlockEntityDeferredRegister<?>> values() {

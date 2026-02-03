@@ -77,5 +77,6 @@
   "jei.cdp2.progress": "Progress: ",
   "jei.cdp2.total": "Total: ",
   "jei.cdp2.chance": "概率: %d",
-  "jei.cdp2.catalyst": "Catalyst"
+  "jei.cdp2.catalyst": "Catalyst",
+  "jei.cdp2.creative_drawer_info": "创造抽屉信息"
 }
