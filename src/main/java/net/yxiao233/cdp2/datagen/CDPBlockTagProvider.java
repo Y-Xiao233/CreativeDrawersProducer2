@@ -24,16 +24,14 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
         Block[] drawers = DataGenUtil.blockEntityMapForBlocks(CDPBlock.CREATIVE_DRAWERS_MAP);
         Block[] pots = DataGenUtil.typedBlockEntityMapForBlocks(CDPBlock.POTS_MAP);
 
-        this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(drawers);
-
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(CDPBlock.UPGRADE_STATION.asBlock())
                 .add(pots)
                 .add(CDPBlock.VOID_BLOCK.asBlock())
                 .add(CDPBlock.VOID_SIEVE.getBlock())
                 .add(CDPBlock.VOID_CRAFTING_TABLE.asBlock())
-                .add(CDPBlock.FRAME.asBlock());
+                .add(CDPBlock.FRAME.asBlock())
+                .add(drawers);
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(CDPBlock.ABSOLUTE_FARMLAND.asBlock())
