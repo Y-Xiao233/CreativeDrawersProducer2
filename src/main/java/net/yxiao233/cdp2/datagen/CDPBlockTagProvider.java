@@ -29,7 +29,9 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(CDPBlock.UPGRADE_STATION.asBlock())
-                .add(pots);
+                .add(pots)
+                .add(CDPBlock.VOID_BLOCK.asBlock())
+                .add(CDPBlock.VOID_SIEVE.getBlock());
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(CDPBlock.ABSOLUTE_FARMLAND.asBlock())

@@ -47,7 +47,10 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         onlyItem(CDPBlock.INFINITE_FARMLAND);
 
         botanyPots();
+
         stateAndItem(CDPBlock.VOID_SIEVE.getBlock());
+
+        cubeAll(CDPBlock.VOID_BLOCK);
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){

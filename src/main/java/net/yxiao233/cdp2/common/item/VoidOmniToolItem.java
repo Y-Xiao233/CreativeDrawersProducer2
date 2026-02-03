@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Unbreakable;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public class VoidOmniToolItem extends TieredItem {
                 Tool.Rule.minesAndDrops(BlockTags.MINEABLE_WITH_SHOVEL,tier.getSpeed()),
                 Tool.Rule.minesAndDrops(BlockTags.MINEABLE_WITH_HOE,tier.getSpeed())
         ),1.0F,1);
+    }
+
+    @Override
+    public float getDestroySpeed(@NotNull ItemStack stack, @NotNull BlockState state) {
+        return 16f;
     }
 
     public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
