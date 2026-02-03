@@ -27,6 +27,5 @@ public class CDPItemModelProvider extends ItemModelProvider {
         basicItem(CDPItem.INFINITE_ESSENCE.asItem());
         basicItem(CDPItem.VOID_MATTER.asItem());
         basicItem(CDPItem.VOID_OMNI_TOOL.asItem());
-        basicItem(CDPItem.CONFIGURATION_CARD.asItem());
     }
 }
