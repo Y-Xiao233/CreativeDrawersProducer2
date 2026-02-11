@@ -26,11 +26,11 @@ public class CreativeDrawerInfo extends BaseRecipe {
     }
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return CDPRecipe.CREATIVE_DRAWER_INFO_SERIALIZER.get();
+        return CDPRecipe.CREATIVE_DRAWER_INFO.asUnknownSerializer();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return CDPRecipe.CREATIVE_DRAWER_INFO_TYPE.get();
+        return CDPRecipe.CREATIVE_DRAWER_INFO.asUnknownType();
     }
 }

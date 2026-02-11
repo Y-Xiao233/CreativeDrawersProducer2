@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.yxiao233.cdp2.api.block.entity.VoidProcessingTile;
@@ -18,9 +17,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntity>{
     @Save
-    private SidedInventoryComponent<VoidSieveBlockEntity> input;
+    private final SidedInventoryComponent<VoidSieveBlockEntity> input;
     @Save
-    private SidedInventoryComponent<VoidSieveBlockEntity> output;
+    private final SidedInventoryComponent<VoidSieveBlockEntity> output;
     private VoidSieveRecipe recipe;
     public VoidSieveBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(CDPBlock.VOID_SIEVE, 68,41, blockPos, blockState);
@@ -43,9 +42,8 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
                 .setSlotToColorRender(7, DyeColor.LIGHT_BLUE)
                 .setSlotToColorRender(8, DyeColor.LIGHT_BLUE)
                 .setRange(3, 4)
-                .setInputFilter((stack, integer) -> {
-                    return false;
-                }).setComponentHarness(this)
+                .setInputFilter((stack, integer) -> false)
+                .setComponentHarness(this)
         );
     }
 
@@ -55,7 +53,6 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
         return this;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void checkForRecipe(){
         if(this.level != null && isServer()){
@@ -63,7 +60,7 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
                 return;
             }
 
-            recipe = RecipeUtil.getRecipes(this.level,(RecipeType<VoidSieveRecipe>) CDPRecipe.VOID_SIEVE_TYPE.get()).stream().filter(recipe -> recipe.matches(input,output)).findFirst().orElse(null);
+            recipe = RecipeUtil.getRecipes(this.level,CDPRecipe.VOID_SIEVE.asType()).stream().filter(recipe -> recipe.matches(input,output)).findFirst().orElse(null);
         }
     }
 

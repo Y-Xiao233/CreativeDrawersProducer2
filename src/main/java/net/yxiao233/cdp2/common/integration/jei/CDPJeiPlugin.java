@@ -12,13 +12,11 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.integration.jei.category.CreativeDrawerInfoCategory;
 import net.yxiao233.cdp2.common.recipe.CreativeDrawerInfo;
-import net.yxiao233.cdp2.common.recipe.VoidSieveRecipe;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPRecipe;
 import net.yxiao233.cdp2.common.integration.botanypot.BotanyPotJei;
@@ -55,11 +53,11 @@ public class CDPJeiPlugin implements IModPlugin {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
         Level level = Minecraft.getInstance().level;
-
-        registration.addRecipes(CDPRecipeType.VOID_SIEVE, RecipeUtil.getRecipes(level,(RecipeType<VoidSieveRecipe>) CDPRecipe.VOID_SIEVE_TYPE.get()));
+        if(level != null){
+            registration.addRecipes(CDPRecipeType.VOID_SIEVE, RecipeUtil.getRecipes(level,CDPRecipe.VOID_SIEVE.asType()));
+        }
         addDrawerInfoRecipe(registration);
     }
 
@@ -68,9 +66,7 @@ public class CDPJeiPlugin implements IModPlugin {
         BotanyPotJei.registerRecipeCatalysts(registration);
         registration.addRecipeCatalyst(CDPBlock.VOID_CRAFTING_TABLE.asBlock(), RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(CDPBlock.VOID_SIEVE,CDPRecipeType.VOID_SIEVE);
-        CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(register -> {
-            registration.addRecipeCatalyst(register.asItem(),CDPRecipeType.DRAWER_INFO);
-        });
+        CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(register -> registration.addRecipeCatalyst(register.asItem(),CDPRecipeType.DRAWER_INFO));
     }
 
     private void addDrawerInfoRecipe(IRecipeRegistration registration){

@@ -59,11 +59,11 @@ public class VoidSieveRecipe extends BaseRecipe {
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return CDPRecipe.VOID_SIEVE_SERIALIZER.get();
+        return CDPRecipe.VOID_SIEVE.asUnknownSerializer();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return CDPRecipe.VOID_SIEVE_TYPE.get();
+        return CDPRecipe.VOID_SIEVE.asUnknownType();
     }
 }
