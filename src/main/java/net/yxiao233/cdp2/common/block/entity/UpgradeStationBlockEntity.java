@@ -22,7 +22,6 @@ import mekanism.common.item.ItemUpgrade;
 import mekanism.common.registries.MekanismItems;
 import mekanism.common.tile.component.TileComponentUpgrade;
 import mekanism.common.tile.interfaces.IUpgradeTile;
-import mekanism.common.util.WorldUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -54,28 +53,31 @@ import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements INBTSerializable<CompoundTag>{
-    private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);
-    @DescSynced
-    @Persisted(key = "owner")
-    private UUID ownerUUID = null;
-    @DescSynced
-    @Persisted(key = "show_information")
-    private boolean showInformation = true;
-    @DescSynced
-    @Persisted(key = "show_range")
-    private boolean showRange = true;
-    @DescSynced
-    @Persisted(key = "progress")
-    public int progress;
-    public int maxProgress = 100;
-    private Player player;
-    @DescSynced
-    private boolean shouldApplyMek = true;
+    private final FieldManagedStorage fieldManagedStorage = new FieldManagedStorage(this);
+    private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create().addItemHandler(new ItemStackHandler(1){
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+            if(getLevel() != null && !getLevel().isClientSide()){
+                getLevel().sendBlockUpdated(getBlockPos(),getBlockState(),getBlockState(),3);
+            }
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return stack.is(CDPTag.Items.CREATIVE_SHARDS);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            return isItemValid(slot,stack) ? ItemStack.EMPTY : stack;
+        }
+    });
     public static final HashMap<BlockPos,UpgradeStationBlockEntity> entries = new HashMap<>();
     @DescSynced
     @Persisted(key = "mekanism")
@@ -83,118 +85,29 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     @DescSynced
     @Persisted(key = "basic")
     private final UpgradePointManager basic = UpgradePointManager.of(UpgradableTypes.BASIC);
+    private final Map<BlockPos, IUpgradeTile> TILES = new ConcurrentHashMap<>();
+    @DescSynced
+    @Persisted(key = "progress")
+    public int progress;
+    public int maxProgress = 100;
+    @DescSynced
+    @Persisted(key = "show_range")
+    private boolean showRange = true;
+    @DescSynced
+    @Persisted(key = "show_information")
+    private boolean showInformation = true;
+    @DescSynced
+    @Persisted(key = "owner")
+    private UUID ownerUUID = null;
+    private Player player;
 
-    private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create()
-            .addItemHandler(new ItemStackHandler(1){
-                @Override
-                public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                    return stack.is(CDPTag.Items.CREATIVE_SHARDS);
-                }
-            });
     public UpgradeStationBlockEntity(BlockPos pos, BlockState blockState) {
         super(CDPBlock.UPGRADE_STATION.asBlockEntityType(), pos, blockState);
         entries.put(pos,this);
-        shouldApplyMek = true;
     }
 
     @Override
-    public BlockCapabilityMap getCapabilityMap() {
-        return capabilityMap;
-    }
-
-    @Override
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if(player == null && ownerUUID != null){
-            player = level.getPlayerByUUID(ownerUUID);
-        }
-        if(!level.isClientSide()){
-            if(shouldApplyMek){
-                applyMekanismUpgrade(level);
-                shouldApplyMek = false;
-            }
-            handle();
-        }
-    }
-
-    private void handle(){
-        ItemStack stack = capabilityMap.getItemHandler().getStackInSlot(0);
-        if(stack.isEmpty()){
-            progress = 0;
-            return;
-        }
-        if(progress >= maxProgress && stack.getItem() instanceof CreativeShardItem shardItem && player != null){
-            progress = 0;
-            stack.setCount(stack.getCount() - 1);
-            addTotalPoint(player,shardItem.getTier());
-            return;
-        }
-        progress = Math.min(++ progress, maxProgress);
-    }
-
-    private void applyMekanismUpgrade(Level level){
-        if(level != null && !level.isClientSide() && getRange() > 0){
-            AABB aabb = getBoundary();
-            BlockPos.betweenClosed((int) aabb.minX, (int) aabb.minY, (int) aabb.minZ, (int) aabb.maxX, (int) aabb.maxY, (int) aabb.maxZ).forEach(pos -> {
-                BlockEntity blockEntity = WorldUtils.getTileEntity(level, pos);
-                if(blockEntity instanceof IUpgradeTile tile){
-                    mekanism.getMap().forEach((k,p) ->{
-                        if(tile.supportsUpgrades()){
-                            TileComponentUpgrade component = tile.getComponent();
-                            ItemUpgrade itemUpgrade = getItemUpgrade(k);
-                            Upgrade type = itemUpgrade.getUpgradeType(new ItemStack(itemUpgrade,p.getPoint()));
-                            if(tile.supportsUpgrade(type)){
-                                component.addUpgrades(type,p.getPoint());
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    public void removeMekanismUpgrade(Level level, int range){
-        range = range == -1 ? getRange() : range;
-        if(level != null && !level.isClientSide() && range > 0){
-            AABB aabb = getBoundary(range);
-            BlockPos.betweenClosed((int) aabb.minX, (int) aabb.minY, (int) aabb.minZ, (int) aabb.maxX, (int) aabb.maxY, (int) aabb.maxZ).forEach(pos -> {
-                BlockEntity blockEntity = WorldUtils.getTileEntity(level, pos);
-                if(blockEntity instanceof IUpgradeTile tile){
-                    mekanism.getMap().forEach((key,pointPair) ->{
-                        if(tile.supportsUpgrades()){
-                            TileComponentUpgrade component = tile.getComponent();
-                            ItemUpgrade itemUpgrade = getItemUpgrade(key);
-                            Upgrade type = itemUpgrade.getUpgradeType(itemUpgrade.getDefaultInstance());
-                            if(tile.supportsUpgrade(type)){
-                                component.removeUpgrade(type,true);
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    private ItemUpgrade getItemUpgrade(String type){
-        return switch (type){
-            case "speed" -> MekanismItems.SPEED_UPGRADE.get();
-            case "filter" -> MekanismItems.FILTER_UPGRADE.get();
-            case "muffling" -> MekanismItems.MUFFLING_UPGRADE.get();
-            case "anchor" -> MekanismItems.ANCHOR_UPGRADE.get();
-            case "chemical" -> MekanismItems.CHEMICAL_UPGRADE.get();
-            default -> MekanismItems.ENERGY_UPGRADE.get();
-        };
-    }
-
-    public void markToUpdate(Level level){
-        if(level != null){
-            removeMekanismUpgrade(level,getRange());
-            applyMekanismUpgrade(level);
-        }
-    }
-
-    //UI
-    @Override
-    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder){
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
         if(this.getOwner() == null){
             this.setOwner(holder.player.getUUID());
         }
@@ -272,18 +185,9 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
             Button decrease = (Button) new Button().setText("-").setOnServerClick(event -> {
                 int point = manager.getPoint(key);
-                if(id.equals("basic")){
-                    removeMekanismUpgrade(level,point);
-                }
                 int delta = 1;
                 manager.updatePoint(key,Math.max(0,point - delta));
-
                 addTotalPoint(player,point - manager.getPoint(key));
-
-                if(id.equals("mekanism")){
-                    removeMekanismUpgrade(level,point);
-                    applyMekanismUpgrade(level);
-                }
             }).layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,-0.8f)).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
                 if(showInformation){
                     event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.decrease"));
@@ -294,16 +198,9 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             Button increase = (Button) new Button().setText("+").setOnServerClick(event -> {
                 int point = manager.getPoint(key);
                 int delta = 1;
-
                 int maxAdd = Math.min(delta,getTotalPoint(player));
                 manager.updatePoint(key,Math.min(manager.getMax(key),point + maxAdd));
-
                 addTotalPoint(player,-(manager.getPoint(key) - point));
-
-                if(id.equals("mekanism") || id.equals("basic")){
-                    removeMekanismUpgrade(level,getRange());
-                    applyMekanismUpgrade(level);
-                }
             }).layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,-0.8f)).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
                 if(showInformation){
                     event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.increase"));
@@ -347,15 +244,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         });
 
         Button reset = (Button) new Button().setText(" ").setOnServerClick(event -> {
-            if(id.equals("basic")){
-                int range = basic.getPoint("range");
-                removeMekanismUpgrade(level,range);
-            }
             addTotalPoint(player,manager.resetAll());
-
-            if(id.equals("mekanism")){
-                removeMekanismUpgrade(level,getRange());
-            }
         }).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
             event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.reset"));
         });
@@ -387,16 +276,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         }
     }
 
-    private Label pointDisplay(Player player){
-        Label pointDisplay = (Label) new Label()
-                .textStyle(textStyle -> textStyle.textAlignHorizontal(Horizontal.CENTER))
-                .setText(Component.translatable("gui.cdp2.total_points",getTotalPoint(player)))
-                .layout(layoutStyle -> layoutStyle.height(22).paddingAll(7).gapAll(5))
-                .style(basicStyle -> basicStyle.background(Sprites.BORDER));
-        pointDisplay.bind(DataBindingBuilder.componentS2C(() -> Component.translatable("gui.cdp2.total_points",getTotalPoint(player))).build());
-        return pointDisplay;
-    }
-
     private Button showRangeButton(){
         Button showRangeButton = (Button) new Button().setText(" ").setOnServerClick(event -> {
             showRange = !showRange;
@@ -412,13 +291,151 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         return showRangeButton;
     }
 
-    //getter
+    private Label pointDisplay(Player player){
+        Label pointDisplay = (Label) new Label()
+                .textStyle(textStyle -> textStyle.textAlignHorizontal(Horizontal.CENTER))
+                .setText(Component.translatable("gui.cdp2.total_points",getTotalPoint(player)))
+                .layout(layoutStyle -> layoutStyle.height(22).paddingAll(7).gapAll(5))
+                .style(basicStyle -> basicStyle.background(Sprites.BORDER));
+        pointDisplay.bind(DataBindingBuilder.componentS2C(() -> Component.translatable("gui.cdp2.total_points",getTotalPoint(player))).build());
+        return pointDisplay;
+    }
+
+    public void addTotalPoint(Player player, int delta){
+        CompoundTag data = player.getPersistentData();
+        if(data.contains("total_point")){
+            int old = data.getInt("total_point");
+            data.putInt("total_point",old + delta);
+        }else{
+            data.putInt("total_point",delta);
+        }
+    }
+
+    public int getTotalPoint(Player player){
+        CompoundTag data = player.getPersistentData();
+        if(data.contains("total_point")){
+            return data.getInt("total_point");
+        }else{
+            data.putInt("total_point",0);
+            return 0;
+        }
+    }
+
     public boolean isShowRange() {
         return showRange && getRange() > 0;
     }
 
+    @Override
+    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
+        if(player == null && ownerUUID != null){
+            player = level.getPlayerByUUID(ownerUUID);
+        }
+        if(!level.isClientSide()){
+            updateMekanismUpgrade();
+            handle();
+        }
+    }
+
+    private void handle(){
+        ItemStack stack = capabilityMap.getItemHandler().getStackInSlot(0);
+        if(stack.isEmpty()){
+            progress = 0;
+            return;
+        }
+        if(progress >= maxProgress && stack.getItem() instanceof CreativeShardItem shardItem && player != null){
+            progress = 0;
+            stack.setCount(stack.getCount() - 1);
+            addTotalPoint(player,shardItem.getTier());
+            return;
+        }
+        progress = Math.min(++ progress, maxProgress);
+    }
+
+    public void updateMekanismUpgrade(){
+        AABB boundary = getBoundary();
+        if(level == null){
+            return;
+        }
+        Set<BlockPos> positions = new HashSet<>();
+        BlockPos.betweenClosedStream((int) boundary.minX, (int) boundary.minY, (int) boundary.minZ, (int) boundary.maxX, (int) boundary.maxY, (int) boundary.maxZ).forEach(pos -> {
+            positions.add(pos.immutable());
+        });
+
+        positions.forEach(pos ->{
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if(blockEntity instanceof IUpgradeTile upgradeTile){
+                TILES.put(pos,upgradeTile);
+            }else{
+                TILES.remove(pos);
+            }
+        });
+
+        TILES.forEach((pos, tile) -> {
+            if(boundary.contains(pos.getX(), pos.getY(), pos.getZ())){
+                applyMekanismUpgrade(tile);
+            }else{
+                removeMekanismUpgrade(tile);
+                TILES.remove(pos);
+            }
+        });
+    }
+
+    public void applyMekanismUpgrade(IUpgradeTile tile){
+        mekanism.getMap().forEach((name, pointPair) ->{
+            Upgrade upgrade = Upgrade.valueOf(name.toUpperCase());
+            int point = pointPair.getPoint();
+            if(tile.supportsUpgrade(upgrade) && point > 0){
+                TileComponentUpgrade component = tile.getComponent();
+                int installed = component.getUpgrades(upgrade);
+                if(installed < point){
+                    component.addUpgrades(upgrade, point - installed);
+                }
+            }
+        });
+    }
+
+    public void applyMekanismUpgrade(BlockPos pos){
+        if(level != null && pos != null && level.getBlockEntity(pos) instanceof IUpgradeTile tile){
+          applyMekanismUpgrade(tile);
+        }
+    }
+
+    public void removeMekanismUpgrade(IUpgradeTile tile){
+        for(Upgrade upgrade : Upgrade.values()){
+            if(tile.supportsUpgrade(upgrade)){
+                TileComponentUpgrade component = tile.getComponent();
+                component.removeUpgrade(upgrade, true);
+            }
+        }
+    }
+
+    public void removeMekanismUpgrade(BlockPos pos){
+        if(level != null && pos != null && level.getBlockEntity(pos) instanceof IUpgradeTile tile){
+            removeMekanismUpgrade(tile);
+        }
+    }
+
+    private ItemUpgrade getItemUpgrade(String type){
+        return switch (type){
+            case "speed" -> MekanismItems.SPEED_UPGRADE.get();
+            case "filter" -> MekanismItems.FILTER_UPGRADE.get();
+            case "muffling" -> MekanismItems.MUFFLING_UPGRADE.get();
+            case "anchor" -> MekanismItems.ANCHOR_UPGRADE.get();
+            case "chemical" -> MekanismItems.CHEMICAL_UPGRADE.get();
+            default -> MekanismItems.ENERGY_UPGRADE.get();
+        };
+    }
+
     public int getRange(){
         return basic.getPoint("range");
+    }
+
+    public void setOwner(UUID ownerUUID){
+        this.ownerUUID = ownerUUID;
+    }
+
+    public UUID getOwner() {
+        return ownerUUID;
     }
 
     public AABB getBoundary(){
@@ -446,37 +463,14 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         );
     }
 
-    public void addTotalPoint(Player player, int delta){
-        CompoundTag data = player.getPersistentData();
-        if(data.contains("total_point")){
-            int old = data.getInt("total_point");
-            data.putInt("total_point",old + delta);
-        }else{
-            data.putInt("total_point",delta);
-        }
-    }
-
-    public int getTotalPoint(Player player){
-        CompoundTag data = player.getPersistentData();
-        if(data.contains("total_point")){
-            return data.getInt("total_point");
-        }else{
-            data.putInt("total_point",0);
-            return 0;
-        }
+    @Override
+    public IManagedStorage getSyncStorage() {
+        return fieldManagedStorage;
     }
 
     @Override
-    public IManagedStorage getSyncStorage() {
-        return syncStorage;
-    }
-
-    public void setOwner(UUID ownerUUID){
-        this.ownerUUID = ownerUUID;
-    }
-
-    public UUID getOwner() {
-        return ownerUUID;
+    public BlockCapabilityMap getCapabilityMap() {
+        return capabilityMap;
     }
 
     @Override
@@ -493,7 +487,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         loadAdditional(tag,provider);
     }
 
-    //interface
     @FunctionalInterface
     public interface HoverTipCallBack{
         void accept(UpgradePointManager manager,  String key, UIEvent event);

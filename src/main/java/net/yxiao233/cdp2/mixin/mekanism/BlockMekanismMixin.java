@@ -38,10 +38,14 @@ public abstract class BlockMekanismMixin extends Block {
     @Override
     protected void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        UpgradeStationBlockEntity.entries.forEach((stationPos,station)-> {
+        if(level.isClientSide()){
+            return;
+        }
+        for(UpgradeStationBlockEntity station : UpgradeStationBlockEntity.entries.values()){
             if (station.getBoundary().contains(pos.getX(),pos.getY(),pos.getZ())) {
-                station.markToUpdate(level);
+                station.applyMekanismUpgrade(pos);
+                break;
             }
-        });
+        }
     }
 }

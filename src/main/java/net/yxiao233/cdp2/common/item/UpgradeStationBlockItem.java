@@ -1,8 +1,10 @@
 package net.yxiao233.cdp2.common.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -11,6 +13,7 @@ import net.yxiao233.cdp2.common.registry.CDPDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class UpgradeStationBlockItem extends BlockItem {
