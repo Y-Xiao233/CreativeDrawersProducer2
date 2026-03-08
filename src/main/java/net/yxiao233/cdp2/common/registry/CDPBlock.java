@@ -49,6 +49,7 @@ public class CDPBlock {
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> DIAMOND_CREATIVE_DRAWER = registerCreativeDrawer("diamond_creative_drawer", Items.DIAMOND::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> VOID_MATTER_CREATIVE_DRAWER = registerCreativeDrawer("void_matter_creative_drawer", CDPItem.VOID_MATTER::asStack);
+    public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> APPLE_CREATIVE_DRAWER = registerCreativeDrawer("apple_creative_drawer", Items.APPLE::getDefaultInstance);
     public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", () -> new FullCopyBlock(Blocks.AMETHYST_BLOCK),null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockDeferredRegister VOID_CRAFTING_TABLE = CDPBlockDeferredRegister.registrySimple("void_crafting_table", VoidCraftingTableBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register(

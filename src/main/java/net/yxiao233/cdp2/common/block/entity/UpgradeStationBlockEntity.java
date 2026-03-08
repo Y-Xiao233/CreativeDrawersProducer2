@@ -1,5 +1,8 @@
 package net.yxiao233.cdp2.common.block.entity;
 
+import com.jerry.mekextras.MekanismExtras;
+import com.jerry.mekextras.api.ExtraUpgrade;
+import com.jerry.mekextras.common.registries.ExtraItems;
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.SupplierDataSource;
@@ -110,6 +113,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
         if(this.getOwner() == null){
             this.setOwner(holder.player.getUUID());
+            player = holder.player;
         }
         var root = LDLibUtil.createTabWithBackground();
 
@@ -132,6 +136,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         return ModularUI.of(UI.of(root),holder.player);
     }
 
+    @SuppressWarnings("deprecation")
     private void mainTab(BlockUIMenuType.BlockUIHolder holder, TabView tabView){
         var tabMain = LDLibUtil.createBaseRoot();
         Label point = pointDisplay(holder.player);
@@ -144,8 +149,8 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             element.addChildren(item,description);
             information.addChildren(element,LDLibUtil.flex(1));
         }
-        UIElement inputDesc = LDLibUtil.text(Component.translatable("gui.cdp2.input")).layout(layoutStyle -> layoutStyle.horizontal(71));
-        UIElement input = LDLibUtil.inputSlot(capabilityMap).layout(layoutStyle -> layoutStyle.horizontal(72));
+        UIElement inputDesc = LDLibUtil.text(Component.translatable("gui.cdp2.input")).layout(layoutStyle -> layoutStyle.marginHorizontal(71));
+        UIElement input = LDLibUtil.inputSlot(capabilityMap).layout(layoutStyle -> layoutStyle.marginHorizontal(72));
         UIElement playerInventory = LDLibUtil.playerInventory();
         ProgressBar progressBar = new ProgressBar().setMaxValue(maxProgress).setProgress(0).bindDataSource(SupplierDataSource.of(() -> (float) progress));
         progressBar.label.bindDataSource(SupplierDataSource.of(() -> Component.literal(progressBar.getValue().intValue() + "/" + ((Float) progressBar.getMaxValue()).intValue())));
@@ -158,19 +163,21 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         tabView.addTab(new Tab().setText(Component.translatable("gui.cdp2.tab_main")),tabMain);
     }
 
+    @SuppressWarnings("deprecation")
     private void upgradeTab(String id, UpgradePointManager manager, BlockUIMenuType.BlockUIHolder holder, TabView tabView, HoverTipCallBack descriptionHoverTip, @Nullable HoverTipCallBack upgradeTierTip){
         Player player = holder.player;
         var upgradeTab = LDLibUtil.createBaseRoot();
         Label pointDisplay = pointDisplay(player);
         UIElement information = LDLibUtil.createBaseRoot();
 
-        int baseGap = 15;
+        int baseGap = 25;
         AtomicInteger firstElementWidth = new AtomicInteger(0);
         manager.getMap().forEach((key, pointPair) ->{
             UIElement element = LDLibUtil.rowElement().layout(layoutStyle -> layoutStyle.width(100));
 
-            Label type = (Label) LDLibUtil.text(Component.literal(key))
-                    .layout(layoutStyle -> layoutStyle.width(key.length() * 6 - 1))
+            Component component = Component.translatable("upgrade.type.cdp2." + key);
+            Label type = (Label) LDLibUtil.text(component)
+                    .layout(layoutStyle -> layoutStyle.width(component.getString().length() * 6 - 1))
                     .addEventListener(UIEvents.HOVER_TOOLTIPS, event -> {
                         if(showInformation){
                             descriptionHoverTip.accept(manager, key, event);
@@ -180,7 +187,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
                     });
 
             if(firstElementWidth.get() == 0){
-                firstElementWidth.set(key.length() * 6 - 1);
+                firstElementWidth.set(component.getString().length() * 6 - 1);
             }
 
             Button decrease = (Button) new Button().setText("-").setOnServerClick(event -> {
@@ -211,7 +218,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
             Label how = (Label) LDLibUtil.text(Component.literal(String.valueOf(manager.getPoint(key))))
                     .bind(DataBindingBuilder.componentS2C(() -> Component.literal(String.valueOf(manager.getPoint(key)))).build())
-                    .layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,1.2f).width(String.valueOf(manager.getPoint(key)).length() * 5 - 1))
+                    .layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,2f).width(String.valueOf(manager.getPoint(key)).length() * 5 - 1))
                     .addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
                         if(upgradeTierTip != null){
                             if(showInformation){
@@ -224,8 +231,8 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             how.textStyle(textStyle -> textStyle.textAlignHorizontal(Horizontal.CENTER));
 
 
-            float prefix = (key.length() * 6 - 1) - firstElementWidth.get();
-            element.addChildren(type,LDLibUtil.widthFlex(baseGap-prefix),decrease,LDLibUtil.flex(2),how,LDLibUtil.flex(3.5f),increase);
+            float prefix = (component.getString().length() * 6 - 1) - firstElementWidth.get();
+            element.addChildren(type,LDLibUtil.widthFlex(baseGap-prefix),decrease,LDLibUtil.flex(3f),how,LDLibUtil.flex(3.5f),increase);
             information.addChildren(element,LDLibUtil.flex(1));
         });
 
@@ -246,7 +253,11 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         Button reset = (Button) new Button().setText(" ").setOnServerClick(event -> {
             addTotalPoint(player,manager.resetAll());
         }).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
-            event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.reset"));
+            if(showInformation){
+                event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.reset"));
+            }else{
+                event.hoverTooltips = HoverTooltips.empty();
+            }
         });
         reset.layout(layoutStyle -> layoutStyle.width(13f));
         reset.buttonStyle(buttonStyle -> {
@@ -266,11 +277,10 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         tabView.addTab(new Tab().setText(Component.translatable("gui.cdp2.tab_" + id)),upgradeTab);
     }
 
+    @SuppressWarnings("deprecation")
     private void creativeDebugButton(BlockUIMenuType.BlockUIHolder holder, UIElement root){
         if(holder.player.isCreative()){
-            UIElement testTotalPoint = new UIElement().layout(layoutStyle -> layoutStyle
-                    .flexDirection(YogaFlexDirection.ROW)
-            );
+            UIElement testTotalPoint = new UIElement().layout(layoutStyle -> layoutStyle.flexDirection(YogaFlexDirection.ROW));
             testTotalPoint.addChildren(new Button().setText("- point").setOnServerClick(event -> addTotalPoint(holder.player,-1)),LDLibUtil.flex(2),new Button().setText("+ point").setOnServerClick(event -> addTotalPoint(holder.player,1)));
             root.addChild(testTotalPoint);
         }
@@ -280,7 +290,11 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         Button showRangeButton = (Button) new Button().setText(" ").setOnServerClick(event -> {
             showRange = !showRange;
         }).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
-            event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2." + (showRange ? "preview" : "hide")));
+            if(showInformation){
+                event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2." + (showRange ? "preview" : "hide")));
+            }else{
+                event.hoverTooltips = HoverTooltips.empty();
+            }
         });
         showRangeButton.layout(layoutStyle -> layoutStyle.width(13f));
         showRangeButton.buttonStyle(buttonStyle -> {
@@ -402,16 +416,24 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     public void removeMekanismUpgrade(IUpgradeTile tile){
         for(Upgrade upgrade : Upgrade.values()){
-            if(tile.supportsUpgrade(upgrade)){
+            if(tile.supportsUpgrade(upgrade) && !upgrade.equals(ExtraUpgrade.CREATIVE)){
                 TileComponentUpgrade component = tile.getComponent();
                 component.removeUpgrade(upgrade, true);
             }
         }
     }
 
-    public void removeMekanismUpgrade(BlockPos pos){
+    public void removeSingleMekanismUpgrade(BlockPos pos){
         if(level != null && pos != null && level.getBlockEntity(pos) instanceof IUpgradeTile tile){
             removeMekanismUpgrade(tile);
+        }
+    }
+
+    public void removeAllMekanismUpgrade(BlockPos pos){
+        if(level != null && pos != null){
+            TILES.forEach((tilePos, tile) ->{
+                removeMekanismUpgrade(tile);
+            });
         }
     }
 
@@ -422,6 +444,8 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             case "muffling" -> MekanismItems.MUFFLING_UPGRADE.get();
             case "anchor" -> MekanismItems.ANCHOR_UPGRADE.get();
             case "chemical" -> MekanismItems.CHEMICAL_UPGRADE.get();
+            case "STACK" -> ExtraItems.STACK.get();
+            case "IONIC_MEMBRANE" -> ExtraItems.IONIC_MEMBRANE.get();
             default -> MekanismItems.ENERGY_UPGRADE.get();
         };
     }

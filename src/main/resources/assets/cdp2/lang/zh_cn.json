@@ -46,6 +46,7 @@
   "tooltip.cdp2.void_power": "§e虚空动力驱动!",
   "tooltip.cdp2.configuration_card.tip0": "* 潜行右键植物盆保存配置",
   "tooltip.cdp2.configuration_card.tip1": "* 潜行右键空气重置配置",
+  "tooltip.titanium.facing_handler.void_input": "虚空物质输入",
 
   "message.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
   "message.cdp2.configuration_card.error": "配置信息错误,请重置后重新尝试",
@@ -78,5 +79,15 @@
   "jei.cdp2.total": "Total: ",
   "jei.cdp2.chance": "概率: %d",
   "jei.cdp2.catalyst": "Catalyst",
-  "jei.cdp2.creative_drawer_info": "创造抽屉信息"
+  "jei.cdp2.creative_drawer_info": "创造抽屉信息",
+
+  "upgrade.type.cdp2.energy": "能量升级",
+  "upgrade.type.cdp2.speed": "速度升级",
+  "upgrade.type.cdp2.filter": "过滤升级",
+  "upgrade.type.cdp2.muffling": "降噪升级",
+  "upgrade.type.cdp2.anchor": "锚升级",
+  "upgrade.type.cdp2.chemical": "化学品升级",
+  "upgrade.type.cdp2.range": "范围升级",
+  "upgrade.type.cdp2.STACK": "堆叠升级",
+  "upgrade.type.cdp2.IONIC_MEMBRANE": "离子膜升级"
 }

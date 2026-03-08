@@ -43,7 +43,7 @@ public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlo
     @Override
     protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
-        UpgradeStationBlockEntity.entries.get(pos).removeMekanismUpgrade(pos);
+        UpgradeStationBlockEntity.entries.get(pos).removeAllMekanismUpgrade(pos);
         if(!Minecraft.getInstance().player.isCreative()){
             createDrop(level,UpgradeStationBlockEntity.entries.get(pos));
         }

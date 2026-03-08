@@ -46,6 +46,7 @@
   "tooltip.cdp2.void_power": "§ePowered by Void!",
   "tooltip.cdp2.configuration_card.tip0": "* SHIFT + Right Click the pot to save configuration",
   "tooltip.cdp2.configuration_card.tip1": "* SHIFT + Right Click air to reset configuration",
+  "tooltip.titanium.facing_handler.void_input": "Void Matter Input",
 
   "message.cdp2.mek_upgrade": "Need to use Upgrade Station to upgrade this machine",
   "message.cdp2.configuration_card.error": "Configuration information error, please reset and try again",
@@ -78,5 +79,15 @@
   "jei.cdp2.total": "Total: ",
   "jei.cdp2.chance": "Chance: %d",
   "jei.cdp2.catalyst": "Catalyst",
-  "jei.cdp2.creative_drawer_info": "Creative Drawer Info"
+  "jei.cdp2.creative_drawer_info": "Creative Drawer Info",
+
+  "upgrade.type.cdp2.energy": "Energy",
+  "upgrade.type.cdp2.speed": "Speed",
+  "upgrade.type.cdp2.filter": "Filter",
+  "upgrade.type.cdp2.muffling": "Muffling",
+  "upgrade.type.cdp2.anchor": "Anchor",
+  "upgrade.type.cdp2.chemical": "Chemical",
+  "upgrade.type.cdp2.range": "Range",
+  "upgrade.type.cdp2.STACK": "Stack",
+  "upgrade.type.cdp2.IONIC_MEMBRANE": "Ionic Membrane"
 }

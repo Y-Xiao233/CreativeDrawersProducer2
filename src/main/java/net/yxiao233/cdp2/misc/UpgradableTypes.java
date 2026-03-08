@@ -7,12 +7,14 @@ public class UpgradableTypes {
     public static final UpgradableTypes BASIC = create()
             .put("range",16);
     public static final UpgradableTypes MEKANISM = create()
-            .put("energy",8)
-            .put("speed",8)
+            .put("energy",32)
+            .put("speed",32)
             .put("filter",1)
             .put("muffling",1)
             .put("anchor",1)
-            .put("chemical",8);
+            .put("chemical",8)
+            .put("STACK",8)
+            .put("IONIC_MEMBRANE",1);
     private final HashMap<String, PointPair> pointMap = new HashMap<>();
     private UpgradableTypes(){
     }

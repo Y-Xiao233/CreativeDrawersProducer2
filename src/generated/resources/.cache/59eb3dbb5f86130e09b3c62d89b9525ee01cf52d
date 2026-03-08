@@ -1,7 +1,8 @@
-// 1.21.1	2026-02-03T14:26:47.3176408	Loot Tables
+// 1.21.1	2026-03-07T19:39:20.2289032	Loot Tables
 e59291b7a485cfd3a438e175121c0b3c2bd118e4 data/cdp2/loot_table/blocks/absolute_botany_pot.json
 e114083eb2a7e0c54b00fb9dc155926c667e466a data/cdp2/loot_table/blocks/absolute_farmland.json
 25a1cdb0be266d15afffdee6e3cdf7067124da01 data/cdp2/loot_table/blocks/absolute_hopper_botany_pot.json
+2a484920675310556d66dfe801f22ce96eaf0489 data/cdp2/loot_table/blocks/apple_creative_drawer.json
 8b52ec6dec93a89e61b5bf74f1a2eb89d7f621f6 data/cdp2/loot_table/blocks/cosmic_botany_pot.json
 32f3802c7c32e13cc402de965e7ee336b21d9728 data/cdp2/loot_table/blocks/cosmic_farmland.json
 6e190d7527c34a158d003588e0d852e11704402a data/cdp2/loot_table/blocks/cosmic_hopper_botany_pot.json
