@@ -151,9 +151,6 @@ dependencies {
     //mystical agradditions
     implementation "curse.maven:mystical-agradditions-256247:7397775"
 
-    //botany pots mystical agriculture compat
-    implementation "curse.maven:botany-pots-mystical-agriculture-compat-1329409:7208646"
-
     //mekanism extra
     implementation "curse.maven:mekanism-extras-1026040:7628313"
 
