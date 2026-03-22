@@ -25,9 +25,13 @@ public class CDPBlockDeferredRegister implements ItemLike {
     private final CDPItemDeferredRegister itemRegister;
     private final DeferredHolder<Item,Item> itemDeferredHolder;
     private final DeferredHolder<Block,Block> blockBlockDeferredHolder;
-    private CDPBlockDeferredRegister(DeferredHolder<Block,Block> blockBlockDeferredHolder, CDPItemDeferredRegister itemRegister){
+    private CDPBlockDeferredRegister(DeferredHolder<Block,Block> blockBlockDeferredHolder, @Nullable CDPItemDeferredRegister itemRegister){
         this.itemRegister = itemRegister;
-        this.itemDeferredHolder = itemRegister.getItemHolder();
+        if(itemRegister != null){
+            this.itemDeferredHolder = itemRegister.getItemHolder();
+        }else{
+            this.itemDeferredHolder = null;
+        }
         this.blockBlockDeferredHolder = blockBlockDeferredHolder;
     }
     public static CDPBlockDeferredRegister registrySimple(String name, Supplier<? extends Block> sup, @Nullable Item.Properties itemProperties){
@@ -52,6 +56,11 @@ public class CDPBlockDeferredRegister implements ItemLike {
         DeferredHolder<Block,Block> block = registryBlock(name,() -> new CDPBotanyPotEntityBlock(CreativeDrawersProducer2.makeId(name),type,potTier));
         CDPItemDeferredRegister item = CDPItemDeferredRegister.registryItem(name,() -> new CDPBotanyPotBlockItem(type,potTier,block.get(),new Item.Properties()));
         return new CDPBlockDeferredRegister(block,item);
+    }
+
+    public static CDPBlockDeferredRegister registerNoItem(String name, Supplier<? extends Block> blockSupplier){
+        DeferredHolder<Block, Block> block = registryBlock(name, blockSupplier);
+        return new CDPBlockDeferredRegister(block,null);
     }
 
     public CDPBlockDeferredRegister addToTab(@Nonnull CDPCreativeModeTabDeferredRegister tab){

@@ -34,6 +34,12 @@
   "cropTier.cdp2.cosmic": "9",
   "cropTier.cdp2.infinite": "10",
 
+  "crop.cdp2.prudentium": "初级精华",
+  "crop.cdp2.tertium": "中级精华",
+  "crop.cdp2.imperium": "高级精华",
+  "crop.cdp2.supremium": "终级精华",
+  "crop.cdp2.insanium": "究级精华",
+
   "potType.cdp2.basic": "植物盆栽",
   "potType.cdp2.hopper": "漏式植物盆栽",
   "potType.cdp2.waxed": "涂蜡的植物盆栽",
@@ -47,6 +53,7 @@
   "tooltip.cdp2.configuration_card.tip0": "* 潜行右键植物盆保存配置",
   "tooltip.cdp2.configuration_card.tip1": "* 潜行右键空气重置配置",
   "tooltip.titanium.facing_handler.void_input": "虚空物质输入",
+  "tooltip.cdp2.essence_output": "%s产出: %s",
 
   "message.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
   "message.cdp2.configuration_card.error": "配置信息错误,请重置后重新尝试",

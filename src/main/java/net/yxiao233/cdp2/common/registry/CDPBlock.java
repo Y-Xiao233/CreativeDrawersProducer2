@@ -1,8 +1,11 @@
 package net.yxiao233.cdp2.common.registry;
 
 import com.blakebr0.cucumber.item.BaseBlockItem;
+import com.blakebr0.mysticalagriculture.api.crop.Crop;
 import com.blakebr0.mysticalagriculture.api.crop.CropTier;
+import com.blakebr0.mysticalagriculture.block.InferiumCropBlock;
 import com.blakebr0.mysticalagriculture.block.InfusedFarmlandBlock;
+import com.blakebr0.mysticalagriculture.init.ModBlocks;
 import com.buuz135.industrial.block.IndustrialBlock;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import net.darkhax.botanypots.common.impl.block.PotType;
@@ -30,6 +33,8 @@ import net.yxiao233.cdp2.common.block.UpgradeStationBlock;
 import net.yxiao233.cdp2.common.block.VoidCraftingTableBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
+import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCrops;
+import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPEssenceCropBlock;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
 import net.yxiao233.cdp2.common.integration.botanypot.block.entity.CDPBotanyPotBlockEntity;
 import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
@@ -64,6 +69,11 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister INFINITE_FARMLAND = registerFarmland(CDPCropTier.TEN);
     public static final BlockWithTile VOID_SIEVE = registerIF("void_sieve", VoidSieveEntityBlock::new, VoidSieveBlockEntity::new);
     public static final CDPBlockDeferredRegister FRAME = CDPBlockDeferredRegister.registrySimple("frame",SimpleBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
+    public static final CDPBlockDeferredRegister PRUDENTIUM_CROP = registerCropBlock("prudentium_crop", CDPCrops.PRUDENTIUM);
+    public static final CDPBlockDeferredRegister TERTIUM_CROP = registerCropBlock("tertium_crop", CDPCrops.TERTIUM);
+    public static final CDPBlockDeferredRegister IMPERIUM_CROP = registerCropBlock("imperium_crop", CDPCrops.IMPERIUM);
+    public static final CDPBlockDeferredRegister SUPREMIUM_CROP = registerCropBlock("supremium_crop", CDPCrops.SUPREMIUM);
+    public static final CDPBlockDeferredRegister INSANIUM_CROP = registerCropBlock("insanium_crop", CDPCrops.INSANIUM);
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());
@@ -102,6 +112,10 @@ public class CDPBlock {
         map.values().forEach(pot -> pot.addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.BOTANY_POT_TAB));
 
         return map;
+    }
+
+    private static CDPBlockDeferredRegister registerCropBlock(String name, Crop crop){
+        return CDPBlockDeferredRegister.registerNoItem(name,() -> new CDPEssenceCropBlock(crop));
     }
 
     public static void init(IEventBus eventBus){

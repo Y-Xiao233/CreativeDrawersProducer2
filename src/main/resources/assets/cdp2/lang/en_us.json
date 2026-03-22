@@ -34,6 +34,12 @@
   "cropTier.cdp2.cosmic": "9",
   "cropTier.cdp2.infinite": "10",
 
+  "crop.cdp2.prudentium": "Prudentium",
+  "crop.cdp2.tertium": "Tertium",
+  "crop.cdp2.imperium": "Imperium",
+  "crop.cdp2.supremium": "Supremium",
+  "crop.cdp2.insanium": "Insanium",
+
   "potType.cdp2.basic": " Botany Pot",
   "potType.cdp2.hopper": " Hopper Botany Pot",
   "potType.cdp2.waxed": " Botany Pot",
@@ -47,6 +53,7 @@
   "tooltip.cdp2.configuration_card.tip0": "* SHIFT + Right Click the pot to save configuration",
   "tooltip.cdp2.configuration_card.tip1": "* SHIFT + Right Click air to reset configuration",
   "tooltip.titanium.facing_handler.void_input": "Void Matter Input",
+  "tooltip.cdp2.essence_output": "%s Output: %s",
 
   "message.cdp2.mek_upgrade": "Need to use Upgrade Station to upgrade this machine",
   "message.cdp2.configuration_card.error": "Configuration information error, please reset and try again",

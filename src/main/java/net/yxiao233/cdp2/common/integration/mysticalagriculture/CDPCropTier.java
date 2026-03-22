@@ -16,7 +16,7 @@ public class CDPCropTier {
     public static final CropTier NINE = new CropTier(CreativeDrawersProducer2.makeId("cosmic"),9,16733695, ChatFormatting.LIGHT_PURPLE);
     public static final CropTier TEN = new CropTier(CreativeDrawersProducer2.makeId("infinite"),10,16733695, ChatFormatting.DARK_PURPLE);
 
-    public static void onRegisterCrops(ICropRegistry registry) {
+    public static void onRegisterCropTiers(ICropRegistry registry) {
         Arrays.stream(CDPCropTier.class.getFields()).toList().forEach(field -> {
             if(Modifier.isStatic(field.getModifiers())){
                 try {
@@ -30,7 +30,7 @@ public class CDPCropTier {
             }
         });
     }
-    public static void onPostRegisterCrops(ICropRegistry registry) {
+    public static void onPostRegisterCropTiers(ICropRegistry registry) {
         SEVEN.setFarmland(CDPBlock.ABSOLUTE_FARMLAND.getBlock()).setEssence(CDPItem.ABSOLUTE_ESSENCE.getItemHolder());
         EIGHT.setFarmland(CDPBlock.SUPREME_FARMLAND.getBlock()).setEssence(CDPItem.SUPREME_ESSENCE.getItemHolder());
         NINE.setFarmland(CDPBlock.COSMIC_FARMLAND.getBlock()).setEssence(CDPItem.COSMIC_ESSENCE.getItemHolder());
