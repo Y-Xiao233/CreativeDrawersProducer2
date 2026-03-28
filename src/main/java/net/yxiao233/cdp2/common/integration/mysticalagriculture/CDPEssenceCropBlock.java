@@ -19,6 +19,7 @@ import java.util.List;
 public class CDPEssenceCropBlock extends MysticalCropBlock {
     public CDPEssenceCropBlock(Crop crop) {
         super(crop);
+        properties.noLootTable();
     }
 
     @Override
