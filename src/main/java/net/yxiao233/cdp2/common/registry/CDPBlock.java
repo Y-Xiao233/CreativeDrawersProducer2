@@ -6,6 +6,7 @@ import com.blakebr0.mysticalagriculture.api.crop.CropTier;
 import com.blakebr0.mysticalagriculture.block.InferiumCropBlock;
 import com.blakebr0.mysticalagriculture.block.InfusedFarmlandBlock;
 import com.blakebr0.mysticalagriculture.init.ModBlocks;
+import com.blakebr0.mysticalagriculture.init.ModItems;
 import com.buuz135.industrial.block.IndustrialBlock;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import net.darkhax.botanypots.common.impl.block.PotType;
@@ -55,6 +56,7 @@ public class CDPBlock {
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> OAK_LOG_CREATIVE_DRAWER = registerCreativeDrawer("oak_log_creative_drawer", Items.OAK_LOG::getDefaultInstance);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> VOID_MATTER_CREATIVE_DRAWER = registerCreativeDrawer("void_matter_creative_drawer", CDPItem.VOID_MATTER::asStack);
     public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> APPLE_CREATIVE_DRAWER = registerCreativeDrawer("apple_creative_drawer", Items.APPLE::getDefaultInstance);
+    public static final CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> PROSPERITY_SHARD_CREATIVE_DRAWER = registerCreativeDrawer("prosperity_shard", () -> ModItems.PROSPERITY_SHARD.get().getDefaultInstance());
     public static final CDPBlockDeferredRegister VOID_BLOCK = CDPBlockDeferredRegister.registrySimple("void_block", () -> new FullCopyBlock(Blocks.AMETHYST_BLOCK),null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockDeferredRegister VOID_CRAFTING_TABLE = CDPBlockDeferredRegister.registrySimple("void_crafting_table", VoidCraftingTableBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockEntityDeferredRegister<UpgradeStationBlockEntity> UPGRADE_STATION = CDPBlockEntityDeferredRegister.register(

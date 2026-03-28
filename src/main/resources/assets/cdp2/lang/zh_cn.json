@@ -1,9 +1,9 @@
 {
-  "itemGroup.cdp2.drawer": "Creative Drawers Producer 2: Drawer",
-  "itemGroup.cdp2.content": "Creative Drawers Producer 2: Content",
-  "itemGroup.cdp2.machine": "Creative Drawers Producer 2: Machine",
-  "itemGroup.cdp2.mystical_agriculture": "Creative Drawers Producer 2: More Essence",
-  "itemGroup.cdp2.botany_pot": "Creative Drawers Producer 2: More Botany Pot",
+  "itemGroup.cdp2.drawer": "创造抽屉制作者2: 创造抽屉",
+  "itemGroup.cdp2.content": "创造抽屉制作者2: 内容",
+  "itemGroup.cdp2.machine": "创造抽屉制作者2: 机器",
+  "itemGroup.cdp2.mystical_agriculture": "创造抽屉制作者2: 神秘农业拓展",
+  "itemGroup.cdp2.botany_pot": "创造抽屉制作者2: 更多植物盆",
 
   "block.cpd2.creative_drawer": " 创造抽屉",
   "block.cdp2.upgrade_station": "机器升级站",
