@@ -4,6 +4,7 @@ import com.hrznstudio.titanium.util.RecipeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -18,12 +19,14 @@ import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.integration.jei.category.CreativeDrawerInfoCategory;
 import net.yxiao233.cdp2.common.recipe.CreativeDrawerInfo;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.registry.CDPRecipe;
 import net.yxiao233.cdp2.common.integration.botanypot.BotanyPotJei;
 import net.yxiao233.cdp2.common.integration.jei.category.VoidSieveCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @JeiPlugin
@@ -38,6 +41,8 @@ public class CDPJeiPlugin implements IModPlugin {
     public void onRuntimeAvailable(@NotNull IJeiRuntime jeiRuntime) {
         IModPlugin.super.onRuntimeAvailable(jeiRuntime);
         runtime = jeiRuntime;
+
+        jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, Collections.singletonList(CDPItem.TEST.asStack()));
     }
 
     public static IJeiRuntime getRuntime(){

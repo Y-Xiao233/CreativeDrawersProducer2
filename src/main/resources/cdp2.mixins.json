@@ -4,6 +4,8 @@
   "package": "net.yxiao233.cdp2.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "arsnouveau.ItemRegistryMixin",
+    "arsnouveau.RitualRegistryMixin",
     "mekanism.BlockMekanismMixin",
     "mekanism.ItemUpgradeMixin",
     "mekanism.TileComponentUpgradeMixin"

@@ -103,6 +103,25 @@ repositories{
 
         }
     }
+
+    //curios
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
+
+    //geckolib
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+    }
 }
 
 dependencies {
@@ -156,6 +175,19 @@ dependencies {
 
     //mekanism unleashed
     implementation "curse.maven:mekanism-unleashed-1072209:6487994"
+
+    //curios
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+
+    //geckolib
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    //terra blender
+    implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}"
+
+    //ars nouveau
+    implementation "com.hollingsworth.ars_nouveau:ars_nouveau-${minecraft_version}:${ars_version}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

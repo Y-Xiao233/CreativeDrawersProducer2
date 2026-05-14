@@ -1,10 +1,10 @@
 package net.yxiao233.cdp2.common.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @AutoRegistryBlockCapabilities
-public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlockEntity> implements IRotatableBlock{
+public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlockEntity> implements IRotatableBlock {
     public UpgradeStationBlock(Properties properties) {
         super(properties);
     }
@@ -44,8 +44,8 @@ public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlo
     protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
         UpgradeStationBlockEntity.entries.get(pos).removeAllMekanismUpgrade(pos);
-        if(!Minecraft.getInstance().player.isCreative()){
-            createDrop(level,UpgradeStationBlockEntity.entries.get(pos));
+        if (level instanceof ServerLevel) {
+            createDrop(level, UpgradeStationBlockEntity.entries.get(pos));
         }
         UpgradeStationBlockEntity.entries.remove(pos);
     }
