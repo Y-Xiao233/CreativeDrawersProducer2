@@ -10,7 +10,6 @@ import net.yxiao233.cdp2.common.integration.kubejs.event.CDPRegistryEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.schema.VoidSieveSchema;
 
 public class CDPKubeJSPlugin implements KubeJSPlugin {
-
     @Override
     public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
         registry.namespace("cdp2")
@@ -25,6 +24,6 @@ public class CDPKubeJSPlugin implements KubeJSPlugin {
 
     @Override
     public void registerEvents(EventGroupRegistry registry) {
-        registry.register(CDPRegistryEvent.REGISTRY);
+        registry.register(CDPRegistryEvent.GROUP);
     }
 }

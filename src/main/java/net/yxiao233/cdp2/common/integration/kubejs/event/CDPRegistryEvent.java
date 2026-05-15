@@ -5,6 +5,6 @@ import dev.latvian.mods.kubejs.event.EventHandler;
 import net.yxiao233.cdp2.common.integration.arsnouveau.StructureRitualDefinition;
 
 public class CDPRegistryEvent {
-    public static final EventGroup REGISTRY = EventGroup.of("CDPRegistryEvents");
-    public static final EventHandler ARS = REGISTRY.startup("ars", () -> StructureRitualDefinition.class);
+    public static final EventGroup GROUP = EventGroup.of("CDPStartupEvents");
+    public static final EventHandler REGISTRY = GROUP.startup("registry", () -> RegistryDefinitionEvent.class);
 }

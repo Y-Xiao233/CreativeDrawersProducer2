@@ -4,6 +4,8 @@
   "package": "net.yxiao233.cdp2.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ae2cs.AECSAccessor",
+    "ae2cs.CrystalGrowthChamberBlockEntityMixin",
     "arsnouveau.ItemRegistryMixin",
     "arsnouveau.RitualRegistryMixin",
     "mekanism.BlockMekanismMixin",

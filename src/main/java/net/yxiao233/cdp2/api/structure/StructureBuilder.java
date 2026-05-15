@@ -52,10 +52,10 @@ public class StructureBuilder {
         return null;
     }
 
-    public boolean buildStructure(ServerLevel level, BlockPos pos) {
+    public void buildStructure(ServerLevel level, BlockPos pos) {
         if (nbtContext == null) {
             LOGGER.error("Cannot build structure: NBT context is null");
-            return false;
+            return;
         }
         StructureTemplate template = new StructureTemplate();
         template.load(level.holderLookup(Registries.BLOCK), nbtContext);
@@ -65,6 +65,5 @@ public class StructureBuilder {
                 .setRotation(Rotation.NONE);
 
         template.placeInWorld(level, pos, pos, settings, level.random, Block.UPDATE_ALL);
-        return true;
     }
 }

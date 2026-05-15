@@ -136,6 +136,8 @@ dependencies {
     implementation "curse.maven:applied-energistics-2-223794:7027323"
     implementation "curse.maven:guideme-1173950:7127444"
 
+    //ae2cs
+    implementation "curse.maven:ae2-crystal-science-1435174:8068871"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"

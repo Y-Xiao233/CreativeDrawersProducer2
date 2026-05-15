@@ -1,10 +1,13 @@
 package net.yxiao233.cdp2;
 
+import appeng.api.upgrades.Upgrades;
+import appeng.core.definitions.AEItems;
 import com.hollingsworth.arsnouveau.api.registry.RitualRegistry;
 import com.hollingsworth.arsnouveau.api.ritual.AbstractRitual;
 import com.hollingsworth.arsnouveau.common.items.RitualTablet;
 import com.mojang.logging.LogUtils;
 import dev.latvian.mods.kubejs.script.ScriptType;
+import io.github.lounode.ae2cs.common.init.AECSBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +20,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.yxiao233.cdp2.common.event.CreativeModeTabEvent;
 import net.yxiao233.cdp2.common.integration.arsnouveau.StructureRitualDefinition;
@@ -34,7 +38,12 @@ public class CreativeDrawersProducer2{
         CDPTab.init(modEventBus);
         CDPDataComponentTypes.DATA_COMPONENTS.register(modEventBus);
         CDPRecipe.init(modEventBus);
+        modEventBus.addListener(CreativeDrawersProducer2::commonSetup);
         modEventBus.addListener(CreativeModeTabEvent::onBuild);
+    }
+
+    public static void commonSetup(FMLCommonSetupEvent event){
+        Upgrades.add(AEItems.SPEED_CARD, AECSBlocks.CRYSTAL_GROWTH_CHAMBER_BLOCK, 8);
     }
 
     @SuppressWarnings({"removal","deprecation"})
