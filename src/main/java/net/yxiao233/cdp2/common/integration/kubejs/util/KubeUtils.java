@@ -22,6 +22,27 @@ public class KubeUtils {
         };
     }
 
+    public static Supplier<ItemStack> getItemStackFromObject(Object obj){
+        return switch (obj){
+            case Item item -> () -> new ItemStack(item,1);
+            case ResourceLocation location -> () -> new ItemStack(getItemFromId(location).get(),1);
+            case String s -> getItemStackFromString(s);
+            case ItemStack stack -> () -> stack;
+            case ItemLike itemLike -> () -> new ItemStack(itemLike.asItem(),1);
+            case null -> Items.AIR::getDefaultInstance;
+            default -> throw new UnsupportedOperationException("Type Unknown");
+        };
+    }
+
+    public static Supplier<ItemStack> getItemStackFromString(String s){
+        if(s.contains("x ")){
+            String[] split = s.split("x ");
+            Item item = getItemFromString(split[1]).get();
+            return () -> new ItemStack(item,Integer.parseInt(split[0]));
+        }
+        return () -> new ItemStack(getItemFromString(s).get(),1);
+    }
+
     public static Supplier<Item> getItemFromString(String s){
         return getItemFromId(getIdFromString(s));
     }

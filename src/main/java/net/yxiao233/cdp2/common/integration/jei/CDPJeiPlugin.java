@@ -49,7 +49,6 @@ public class CDPJeiPlugin implements IModPlugin {
         return runtime;
     }
 
-
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper =  registration.getJeiHelpers().getGuiHelper();

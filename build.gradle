@@ -138,6 +138,14 @@ dependencies {
 
     //ae2cs
     implementation "curse.maven:ae2-crystal-science-1435174:8068871"
+    //glodium
+    implementation "curse.maven:glodium-957920:5821676"
+    //extended ae
+    implementation "curse.maven:ex-pattern-provider-892005:8025439"
+    //advanced ae
+    implementation "curse.maven:advancedae-1084104:7849217"
+    //ae2lt
+    implementation "curse.maven:ae2-lightning-tech-1527395:8101595"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"

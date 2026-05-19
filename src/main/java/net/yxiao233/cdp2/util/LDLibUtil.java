@@ -75,6 +75,7 @@ public class LDLibUtil {
         });
     }
 
+    @SuppressWarnings("deprecation")
     public static UIElement fakeItemElement(Item item, float posX, float posY){
         Objects.requireNonNull(item);
         return new UIElement().layout(layoutStyle -> layoutStyle
@@ -135,6 +136,7 @@ public class LDLibUtil {
         return new InventorySlots();
     }
 
+    @SuppressWarnings("deprecation")
     public static UIElement createBaseRoot(){
         return new UIElement().layout(layoutStyle -> layoutStyle
                 .setPadding(YogaEdge.ALL, 4)
@@ -143,6 +145,7 @@ public class LDLibUtil {
         );
     }
 
+    @SuppressWarnings("deprecation")
     public static TabView createTabWithBackground(IGuiTexture background){
         return (TabView) new TabView().layout(layoutStyle -> layoutStyle
                 .setPadding(YogaEdge.ALL, 4)
@@ -153,6 +156,7 @@ public class LDLibUtil {
         });
     }
 
+    @SuppressWarnings("deprecation")
     public static TabView createBaseTab(){
         return (TabView) new TabView().layout(layoutStyle -> layoutStyle
                 .setPadding(YogaEdge.ALL, 4)
@@ -165,6 +169,7 @@ public class LDLibUtil {
         return createTabWithBackground(Sprites.BORDER);
     }
 
+    @SuppressWarnings("deprecation")
     public static UIElement createBaseRootWithBackground(IGuiTexture background){
         return new UIElement().layout(layoutStyle -> layoutStyle
                 .setPadding(YogaEdge.ALL, 4)
@@ -186,6 +191,7 @@ public class LDLibUtil {
     public static UIElement widthFlex(float flex){
         return new UIElement().layout(layoutStyle -> layoutStyle.width(flex));
     }
+    @SuppressWarnings("deprecation")
     public static UIElement rowElement(){
         return new UIElement().layout(layoutStyle -> layoutStyle
                 .flexDirection(YogaFlexDirection.ROW)
