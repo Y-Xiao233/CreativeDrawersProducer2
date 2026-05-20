@@ -8,9 +8,13 @@ import net.yxiao233.cdp2.common.integration.kubejs.util.KubeUtils;
 import net.yxiao233.cdp2.mixin.ae2cs.AECSAccessor;
 
 @SuppressWarnings("unused")
-public class RegistryDefinitionEvent implements KubeEvent {
+public class ItemRegistryEvent implements KubeEvent {
+    public static void createStructureRitual(String registryName, String nbtPath, int xOffset, int yOffset, int zOffset){
+        StructureRitualDefinition.create(registryName,nbtPath,xOffset,yOffset,zOffset);
+    }
+
     public static void createStructureRitual(String registryName, String nbtPath){
-        StructureRitualDefinition.create(registryName,nbtPath);
+        createStructureRitual(registryName,nbtPath,0,0,0);
     }
 
     public static void createCrystalSeedItem(String name, Object growTo){
