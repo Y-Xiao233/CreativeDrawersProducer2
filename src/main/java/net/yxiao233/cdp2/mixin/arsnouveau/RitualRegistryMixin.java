@@ -26,7 +26,7 @@ public class RitualRegistryMixin {
             return null;
         try {
             if(ritualMap.get(id) instanceof StructureRitual structureRitual){
-                return ritualMap.get(id).getClass().getDeclaredConstructor(String.class, String.class).newInstance(structureRitual.name, structureRitual.nbtPath);
+                return ritualMap.get(id).getClass().getDeclaredConstructor(String.class, String.class,int.class,int.class,int.class).newInstance(structureRitual.name, structureRitual.nbtPath,structureRitual.xOffset,structureRitual.yOffset,structureRitual.zOffset);
             }
             return ritualMap.get(id).getClass().getDeclaredConstructor().newInstance();
         } catch (Exception e) {
