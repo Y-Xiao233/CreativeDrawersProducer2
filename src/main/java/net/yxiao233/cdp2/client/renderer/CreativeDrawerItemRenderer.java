@@ -35,17 +35,20 @@ public class CreativeDrawerItemRenderer extends CDPItemRenderer {
         poseStack.translate(0.5f,0.5f,0.5f);
         poseStack.mulPose(Axis.XN.rotationDegrees(180));
         poseStack.mulPose(Axis.ZN.rotationDegrees(180));
-        poseStack.translate(0,0,0.42f);
+        poseStack.mulPose(Axis.YN.rotationDegrees(180));
+        poseStack.translate(0,0,-0.43f);
         if(infinityItem.get().getItem() instanceof BlockItem){
-            poseStack.translate(0,0,-0.1f);
+            poseStack.translate(0,0,0.08f);
         }
         poseStack.scale(0.6f,0.6f,0.6f);
         Minecraft.getInstance().getItemRenderer().renderStatic(infinityItem.get(),ItemDisplayContext.FIXED,packedLight,packedOverlay,poseStack,buffer,Minecraft.getInstance().level,0);
 
         if(infinityItem.get().getItem() instanceof BlockItem){
-            poseStack.translate(0,0,0.16f);
+            poseStack.translate(0,0,-0.14f);
         }
-        poseStack.translate(0,0.1f,0.05f);
+
+        poseStack.mulPose(Axis.YN.rotationDegrees(-180));
+        poseStack.translate(0,0.1f,0.02f);
         RenderUtil.renderText(poseStack,buffer,packedLight,Component.literal("2.14G"),0.6f);
 
         poseStack.popPose();

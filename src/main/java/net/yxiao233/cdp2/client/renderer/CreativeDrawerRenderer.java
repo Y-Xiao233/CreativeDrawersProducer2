@@ -46,17 +46,20 @@ public class CreativeDrawerRenderer extends CDPBaseBlockEntityRenderer<CreativeD
             case WEST -> poseStack.mulPose(Axis.YN.rotationDegrees(90));
             case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
         }
-        poseStack.translate(0,0,0.42f);
+        poseStack.mulPose(Axis.YN.rotationDegrees(180));
+        poseStack.translate(0,0,-0.43f);
         if(stack.getItem() instanceof BlockItem){
-            poseStack.translate(0,0,-0.1f);
+            poseStack.translate(0,0,0.08f);
         }
         poseStack.scale(0.6f,0.6f,0.6f);
         renderStaticItem(stack,entity,poseStack,multiBufferSource,direction);
 
         if(stack.getItem() instanceof BlockItem){
-            poseStack.translate(0,0,0.16f);
+            poseStack.translate(0,0,-0.14f);
         }
-        poseStack.translate(0,0.1f,0.05f);
+
+        poseStack.mulPose(Axis.YN.rotationDegrees(-180));
+        poseStack.translate(0,0.1f,0.02f);
         RenderUtil.renderText(poseStack,multiBufferSource,combinedLight, Component.literal("2.14G"),0.6f);
 
         poseStack.popPose();
