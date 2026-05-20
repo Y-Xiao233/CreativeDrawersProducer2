@@ -78,7 +78,7 @@ public class CDPBlock {
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());
     }
 
-    static CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> registerCreativeDrawer(String name, Supplier<ItemStack> infinityItem){
+    public static CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> registerCreativeDrawer(String name, Supplier<ItemStack> infinityItem){
         CDPBlockEntityDeferredRegister<CreativeDrawerBlockEntity> register = CDPBlockEntityDeferredRegister.registerCreativeDrawer(name, infinityItem).addToTab(CDPTab.DRAWER_TAB).addToTab(CDPTab.CONTENT_TAB);
         CREATIVE_DRAWERS_MAP.put(CreativeDrawersProducer2.makeId(name),register);
         return register;
