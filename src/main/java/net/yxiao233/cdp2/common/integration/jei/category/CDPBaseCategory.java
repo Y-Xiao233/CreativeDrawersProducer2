@@ -174,6 +174,12 @@ public abstract class CDPBaseCategory<T extends Recipe<?>> implements IRecipeCat
         };
     }
 
+    public IRecipeSlotRichTooltipCallback addLiteral(String context, ChatFormatting style){
+        return (view, tooltip) ->{
+            tooltip.add(Component.literal(context).withStyle(style));
+        };
+    }
+
     public void drawVoidBar(GuiGraphics guiGraphics,int x, int y, DyeColor dyeColor, double mouseX, double mouseY){
         IAssetProvider provider = IAssetProvider.DEFAULT_PROVIDER;
         IAsset assetBorder = IAssetProvider.getAsset(provider, AssetTypes.PROGRESS_BAR_BORDER_VERTICAL);

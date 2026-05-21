@@ -1,5 +1,6 @@
 package net.yxiao233.cdp2.common.integration.jei;
 
+import appeng.core.definitions.AEBlocks;
 import com.hrznstudio.titanium.util.RecipeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
+import net.yxiao233.cdp2.common.integration.jei.category.ChemicalFromCellInfoCategory;
 import net.yxiao233.cdp2.common.integration.jei.category.CreativeDrawerInfoCategory;
 import net.yxiao233.cdp2.common.recipe.CreativeDrawerInfo;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
@@ -54,6 +56,7 @@ public class CDPJeiPlugin implements IModPlugin {
         IGuiHelper guiHelper =  registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new VoidSieveCategory(guiHelper));
         registration.addRecipeCategories(new CreativeDrawerInfoCategory(guiHelper));
+        registration.addRecipeCategories(new ChemicalFromCellInfoCategory(guiHelper));
     }
 
     @Override
@@ -61,6 +64,7 @@ public class CDPJeiPlugin implements IModPlugin {
         Level level = Minecraft.getInstance().level;
         if(level != null){
             registration.addRecipes(CDPRecipeType.VOID_SIEVE, RecipeUtil.getRecipes(level,CDPRecipe.VOID_SIEVE.asType()));
+            registration.addRecipes(CDPRecipeType.CHEMICAL_FROM_CELL_INFO, RecipeUtil.getRecipes(level,CDPRecipe.CHEMICAL_FROM_CELL_INFO.asType()));
         }
         addDrawerInfoRecipe(registration);
     }

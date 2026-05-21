@@ -25,32 +25,36 @@ public class HighlightRendererEvent {
     @SubscribeEvent
     public static void onRenderer(RenderLevelStageEvent event){
         if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && Minecraft.getInstance().level != null){
-            UpgradeStationBlockEntity.entries.values().forEach(entry ->{
-                if(entry.getLevel() == null || !LevelUtil.checkDimension(Minecraft.getInstance().level.dimension(),entry.getLevel().dimension())){
-                    return;
-                }
-                if(!(Minecraft.getInstance().level.getBlockEntity(entry.getBlockPos()) instanceof UpgradeStationBlockEntity)){{
-                    return;
-                }}
-                if(entry.isShowRange()){
-                    BlockPos pos = entry.getBlockPos();
-                    Vec3 camera = event.getCamera().getPosition().reverse();
-                    AABB box = entry.getBoundary().move(camera);
-                    MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-                    PoseStack poseStack = event.getPoseStack();
-                    poseStack.pushPose();
-                    RenderSystem.disableDepthTest();
-                    RenderSystem.enableBlend();
-                    RenderSystem.defaultBlendFunc();
-                    LevelRenderer.renderLineBox(poseStack,bufferSource.getBuffer(RenderType.lines()),box,1,1,0,0.5f);
-                    for(Direction direction : Direction.values()){
-                        LevelRenderer.renderFace(poseStack,bufferSource.getBuffer(CDPRenderTypes.WORK_AREA), direction,(float) box.maxX,(float) box.maxY,(float) box.maxZ,(float) box.minX,(float) box.minY,(float) box.minZ,1,1,0,0.2f);
-                    }
-                    RenderSystem.disableBlend();
-                    RenderSystem.enableDepthTest();
-                    poseStack.popPose();
-                }
-            });
+            renderUpgradeStation(event);
         }
+    }
+
+    public static void renderUpgradeStation(RenderLevelStageEvent event){
+        UpgradeStationBlockEntity.entries.values().forEach(entry ->{
+            if(entry.getLevel() == null || !LevelUtil.checkDimension(Minecraft.getInstance().level.dimension(),entry.getLevel().dimension())){
+                return;
+            }
+            if(!(Minecraft.getInstance().level.getBlockEntity(entry.getBlockPos()) instanceof UpgradeStationBlockEntity)){{
+                return;
+            }}
+            if(entry.isShowRange()){
+                BlockPos pos = entry.getBlockPos();
+                Vec3 camera = event.getCamera().getPosition().reverse();
+                AABB box = entry.getBoundary().move(camera);
+                MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+                PoseStack poseStack = event.getPoseStack();
+                poseStack.pushPose();
+                RenderSystem.disableDepthTest();
+                RenderSystem.enableBlend();
+                RenderSystem.defaultBlendFunc();
+                LevelRenderer.renderLineBox(poseStack,bufferSource.getBuffer(RenderType.lines()),box,1,1,0,0.5f);
+                for(Direction direction : Direction.values()){
+                    LevelRenderer.renderFace(poseStack,bufferSource.getBuffer(CDPRenderTypes.WORK_AREA), direction,(float) box.maxX,(float) box.maxY,(float) box.maxZ,(float) box.minX,(float) box.minY,(float) box.minZ,1,1,0,0.2f);
+                }
+                RenderSystem.disableBlend();
+                RenderSystem.enableDepthTest();
+                poseStack.popPose();
+            }
+        });
     }
 }

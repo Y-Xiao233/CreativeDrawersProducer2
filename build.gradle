@@ -163,6 +163,8 @@ dependencies {
     //KubeJS
     implementation "curse.maven:kubejs-238086:7255073"
     implementation "curse.maven:rhino-416294:7104526"
+    //kubejs mekanism
+    implementation "curse.maven:kubejs-mekanism-418651:7213666"
 
     //bookshelf
     implementation "curse.maven:bookshelf-228525:7335846"

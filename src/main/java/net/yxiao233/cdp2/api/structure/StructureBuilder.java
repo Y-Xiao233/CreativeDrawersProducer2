@@ -52,13 +52,21 @@ public class StructureBuilder {
         return null;
     }
 
-    public void buildStructure(ServerLevel level, BlockPos pos) {
+    public StructureTemplate getStructureTemplate(ServerLevel level){
         if (nbtContext == null) {
             LOGGER.error("Cannot build structure: NBT context is null");
-            return;
+            return null;
         }
         StructureTemplate template = new StructureTemplate();
         template.load(level.holderLookup(Registries.BLOCK), nbtContext);
+        return template;
+    }
+
+    public void buildStructure(ServerLevel level, BlockPos pos) {
+        StructureTemplate template = getStructureTemplate(level);
+        if(template == null){
+            return;
+        }
 
         StructurePlaceSettings settings = new StructurePlaceSettings()
                 .setMirror(Mirror.NONE)

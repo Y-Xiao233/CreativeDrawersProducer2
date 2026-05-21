@@ -56,9 +56,7 @@ public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlo
         if(server != null){
             CompoundTag raw = stack.getOrDefault(CDPDataComponentTypes.COMPOUND_TAG, new CompoundTag());
             raw.put("entity_data",entity.serializeNBT(server.registryAccess()));
-            System.out.println(raw);
             stack.set(CDPDataComponentTypes.COMPOUND_TAG,raw);
-            System.out.println(stack.get(CDPDataComponentTypes.COMPOUND_TAG));
             LevelUtil.dropContents(level,entity.getBlockPos(),stack);
         }
     }

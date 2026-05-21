@@ -13,6 +13,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.yxiao233.cdp2.api.recipe.ChanceIngredient;
 import net.yxiao233.cdp2.api.recipe.ChanceItemStack;
@@ -21,12 +22,20 @@ import net.yxiao233.cdp2.common.recipe.VoidSieveRecipe;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.integration.jei.CDPRecipeType;
+import net.yxiao233.cdp2.common.registry.CDPRecipe;
+import net.yxiao233.cdp2.util.RecipeUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
     public static final Component TITLE = Component.translatable("block.cdp2.void_sieve");
     public VoidSieveCategory(IGuiHelper helper) {
         super(helper, CDPRecipeType.VOID_SIEVE, TITLE, CDPBlock.VOID_SIEVE.asItem(), 160, 82);
+    }
+
+    @Override
+    public @Nullable ResourceLocation getRegistryName(@NotNull VoidSieveRecipe recipe) {
+        return RecipeUtil.getRecipeId(CDPRecipe.VOID_SIEVE.asType(), recipe);
     }
 
     @Override

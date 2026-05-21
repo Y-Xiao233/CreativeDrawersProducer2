@@ -7,13 +7,15 @@ import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.yxiao233.cdp2.api.recipe.ChanceIngredient;
 import net.yxiao233.cdp2.api.recipe.ChanceItemStack;
 import net.yxiao233.cdp2.common.integration.kubejs.event.CDPRegistryEvent;
+import net.yxiao233.cdp2.common.integration.kubejs.schema.ChemicalFromCellInfoSchema;
 import net.yxiao233.cdp2.common.integration.kubejs.schema.VoidSieveSchema;
 
 public class CDPKubeJSPlugin implements KubeJSPlugin {
     @Override
     public void registerRecipeSchemas(RecipeSchemaRegistry registry) {
         registry.namespace("cdp2")
-                .register("void_sieve", VoidSieveSchema.SCHEMA);
+                .register("void_sieve", VoidSieveSchema.SCHEMA)
+                .register("chemical_from_cell_info", ChemicalFromCellInfoSchema.SCHEMA);
     }
 
     @Override

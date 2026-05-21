@@ -9,6 +9,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.registry.CDPRecipeDeferredRegister;
+import net.yxiao233.cdp2.common.recipe.ChemicalFromCellInfo;
 import net.yxiao233.cdp2.common.recipe.CreativeDrawerInfo;
 import net.yxiao233.cdp2.common.recipe.VoidSieveRecipe;
 
@@ -18,6 +19,7 @@ public class CDPRecipe {
 
     public static final CDPRecipeDeferredRegister<VoidSieveRecipe> VOID_SIEVE = CDPRecipeDeferredRegister.codecRecipe("void_sieve", VoidSieveRecipe.class);
     public static final CDPRecipeDeferredRegister<CreativeDrawerInfo> CREATIVE_DRAWER_INFO = CDPRecipeDeferredRegister.codecRecipe("creative_drawer_info", CreativeDrawerInfo.class);
+    public static final CDPRecipeDeferredRegister<ChemicalFromCellInfo> CHEMICAL_FROM_CELL_INFO = CDPRecipeDeferredRegister.codecRecipe("chemical_from_cell_info", ChemicalFromCellInfo.class);
 
     public static void init(IEventBus eventBus){
         RECIPE_SERIALIZERS.register(eventBus);
