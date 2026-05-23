@@ -28,8 +28,9 @@ public class RitualBrazierTileRenderer extends CDPBaseBlockEntityRenderer<Ritual
             NbtFile file = getNbtFile(ritual);
             List<Pair<BlockPos, BlockState>> blocks = file.getBlocks();
             blocks.forEach(info ->{
-                RenderUtil.renderBlock(info.getSecond(),entity.getBlockPos().offset(ritual.xOffset,ritual.yOffset,ritual.zOffset),poseStack,multiBufferSource, CDPRenderTypes.GHOST, back ->{
+                RenderUtil.renderBlock(info.getSecond(),entity.getBlockPos(),poseStack,multiBufferSource, CDPRenderTypes.GHOST, back ->{
                     BlockPos offset = info.getFirst();
+                    back.translate(ritual.xOffset,ritual.yOffset,ritual.zOffset);
                     back.translate(offset.getX(),offset.getY(),offset.getZ());
                 });
             });
