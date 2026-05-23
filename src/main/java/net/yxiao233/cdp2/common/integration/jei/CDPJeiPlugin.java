@@ -1,6 +1,5 @@
 package net.yxiao233.cdp2.common.integration.jei;
 
-import appeng.core.definitions.AEBlocks;
 import com.hrznstudio.titanium.util.RecipeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;

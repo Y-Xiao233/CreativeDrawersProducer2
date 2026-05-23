@@ -17,7 +17,11 @@
     "arsnouveau.RitualRegistryMixin",
     "mekanism.BlockMekanismMixin",
     "mekanism.ItemUpgradeMixin",
-    "mekanism.TileComponentUpgradeMixin"
+    "mekanism.TileComponentUpgradeMixin",
+    "naturesaura.AltarCategoryMixin",
+    "naturesaura.AnimalSpawnerCategoryMixin",
+    "naturesaura.OfferingCategoryMixin",
+    "naturesaura.TreeRitualCategoryMixin"
   ],
   "client": [
   ],

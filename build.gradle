@@ -200,6 +200,9 @@ dependencies {
 
     //ars nouveau
     implementation "com.hollingsworth.ars_nouveau:ars_nouveau-${minecraft_version}:${ars_version}"
+
+    //natures aura
+    implementation "curse.maven:natures-aura-306626:6948833"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
