@@ -237,6 +237,11 @@ public class RenderUtil {
 
     @OnlyIn(Dist.CLIENT)
     public static void renderBlock(BlockState blockState, BlockPos pos, PoseStack poseStack, MultiBufferSource multiBufferSource, PoseBack back){
+        renderBlock(blockState,pos,poseStack,multiBufferSource,RenderType.CUTOUT,back);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void renderBlock(BlockState blockState, BlockPos pos, PoseStack poseStack, MultiBufferSource multiBufferSource, RenderType renderType, PoseBack back){
         Minecraft minecraft = Minecraft.getInstance();
         Level level = minecraft.level;
         if(level == null){
@@ -244,7 +249,7 @@ public class RenderUtil {
         }
         poseStack.pushPose();
         back.apply(poseStack);
-        minecraft.getBlockRenderer().renderBatched(blockState,pos,level,poseStack, multiBufferSource.getBuffer(RenderType.CUTOUT),false,level.random);
+        minecraft.getBlockRenderer().renderBatched(blockState,pos,level,poseStack, multiBufferSource.getBuffer(renderType),false,level.random);
         poseStack.popPose();
     }
 
