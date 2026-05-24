@@ -8,6 +8,11 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import org.lwjgl.opengl.GL14;
+import vazkii.patchouli.api.PatchouliAPI;
+import vazkii.patchouli.client.handler.MultiblockVisualizationHandler;
+
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 public class CDPRenderTypes extends RenderType {
     private static final RenderStateShard.TransparencyStateShard GHOST_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("ghost_transparency",
@@ -59,5 +64,33 @@ public class CDPRenderTypes extends RenderType {
 
     private CDPRenderTypes(String pName, VertexFormat pFormat, VertexFormat.Mode pMode, int pBufferSize, boolean pAffectsCrumbling, boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
         super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
+    }
+
+    public static class GhostRenderLayer extends RenderType {
+        private static final Map<RenderType, RenderType> remappedTypes = new IdentityHashMap<>();
+
+        private GhostRenderLayer(RenderType original) {
+            super(String.format("%s_%s_ghost", original.toString(), PatchouliAPI.MOD_ID), original.format(), original.mode(), original.bufferSize(), original.affectsCrumbling(), true, () -> {
+                original.setupRenderState();
+
+                RenderSystem.disableDepthTest();
+                RenderSystem.enableBlend();
+                RenderSystem.setShaderColor(1, 1, 1, 0.4F);
+            }, () -> {
+                RenderSystem.setShaderColor(1, 1, 1, 1);
+                RenderSystem.disableBlend();
+                RenderSystem.enableDepthTest();
+
+                original.clearRenderState();
+            });
+        }
+
+        public static RenderType remap(RenderType in) {
+            if (in instanceof GhostRenderLayer) {
+                return in;
+            } else {
+                return remappedTypes.computeIfAbsent(in, GhostRenderLayer::new);
+            }
+        }
     }
 }

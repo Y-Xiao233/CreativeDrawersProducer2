@@ -203,6 +203,9 @@ dependencies {
 
     //natures aura
     implementation "curse.maven:natures-aura-306626:6948833"
+
+    //patchouli
+    implementation "curse.maven:patchouli-306770:7730942"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

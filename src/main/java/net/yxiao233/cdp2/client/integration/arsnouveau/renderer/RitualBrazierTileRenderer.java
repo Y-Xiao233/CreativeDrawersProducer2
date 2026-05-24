@@ -4,6 +4,7 @@ import com.hollingsworth.arsnouveau.common.block.tile.RitualBrazierTile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,7 +29,7 @@ public class RitualBrazierTileRenderer extends CDPBaseBlockEntityRenderer<Ritual
             NbtFile file = getNbtFile(ritual);
             List<Pair<BlockPos, BlockState>> blocks = file.getBlocks();
             blocks.forEach(info ->{
-                RenderUtil.renderBlock(info.getSecond(),entity.getBlockPos(),poseStack,multiBufferSource, CDPRenderTypes.GHOST, back ->{
+                RenderUtil.renderBlock(info.getSecond(),entity.getBlockPos(),poseStack,multiBufferSource, CDPRenderTypes.GhostRenderLayer.remap(RenderType.CUTOUT), back ->{
                     BlockPos offset = info.getFirst();
                     back.translate(ritual.xOffset,ritual.yOffset,ritual.zOffset);
                     back.translate(offset.getX(),offset.getY(),offset.getZ());
