@@ -206,6 +206,9 @@ dependencies {
 
     //patchouli
     implementation "curse.maven:patchouli-306770:7730942"
+
+    //actually additions
+    implementation "curse.maven:actually-additions-228404:7676502"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
