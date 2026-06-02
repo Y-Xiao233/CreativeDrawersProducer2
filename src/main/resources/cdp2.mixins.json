@@ -13,7 +13,6 @@
     "actuallyadditions.PressingCategoryMixin",
     "advancedae.ReactionChamberCategoryMixin",
     "ae2cs.AECSAccessor",
-    "ae2cs.CrystalGrowthChamberBlockEntityMixin",
     "ae2lt.CrystalCatalyzerCategoryMixin",
     "ae2lt.LightingStrikeCategoryMixin",
     "ae2lt.LightingTransformCategoryMixin",
