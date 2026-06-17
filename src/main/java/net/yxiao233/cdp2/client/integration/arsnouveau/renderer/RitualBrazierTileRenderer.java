@@ -19,6 +19,7 @@ import java.util.List;
 
 public class RitualBrazierTileRenderer extends CDPBaseBlockEntityRenderer<RitualBrazierTile> {
     private NbtFile CACHE;
+    private String ritualPath;
     public RitualBrazierTileRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
@@ -40,8 +41,14 @@ public class RitualBrazierTileRenderer extends CDPBaseBlockEntityRenderer<Ritual
 
 
     private NbtFile getNbtFile(StructureRitual ritual){
-        if(CACHE == null){
+        if(ritual.nbtPath.equals(ritualPath)){
+            if(CACHE == null){
+                CACHE = new NbtFile("cdp2",ritual.nbtPath);
+                ritualPath = ritual.nbtPath;
+            }
+        }else{
             CACHE = new NbtFile("cdp2",ritual.nbtPath);
+            ritualPath = ritual.nbtPath;
         }
         return CACHE;
     }
