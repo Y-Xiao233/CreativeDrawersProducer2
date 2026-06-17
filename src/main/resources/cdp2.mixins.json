@@ -25,6 +25,7 @@
     "industrialforegoing.FluidExtractorCategoryMixin",
     "industrialforegoing.LaserDrillFluidCategoryMixin",
     "industrialforegoing.LaserDrillOreCategoryMixin",
+    "industrialforegoing.MobDuplicatorTileMixin",
     "industrialforegoing.StoneWorkGeneratorCategoryMixin",
     "mekanism.BlockMekanismMixin",
     "mekanism.ItemUpgradeMixin",

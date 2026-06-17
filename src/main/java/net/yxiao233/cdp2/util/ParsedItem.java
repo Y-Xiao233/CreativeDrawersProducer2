@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
+import org.jetbrains.annotations.NotNull;
 
 public record ParsedItem(ExtraCodecs.TagOrElementLocation tagOrId, int count) {
     public ParsedItem(ExtraCodecs.TagOrElementLocation tagOrId, int count) {
@@ -51,7 +52,7 @@ public record ParsedItem(ExtraCodecs.TagOrElementLocation tagOrId, int count) {
         return new ParsedItem(new ExtraCodecs.TagOrElementLocation(id, tag), count);
     }
 
-    public String toString() {
+    public @NotNull String toString() {
         return this.count == 1 ? this.tagOrId.toString() : "%dx %s".formatted(this.count, this.tagOrId);
     }
 

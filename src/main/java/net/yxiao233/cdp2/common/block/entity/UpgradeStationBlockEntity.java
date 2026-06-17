@@ -1,6 +1,5 @@
 package net.yxiao233.cdp2.common.block.entity;
 
-import com.jerry.mekextras.MekanismExtras;
 import com.jerry.mekextras.api.ExtraUpgrade;
 import com.jerry.mekextras.common.registries.ExtraItems;
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;

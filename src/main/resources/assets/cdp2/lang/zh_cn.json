@@ -54,6 +54,8 @@
   "tooltip.cdp2.configuration_card.tip1": "* 潜行右键空气重置配置",
   "tooltip.titanium.facing_handler.void_input": "虚空物质输入",
   "tooltip.cdp2.essence_output": "%s产出: %s",
+  "tooltip.cdp2.mob_imprisonment_tool.enable": "该生物可以在自动刷怪笼中获取",
+  "tooltip.cdp2.mob_imprisonment_tool.disable": "该生物无法在自动刷怪笼中获取",
 
   "message.cdp2.mek_upgrade": "需要使用机器升级站来升级该机器",
   "message.cdp2.configuration_card.error": "配置信息错误,请重置后重新尝试",

@@ -6,6 +6,7 @@ import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.yxiao233.cdp2.api.recipe.ChanceIngredient;
 import net.yxiao233.cdp2.api.recipe.ChanceItemStack;
+import net.yxiao233.cdp2.common.integration.kubejs.event.CDPModifyEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.CDPRegistryEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.schema.ChemicalFromCellInfoSchema;
 import net.yxiao233.cdp2.common.integration.kubejs.schema.VoidSieveSchema;
@@ -27,5 +28,6 @@ public class CDPKubeJSPlugin implements KubeJSPlugin {
     @Override
     public void registerEvents(EventGroupRegistry registry) {
         registry.register(CDPRegistryEvent.GROUP);
+        registry.register(CDPModifyEvent.GROUP);
     }
 }

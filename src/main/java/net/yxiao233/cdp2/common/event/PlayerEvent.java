@@ -1,10 +1,6 @@
 package net.yxiao233.cdp2.common.event;
 
-import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,8 +15,6 @@ import net.yxiao233.cdp2.api.block.IRightClickedHandler;
 import net.yxiao233.cdp2.api.block.property.RotationHandler;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
-import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
-import net.yxiao233.cdp2.misc.UpgradeStationSavedData;
 
 @SuppressWarnings({"removal","unused"})
 @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)

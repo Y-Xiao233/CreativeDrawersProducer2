@@ -21,7 +21,7 @@ public class VoidCraftingTableBlock extends CraftingTableBlock {
     }
 
     @Override
-    protected MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
+    protected @NotNull MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         ContainerLevelAccess access = ContainerLevelAccess.create(level, pos);
         return new SimpleMenuProvider((id, inventory, player) -> {
             return new CraftingMenu(id, inventory, access){
