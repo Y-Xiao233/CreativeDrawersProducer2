@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "subfacing=east": {
+      "model": "cdp2:block/void_sieve",
+      "y": 90
+    },
+    "subfacing=north": {
       "model": "cdp2:block/void_sieve"
+    },
+    "subfacing=south": {
+      "model": "cdp2:block/void_sieve",
+      "y": 180
+    },
+    "subfacing=west": {
+      "model": "cdp2:block/void_sieve",
+      "y": 270
     }
   }
 }

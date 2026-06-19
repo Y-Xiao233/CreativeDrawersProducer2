@@ -26,7 +26,7 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
 
         super.addInventory(this.input = (SidedInventoryComponent<VoidSieveBlockEntity>) new SidedInventoryComponent<VoidSieveBlockEntity>("input",43,40,1,1).setColor(DyeColor.GREEN)
                 .setOnSlotChanged((stack, integer) -> checkForRecipe())
-                .setInputFilter((itemStack, integer) -> !canIncrease())
+                .setInputFilter((itemStack, integer) -> canInsert(itemStack))
                 .setOutputFilter((stack, integer) -> false)
                 .setComponentHarness(this)
         );
@@ -67,9 +67,23 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
     @Override
     public boolean canIncrease() {
         if(recipe != null){
-            return recipe.input.sizedIngredient().test(this.input.getStackInSlot(0));
+            boolean hasEmptySlot = false;
+            for (int i = 0; i < this.output.getSlots(); i++) {
+                hasEmptySlot = this.output.getStackInSlot(i).isEmpty();
+                if(hasEmptySlot){
+                    break;
+                }
+            }
+            return recipe.input.sizedIngredient().test(this.input.getStackInSlot(0)) && hasEmptySlot;
         }
         return false;
+    }
+
+    public boolean canInsert(ItemStack stack){
+        if(recipe != null){
+            return recipe.input.sizedIngredient().test(this.input.getStackInSlot(0));
+        }
+        return RecipeUtil.getRecipes(this.level,CDPRecipe.VOID_SIEVE.asType()).stream().filter(recipe -> recipe.matches(stack,output)).findFirst().orElse(null) != null;
     }
 
 

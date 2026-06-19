@@ -9,6 +9,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
@@ -53,6 +54,13 @@ public class VoidSieveRecipe extends BaseRecipe {
     public boolean matches(SidedInventoryComponent<VoidSieveBlockEntity> input, SidedInventoryComponent<VoidSieveBlockEntity> output){
         if(input != null && output != null){
             return this.input.sizedIngredient().test(input.getStackInSlot(0));
+        }
+        return false;
+    }
+
+    public boolean matches(ItemStack stack, SidedInventoryComponent<VoidSieveBlockEntity> output){
+        if(input != null && output != null){
+            return this.input.sizedIngredient().test(stack);
         }
         return false;
     }

@@ -49,6 +49,7 @@ import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.registry.CDPTag;
 import net.yxiao233.cdp2.misc.UpgradableTypes;
 import net.yxiao233.cdp2.misc.UpgradePointManager;
+import net.yxiao233.cdp2.mixin.mekanism.TileComponentUpgradeAccessor;
 import net.yxiao233.cdp2.util.LDLibUtil;
 import org.appliedenergistics.yoga.YogaEdge;
 import org.appliedenergistics.yoga.YogaFlexDirection;
@@ -400,8 +401,11 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             if(tile.supportsUpgrade(upgrade) && point > 0){
                 TileComponentUpgrade component = tile.getComponent();
                 int installed = component.getUpgrades(upgrade);
+
                 if(installed < point){
                     component.addUpgrades(upgrade, point - installed);
+                }else{
+                    removeUpgrades(component,upgrade,installed - point);
                 }
             }
         });
@@ -410,6 +414,20 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     public void applyMekanismUpgrade(BlockPos pos){
         if(level != null && pos != null && level.getBlockEntity(pos) instanceof IUpgradeTile tile){
           applyMekanismUpgrade(tile);
+        }
+    }
+
+    private void removeUpgrades(TileComponentUpgrade tile, Upgrade upgrade, int toRemove) {
+        if(toRemove > 0){
+            if(tile instanceof TileComponentUpgradeAccessor accessor){
+                Map<Upgrade, Integer> upgradeMap = accessor.getUpgradeMap();
+                upgradeMap.put(upgrade, Math.max(tile.getUpgrades(upgrade) - toRemove,0));
+                accessor.getTileEntity().recalculateUpgrades(upgrade);
+                if(upgrade == Upgrade.MUFFLING){
+                    accessor.getTileEntity().sendUpdatePacket();
+                }
+                accessor.getTileEntity().markForSave();
+            }
         }
     }
 

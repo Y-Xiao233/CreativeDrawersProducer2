@@ -27,4 +27,9 @@ public class VoidSieveEntityBlock extends IndustrialBlock<VoidSieveBlockEntity> 
     public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.cdp2.void_power"));
     }
+
+    @Override
+    public @NotNull RotationType getRotationType() {
+        return RotationType.FOUR_WAY;
+    }
 }

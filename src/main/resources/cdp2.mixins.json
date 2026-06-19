@@ -29,6 +29,7 @@
     "industrialforegoing.StoneWorkGeneratorCategoryMixin",
     "mekanism.BlockMekanismMixin",
     "mekanism.ItemUpgradeMixin",
+    "mekanism.TileComponentUpgradeAccessor",
     "mekanism.TileComponentUpgradeMixin",
     "mysticalagriculture.AwakeningCategoryMixin",
     "mysticalagriculture.EnchanterCategoryMixin",

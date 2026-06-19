@@ -8,10 +8,7 @@ import mekanism.common.tile.base.TileEntityMekanism;
 import mekanism.common.tile.component.TileComponentUpgrade;
 import mekanism.common.util.UpgradeUtils;
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,6 +21,7 @@ public abstract class TileComponentUpgradeMixin {
     @Shadow @Final private Map<Upgrade, Integer> upgrades;
 
     @Shadow @Final private TileEntityMekanism tile;
+
 
     /**
      *

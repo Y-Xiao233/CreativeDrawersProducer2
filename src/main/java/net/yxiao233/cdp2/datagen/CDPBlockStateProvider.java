@@ -50,7 +50,7 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         //pot
         botanyPots();
         //void sieve
-        stateAndItem(CDPBlock.VOID_SIEVE.getBlock());
+        fourWayBlockState(CDPBlock.VOID_SIEVE.getBlock());
         //void block
         cubeAll(CDPBlock.VOID_BLOCK);
         //void crafting table
@@ -104,6 +104,10 @@ public class CDPBlockStateProvider extends BlockStateProvider {
 
     private void fourWayBlockState(CDPBlockEntityDeferredRegister<?> register){
         fourWayBlockState(register,BuiltInRegistries.BLOCK.getKey(register.asBlock()).getPath());
+    }
+
+    private <T extends Block> void fourWayBlockState(T block){
+        fourWayBlockState((Block & IRotatableBlock) block,BuiltInRegistries.BLOCK.getKey(block).getPath());
     }
     private <T extends Block & IRotatableBlock> void fourWayBlockState(T block, String modelPath){
         fourWayBlockState(block,ResourceLocation.fromNamespaceAndPath(CreativeDrawersProducer2.MODID, "block/" + modelPath));
