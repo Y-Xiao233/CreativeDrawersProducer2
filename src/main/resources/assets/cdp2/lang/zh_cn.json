@@ -90,6 +90,7 @@
   "jei.cdp2.catalyst": "Catalyst",
   "jei.cdp2.creative_drawer_info": "创造抽屉信息",
   "jei.cdp2.chemical_from_cell_info": "从元件中获取化学品",
+  "jei.cdp2.needed_aura": "所需灵气: %s",
 
   "upgrade.type.cdp2.energy": "能量升级",
   "upgrade.type.cdp2.speed": "速度升级",

@@ -153,6 +153,8 @@ dependencies {
     implementation "curse.maven:functional-storage-556861:7061714"
     //industrial foregoing
     implementation("maven.modrinth:industrial-foregoing:${industrialforegoing_version}")
+    //ifs
+    implementation "curse.maven:industrial-foregoing-simulation-1489811:7784864"
 
     //mekanism
     implementation "curse.maven:mekanism-268560:7621971"

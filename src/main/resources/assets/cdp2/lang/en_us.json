@@ -90,6 +90,7 @@
   "jei.cdp2.catalyst": "Catalyst",
   "jei.cdp2.creative_drawer_info": "Creative Drawer Info",
   "jei.cdp2.chemical_from_cell_info": "Chemical From Cell",
+  "jei.cdp2.needed_aura": "Needed Aura: %s",
 
   "upgrade.type.cdp2.energy": "Energy",
   "upgrade.type.cdp2.speed": "Speed",

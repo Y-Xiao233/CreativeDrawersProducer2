@@ -21,6 +21,7 @@
     "ae2lt.OverloadProcessingRecipeMixin",
     "arsnouveau.ItemRegistryMixin",
     "arsnouveau.RitualRegistryMixin",
+    "ifs.SimulatedMobDuplicatorTileMixin",
     "industrialforegoing.DissolutionChamberCategoryMixin",
     "industrialforegoing.FluidExtractorCategoryMixin",
     "industrialforegoing.LaserDrillFluidCategoryMixin",
