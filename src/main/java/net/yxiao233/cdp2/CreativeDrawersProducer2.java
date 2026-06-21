@@ -14,6 +14,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import net.yxiao233.cdp2.common.command.CreativeDrawersProducerCommand;
 import net.yxiao233.cdp2.common.event.CreativeModeTabEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.BlockModifyEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.BlockRegistryEvent;
@@ -28,6 +29,7 @@ public class CreativeDrawersProducer2{
     public static final Logger LOGGER = LogUtils.getLogger();
     private static boolean frozenCreativeDrawer = false;
     private static boolean loadKubeJSWhiteList = false;
+    public static boolean hideNeededAura = false;
     public CreativeDrawersProducer2(IEventBus modEventBus, ModContainer modContainer) {
         CDPItem.init(modEventBus); 
         CDPBlock.init(modEventBus);

@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.util.RecipeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,6 +24,8 @@ public abstract class AltarCategoryMixin implements IRecipeCategory<AltarRecipe>
 
     @Override
     public void draw(@NotNull AltarRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.cdp2.needed_aura",recipe.aura),0,48,0x7CFC00);
+        if(!CreativeDrawersProducer2.hideNeededAura){
+            guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.cdp2.needed_aura",recipe.aura),0,48,0x7CFC00);
+        }
     }
 }

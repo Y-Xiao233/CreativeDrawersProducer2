@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.util.RecipeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +27,8 @@ public abstract class AnimalSpawnerCategoryMixin implements IRecipeCategory<Anim
 
     @Inject(method = "draw(Lde/ellpeck/naturesaura/recipes/AnimalSpawnerRecipe;Lmezz/jei/api/gui/ingredient/IRecipeSlotsView;Lnet/minecraft/client/gui/GuiGraphics;DD)V", at = @At("TAIL"))
     private void cdp2$draw(AnimalSpawnerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY, CallbackInfo ci){
-        graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("jei.cdp2.needed_aura",recipe.aura),34,2,0x7CFC00);
+        if(!CreativeDrawersProducer2.hideNeededAura){
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("jei.cdp2.needed_aura",recipe.aura),34,2,0x7CFC00);
+        }
     }
 }
