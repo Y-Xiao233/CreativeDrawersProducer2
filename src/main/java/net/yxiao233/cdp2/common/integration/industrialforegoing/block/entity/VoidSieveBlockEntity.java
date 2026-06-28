@@ -97,7 +97,8 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
             sieveRecipe.outputs.forEach(output ->{
                 if(level != null && level.getRandom().nextFloat() <= output.chance()){
                     int fortune = AugmentInventoryHelper.getAugmentTier(this, AddonType.FORTUNE);
-                    ItemHandlerHelper.insertItem(this.output,output.item().copyWithCount(Math.min(fortune,output.item().copy().getMaxStackSize())),false);
+                    ItemStack outputStack = getFinalOutputStack(fortune, output.item().copy());
+                    ItemHandlerHelper.insertItem(this.output,outputStack,false);
                 }
             });
             if(level != null && level.getRandom().nextFloat() <= sieveRecipe.input.chance()){
@@ -105,6 +106,15 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
             }
             this.checkForRecipe();
         };
+    }
+
+    public ItemStack getFinalOutputStack(int fortune, ItemStack origin){
+        if(this.level != null){
+            int originCount = origin.getCount();
+            int count = Math.min(originCount * Math.max(1,fortune + 1), origin.getMaxStackSize());
+            return origin.copyWithCount(count);
+        }
+        return origin;
     }
 
     @Override
