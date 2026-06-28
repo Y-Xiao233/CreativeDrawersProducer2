@@ -13,6 +13,9 @@ import net.yxiao233.cdp2.api.block.entity.VoidProcessingTile;
 import net.yxiao233.cdp2.common.recipe.VoidSieveRecipe;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPRecipe;
+import net.yxiao233.ifs.api.item.AddonType;
+import net.yxiao233.ifs.api.item.FortuneAddonItem;
+import net.yxiao233.ifs.util.AugmentInventoryHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntity>{
@@ -93,7 +96,8 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
             VoidSieveRecipe sieveRecipe = recipe;
             sieveRecipe.outputs.forEach(output ->{
                 if(level != null && level.getRandom().nextFloat() <= output.chance()){
-                    ItemHandlerHelper.insertItem(this.output,output.item().copy(),false);
+                    int fortune = AugmentInventoryHelper.getAugmentTier(this, AddonType.FORTUNE);
+                    ItemHandlerHelper.insertItem(this.output,output.item().copyWithCount(Math.min(fortune,output.item().copy().getMaxStackSize())),false);
                 }
             });
             if(level != null && level.getRandom().nextFloat() <= sieveRecipe.input.chance()){
@@ -101,6 +105,11 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
             }
             this.checkForRecipe();
         };
+    }
+
+    @Override
+    public boolean canAcceptAugment(ItemStack augment) {
+        return augment.getItem() instanceof FortuneAddonItem ? AugmentInventoryHelper.canAccept(this, augment) : super.canAcceptAugment(augment);
     }
 
     public ItemStack getBlockForDisplay(){
