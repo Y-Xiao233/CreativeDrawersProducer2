@@ -16,7 +16,7 @@ public abstract class CDPCapabilitiesBlockEntity extends CDPBaseBlockEntity impl
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag,registries);
         if(getCapabilityMap() != null){
-            getCapabilityMap().saveAll(tag,registries);
+            getCapabilityMap().saveAdditional(tag,registries);
         }
     }
 
@@ -24,7 +24,7 @@ public abstract class CDPCapabilitiesBlockEntity extends CDPBaseBlockEntity impl
     protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.loadAdditional(tag,registries);
         if(getCapabilityMap() != null){
-            getCapabilityMap().loadAll(tag,registries);
+            getCapabilityMap().loadAdditional(tag,registries);
         }
     }
 }

@@ -15,6 +15,7 @@
   "block.cdp2.void_block": "虚空块",
   "block.cdp2.void_crafting_table": "虚空工作台",
   "block.cdp2.frame": "框架方块",
+  "block.cdp2.flux_infusion_enchantment_factory": "通量自动灌注附魔机",
 
   "item.cdp2.random_creative_drawer": "随机创造抽屉",
   "item.cdp2.creative_shard_1": "创造碎片 Tier 1",
@@ -81,6 +82,9 @@
   "gui.cdp2.hide_information": "隐藏信息",
   "gui.cdp2.reset": "重置当前页面所有点数",
   "gui.cdp2.total_points": "研究点数: %d",
+  "gui.cdp2.eterna": "位阶",
+  "gui.cdp2.quanta": "量子化",
+  "gui.cdp2.arcana": "阿卡那",
 
 
   "jei.cdp2.power": "Power: ",

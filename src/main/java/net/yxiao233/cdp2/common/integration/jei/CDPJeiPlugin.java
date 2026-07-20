@@ -1,6 +1,7 @@
 package net.yxiao233.cdp2.common.integration.jei;
 
 import com.hrznstudio.titanium.util.RecipeUtil;
+import dev.shadowsoffire.apothic_enchanting.compat.InfusionRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -73,6 +74,7 @@ public class CDPJeiPlugin implements IModPlugin {
         BotanyPotJei.registerRecipeCatalysts(registration);
         registration.addRecipeCatalyst(CDPBlock.VOID_CRAFTING_TABLE.asBlock(), RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(CDPBlock.VOID_SIEVE,CDPRecipeType.VOID_SIEVE);
+        registration.addRecipeCatalyst(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY, InfusionRecipeCategory.TYPE);
         CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(register -> registration.addRecipeCatalyst(register.asItem(),CDPRecipeType.DRAWER_INFO));
     }
 

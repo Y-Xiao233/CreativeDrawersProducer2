@@ -9,8 +9,10 @@ import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.event.HoverTooltips;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.yxiao233.cdp2.api.capabilities.BlockCapabilityMap;
+import net.yxiao233.cdp2.api.capabilities.ItemCapability;
 import net.yxiao233.cdp2.util.LDLibUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +63,7 @@ public class UIEntry {
     }
 
     public UIEntry itemSlot(BlockCapabilityMap capabilityMap, int index){
-        return itemSlot((ItemStackHandler) capabilityMap.getItemHandler(),index);
+        return itemSlot(capabilityMap.getHandler(Capabilities.ItemHandler.BLOCK, ItemCapability.class).getHandler(),index);
     }
 
     public UIEntry playerInventory(){

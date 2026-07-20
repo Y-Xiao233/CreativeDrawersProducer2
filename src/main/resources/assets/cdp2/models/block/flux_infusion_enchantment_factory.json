@@ -1,0 +1,25 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"3": "cdp2:block/flux_infusion_enchantment_factory_front",
+		"4": "cdp2:block/flux_infusion_enchantment_factory_top",
+		"7": "industrialforegoing:block/base/bottom",
+		"6": "industrialforegoing:block/base/side",
+		"particle": "cdp2:block/flux_infusion_enchantment_factory_top"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#7"}
+			}
+		}
+	]
+}

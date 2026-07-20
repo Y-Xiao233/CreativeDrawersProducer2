@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.yxiao233.cdp2.api.annotation.AutoRegistryBlockCapabilities;
 import net.yxiao233.cdp2.api.block.CDPMachineEntityBlock;
 import net.yxiao233.cdp2.api.block.entity.ITickableBlockEntity;
 import net.yxiao233.cdp2.api.block.property.IRotatableBlock;
@@ -24,7 +23,6 @@ import net.yxiao233.cdp2.util.LevelUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@AutoRegistryBlockCapabilities
 public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlockEntity> implements IRotatableBlock {
     public UpgradeStationBlock(Properties properties) {
         super(properties);

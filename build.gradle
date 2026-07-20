@@ -130,7 +130,7 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     //jade
-    implementation "curse.maven:jade-324717:7428884"
+    implementation "curse.maven:jade-324717:7545219"
 
     //ae2
     implementation "curse.maven:applied-energistics-2-223794:7027323"
@@ -211,6 +211,22 @@ dependencies {
 
     //actually additions
     implementation "curse.maven:actually-additions-228404:7676502"
+
+    //valhelsia core
+    implementation "curse.maven:valhelsia-core-416935:6296775"
+    //forbidden arcanus
+    implementation "curse.maven:forbidden-arcanus-309858:6875895"
+
+    //placebo
+    implementation "curse.maven:placebo-283644:8463693"
+    //apothic attributes
+    implementation "curse.maven:apothic-attributes-898963:8469391"
+    //apothic enchanting
+    implementation "curse.maven:apothic-enchanting-1063926:8469450"
+    //apothic spawners
+    implementation "curse.maven:apothic-spawners-986583:8469405"
+    //apothic enchanting addition
+    implementation "curse.maven:apothic-enchanting-addition-1483497:7985901"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

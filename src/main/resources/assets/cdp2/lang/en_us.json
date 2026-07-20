@@ -15,6 +15,7 @@
   "block.cdp2.void_block": "Void Block",
   "block.cdp2.void_crafting_table": "Void Crafting Table",
   "block.cdp2.frame": "Frame Block",
+  "block.cdp2.flux_infusion_enchantment_factory": "Flux Infusion Enchantment Factory",
 
   "item.cdp2.random_creative_drawer": "Random Creative Drawer",
   "item.cdp2.creative_shard_1": "Creative Shard Tier 1",
@@ -81,6 +82,9 @@
   "gui.cdp2.hide_information": "Hide Information",
   "gui.cdp2.reset": "Reset All points(only for this page)",
   "gui.cdp2.total_points": "Research points: %d",
+  "gui.cdp2.eterna": "Eterna",
+  "gui.cdp2.quanta": "Quanta",
+  "gui.cdp2.arcana": "Arcana",
 
 
   "jei.cdp2.power": "Power: ",

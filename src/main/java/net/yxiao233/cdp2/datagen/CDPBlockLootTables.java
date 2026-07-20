@@ -29,6 +29,7 @@ public class CDPBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(CDPBlock.VOID_BLOCK.asBlock());
         this.dropSelf(CDPBlock.VOID_CRAFTING_TABLE.asBlock());
         this.dropSelf(CDPBlock.FRAME.asBlock());
+        this.dropSelf(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock());
     }
 
     @Override

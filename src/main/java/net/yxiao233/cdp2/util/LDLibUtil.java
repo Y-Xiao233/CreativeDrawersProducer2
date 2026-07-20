@@ -20,9 +20,11 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.capabilities.BlockCapabilityMap;
+import net.yxiao233.cdp2.api.capabilities.ItemCapability;
 import net.yxiao233.cdp2.client.gui.CDPSprites;
 import net.yxiao233.cdp2.misc.UpgradePointManager;
 import org.appliedenergistics.yoga.YogaEdge;
@@ -119,7 +121,7 @@ public class LDLibUtil {
     }
 
     public static UIElement inputSlot(BlockCapabilityMap capabilityMap, int index){
-        return itemSlot(SlotRole.INPUT, capabilityMap.getItemHandler(),index);
+        return itemSlot(SlotRole.INPUT, capabilityMap.getHandler(Capabilities.ItemHandler.BLOCK, ItemCapability.class).getHandler(),index);
     }
 
     public static UIElement itemSlot(SlotRole role, ItemStackHandler handler, int index){

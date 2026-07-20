@@ -51,6 +51,7 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         botanyPots();
         //void sieve
         fourWayBlockState(CDPBlock.VOID_SIEVE.getBlock());
+        fourWayBlockState(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock());
         //void block
         cubeAll(CDPBlock.VOID_BLOCK);
         //void crafting table

@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.yxiao233.cdp2.api.annotation.AutoRegistryBlockCapabilities;
 import net.yxiao233.cdp2.api.block.CDPTickableEntityBlock;
 import net.yxiao233.cdp2.api.block.entity.ITickableBlockEntity;
 import net.yxiao233.cdp2.api.block.property.IRotatableBlock;
@@ -21,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-@AutoRegistryBlockCapabilities
 public class CreativeDrawerBlock extends CDPTickableEntityBlock implements IRotatableBlock{
     private final Supplier<ItemStack> infinityItem;
     private final ResourceLocation entityTypeLocation;

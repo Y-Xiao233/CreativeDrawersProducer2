@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "subfacing=east": {
+      "model": "cdp2:block/flux_infusion_enchantment_factory",
+      "y": 90
+    },
+    "subfacing=north": {
+      "model": "cdp2:block/flux_infusion_enchantment_factory"
+    },
+    "subfacing=south": {
+      "model": "cdp2:block/flux_infusion_enchantment_factory",
+      "y": 180
+    },
+    "subfacing=west": {
+      "model": "cdp2:block/flux_infusion_enchantment_factory",
+      "y": 270
+    }
+  }
+}

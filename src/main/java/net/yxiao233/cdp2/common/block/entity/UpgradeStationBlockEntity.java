@@ -36,11 +36,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.block.entity.CDPMachineBlockEntity;
 import net.yxiao233.cdp2.api.capabilities.BlockCapabilityMap;
+import net.yxiao233.cdp2.api.capabilities.ItemCapability;
 import net.yxiao233.cdp2.client.gui.CDPSprites;
 import net.yxiao233.cdp2.common.item.CreativeShardItem;
 import net.yxiao233.cdp2.common.item.CreativeShardTier;
@@ -62,7 +64,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements INBTSerializable<CompoundTag>{
     private final FieldManagedStorage fieldManagedStorage = new FieldManagedStorage(this);
-    private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create().addItemHandler(new ItemStackHandler(1){
+    private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create().add(new ItemCapability<>(new ItemStackHandler(1){
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -80,7 +82,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return isItemValid(slot,stack) ? ItemStack.EMPTY : stack;
         }
-    });
+    }));
     public static final HashMap<BlockPos,UpgradeStationBlockEntity> entries = new HashMap<>();
     @DescSynced
     @Persisted(key = "mekanism")
@@ -351,7 +353,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     }
 
     private void handle(){
-        ItemStack stack = capabilityMap.getItemHandler().getStackInSlot(0);
+        ItemStack stack = capabilityMap.getHandler(Capabilities.ItemHandler.BLOCK,ItemCapability.class).getHandler().getStackInSlot(0);
         if(stack.isEmpty()){
             progress = 0;
             return;

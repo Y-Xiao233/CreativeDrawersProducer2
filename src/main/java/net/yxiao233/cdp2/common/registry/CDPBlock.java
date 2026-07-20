@@ -31,6 +31,8 @@ import net.yxiao233.cdp2.common.block.UpgradeStationBlock;
 import net.yxiao233.cdp2.common.block.VoidCraftingTableBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.FluxInfusionEnchantmentFactoryBlock;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.FluxInfusionEnchantmentFactoryEntity;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCrops;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPEssenceCropBlock;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
@@ -67,6 +69,7 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister COSMIC_FARMLAND = registerFarmland(CDPCropTier.NINE);
     public static final CDPBlockDeferredRegister INFINITE_FARMLAND = registerFarmland(CDPCropTier.TEN);
     public static final BlockWithTile VOID_SIEVE = registerIF("void_sieve", VoidSieveEntityBlock::new, VoidSieveBlockEntity::new);
+    public static final BlockWithTile FLUX_INFUSION_ENCHANTMENT_FACTORY = registerIF("flux_infusion_enchantment_factory", FluxInfusionEnchantmentFactoryBlock::new, FluxInfusionEnchantmentFactoryEntity::new);
     public static final CDPBlockDeferredRegister FRAME = CDPBlockDeferredRegister.registrySimple("frame",SimpleBlock::new,null).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPBlockDeferredRegister PRUDENTIUM_CROP = registerCropBlock("prudentium_crop", CDPCrops.PRUDENTIUM);
     public static final CDPBlockDeferredRegister TERTIUM_CROP = registerCropBlock("tertium_crop", CDPCrops.TERTIUM);

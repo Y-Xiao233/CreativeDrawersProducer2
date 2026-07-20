@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.yxiao233.cdp2.api.block.ILeftClickHandler;
 import net.yxiao233.cdp2.api.block.IRightClickedHandler;
@@ -20,6 +21,7 @@ import net.yxiao233.cdp2.api.block.entity.CDPCapabilitiesBlockEntity;
 import net.yxiao233.cdp2.api.block.entity.ITickableBlockEntity;
 import net.yxiao233.cdp2.api.capabilities.BigItemStackHandler;
 import net.yxiao233.cdp2.api.capabilities.BlockCapabilityMap;
+import net.yxiao233.cdp2.api.capabilities.ItemCapability;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.util.EntityUtil;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +30,7 @@ import java.util.function.Supplier;
 
 public class CreativeDrawerBlockEntity extends CDPCapabilitiesBlockEntity implements ITickableBlockEntity, ILeftClickHandler, IRightClickedHandler {
     private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create()
-            .addItemHandler(new BigItemStackHandler(1,Integer.MAX_VALUE){
+            .add(new ItemCapability(new BigItemStackHandler(1,Integer.MAX_VALUE){
                 @Override
                 protected void onContentsChanged(int slot) {
                     setChanged();
@@ -46,7 +48,7 @@ public class CreativeDrawerBlockEntity extends CDPCapabilitiesBlockEntity implem
                 public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
                     return isItemValid(slot,stack) ? ItemStack.EMPTY : stack;
                 }
-            });
+            }));
     private final ItemStack infinityItem;
 
     private int removeTicks = 0;
@@ -58,7 +60,7 @@ public class CreativeDrawerBlockEntity extends CDPCapabilitiesBlockEntity implem
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         this.removeTicks = Math.max(this.removeTicks - 1, 0);
-        BigItemStackHandler itemHandler = capabilityMap.getItemHandler(BigItemStackHandler.class);
+        BigItemStackHandler itemHandler = (BigItemStackHandler) capabilityMap.getHandler(Capabilities.ItemHandler.BLOCK, ItemCapability.class).getHandler();
         if(itemHandler != null && itemHandler.getStackInSlot(0).getCount() < Integer.MAX_VALUE){
             itemHandler.setStackInSlot(0, infinityItem);
         }
@@ -76,7 +78,7 @@ public class CreativeDrawerBlockEntity extends CDPCapabilitiesBlockEntity implem
                 return;
             }
             this.removeTicks = 3;
-            BigItemStackHandler handler = getCapabilityMap().getItemHandler(BigItemStackHandler.class);
+            BigItemStackHandler handler = (BigItemStackHandler) getCapabilityMap().getHandler(Capabilities.ItemHandler.BLOCK, ItemCapability.class).getHandler();
             ItemHandlerHelper.giveItemToPlayer(player,handler.extractItem(0, player.isShiftKeyDown() ? handler.getStackInSlot(0).getMaxStackSize() : 1, false));
         }
     }
