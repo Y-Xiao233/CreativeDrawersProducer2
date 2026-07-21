@@ -133,7 +133,7 @@ public class FluxInfusionEnchantmentFactoryEntity extends IndustrialProcessingTi
     public Runnable onFinish() {
         return () ->{
             InfusionRecipe infusionRecipe = recipe;
-            ItemHandlerHelper.insertItem(this.output,infusionRecipe.getOutput(),false);
+            ItemHandlerHelper.insertItem(this.output,infusionRecipe.getOutput().copy(),false);
             this.input.getStackInSlot(0).shrink(1);
             this.checkForRecipe();
         };
