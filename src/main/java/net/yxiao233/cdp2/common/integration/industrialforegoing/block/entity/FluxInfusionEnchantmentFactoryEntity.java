@@ -16,7 +16,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -140,6 +142,12 @@ public class FluxInfusionEnchantmentFactoryEntity extends IndustrialProcessingTi
     }
 
     @Override
+    public void setChanged() {
+        super.setChanged();
+        checkForRecipe();
+    }
+
+    @Override
     protected int getTickPower() {
         if(recipe != null){
             return (int) (recipe.getRequirements().eterna() * 10000);
@@ -155,7 +163,22 @@ public class FluxInfusionEnchantmentFactoryEntity extends IndustrialProcessingTi
     @Override
     protected @NotNull EnergyStorageComponent<FluxInfusionEnchantmentFactoryEntity> createEnergyStorage() {
         return new EnergyStorageComponent<>(10000000, 4, 14);
+    }
 
+    @Override
+    public void saveSettings(Player player, CompoundTag tag) {
+        super.saveSettings(player, tag);
+        tag.putFloat("eterna",this.eterna);
+        tag.putFloat("quanta",this.quanta);
+        tag.putFloat("arcana",this.arcana);
+    }
+
+    @Override
+    public void loadSettings(Player player, CompoundTag tag) {
+        super.loadSettings(player, tag);
+        this.eterna = tag.getFloat("eterna");
+        this.quanta = tag.getFloat("quanta");
+        this.arcana = tag.getFloat("arcana");
     }
 
     @Override
