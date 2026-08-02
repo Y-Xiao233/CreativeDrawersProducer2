@@ -14,6 +14,7 @@
     "advancedae.ReactionChamberCategoryMixin",
     "ae2cs.AECSAccessor",
     "ae2lt.CrystalCatalyzerCategoryMixin",
+    "ae2lt.FirmamentConversionCategoryMixin",
     "ae2lt.FirmamentConversionCoreBlockEntityMixin",
     "ae2lt.LightingStrikeCategoryMixin",
     "ae2lt.LightingTransformCategoryMixin",
