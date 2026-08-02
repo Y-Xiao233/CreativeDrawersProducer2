@@ -107,5 +107,9 @@
   "upgrade.type.cdp2.IONIC_MEMBRANE": "Ionic Membrane",
 
   "command.cdp2.show_needed_aura": "JEI will now display the aura that needs to be consumed",
-  "command.cdp2.hide_needed_aura": "Hidden the display of aura in the JEI"
+  "command.cdp2.hide_needed_aura": "Hidden the display of aura in the JEI",
+
+  "ftbquests.task.cdp2.chemical": "Chemical",
+  "ftbquests.task.cdp2.chemical.amount": "Amount",
+  "ftbquests.task.cdp2.chemical.chemical": "Chemical"
 }

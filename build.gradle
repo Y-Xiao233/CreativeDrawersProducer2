@@ -227,6 +227,16 @@ dependencies {
     implementation "curse.maven:apothic-spawners-986583:8469405"
     //apothic enchanting addition
     implementation "curse.maven:apothic-enchanting-addition-1483497:7985901"
+
+
+    //architectury api
+    implementation "curse.maven:architectury-api-419699:8492726"
+    //ftb library
+    implementation "curse.maven:ftb-library-forge-404465:8519365"
+    //ftb teams
+    implementation "curse.maven:ftb-teams-forge-404468:7878281"
+    //ftb quests
+    implementation "curse.maven:ftb-quests-forge-289412:8534556"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

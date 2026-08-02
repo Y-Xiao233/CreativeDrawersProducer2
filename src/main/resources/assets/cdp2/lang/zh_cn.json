@@ -107,5 +107,10 @@
   "upgrade.type.cdp2.IONIC_MEMBRANE": "离子膜升级",
 
   "command.cdp2.show_needed_aura": "JEI界面现在会显示需要消耗的灵气",
-  "command.cdp2.hide_needed_aura": "隐藏了JEI界面中灵气的显示"
+  "command.cdp2.hide_needed_aura": "隐藏了JEI界面中灵气的显示",
+
+
+  "ftbquests.task.cdp2.chemical": "化学品",
+  "ftbquests.task.cdp2.chemical.amount": "数量",
+  "ftbquests.task.cdp2.chemical.chemical": "化学品"
 }

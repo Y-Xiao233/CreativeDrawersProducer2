@@ -15,6 +15,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.yxiao233.cdp2.common.event.CreativeModeTabEvent;
+import net.yxiao233.cdp2.common.integration.ftbquests.CDPTaskTypes;
 import net.yxiao233.cdp2.common.integration.kubejs.event.BlockModifyEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.BlockRegistryEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.CDPModifyEvent;
@@ -38,6 +39,7 @@ public class CreativeDrawersProducer2{
         modEventBus.addListener(CreativeDrawersProducer2::onRegistry);
         modEventBus.addListener(CreativeModeTabEvent::onBuild);
         modEventBus.addListener(CreativeDrawersProducer2::commonSetup);
+        CDPTaskTypes.init();
     }
 
     public static void onRegistry(RegisterEvent event){
