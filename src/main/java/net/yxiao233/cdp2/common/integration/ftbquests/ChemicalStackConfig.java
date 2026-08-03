@@ -17,7 +17,7 @@ public class ChemicalStackConfig extends ResourceConfigValue<ChemicalStack> {
     private final boolean isFixedSize;
     private final long fixedSize;
     public ChemicalStackConfig(boolean single, boolean empty) {
-        this.isFixedSize = single && !empty;
+        this.isFixedSize = false;
         this.fixedSize = 0L;
         this.allowEmpty = empty;
         this.defaultValue = ChemicalStack.EMPTY;

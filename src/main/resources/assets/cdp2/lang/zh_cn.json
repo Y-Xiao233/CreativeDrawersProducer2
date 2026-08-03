@@ -112,5 +112,7 @@
 
   "ftbquests.task.cdp2.chemical": "化学品",
   "ftbquests.task.cdp2.chemical.amount": "数量",
-  "ftbquests.task.cdp2.chemical.chemical": "化学品"
+  "ftbquests.task.cdp2.chemical.chemical": "化学品",
+  "ftbquests.task.cdp2.chemical.all": "所有化学品",
+  "ftbquests.task.cdp2.chemical.inventory": "物品栏"
 }

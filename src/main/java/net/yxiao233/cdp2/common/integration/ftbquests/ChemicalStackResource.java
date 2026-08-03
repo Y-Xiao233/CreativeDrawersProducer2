@@ -15,6 +15,11 @@ public record ChemicalStackResource(ChemicalStack resource) implements Selectabl
     }
 
     @Override
+    public boolean isEmpty() {
+        return this.resource.isEmpty();
+    }
+
+    @Override
     public void setCount(int i) {
         this.resource.setAmount(i);
     }

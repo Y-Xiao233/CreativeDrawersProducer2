@@ -111,5 +111,7 @@
 
   "ftbquests.task.cdp2.chemical": "Chemical",
   "ftbquests.task.cdp2.chemical.amount": "Amount",
-  "ftbquests.task.cdp2.chemical.chemical": "Chemical"
+  "ftbquests.task.cdp2.chemical.chemical": "Chemical",
+  "ftbquests.task.cdp2.chemical.all": "All Chemicals",
+  "ftbquests.task.cdp2.chemical.inventory": "Inventory"
 }

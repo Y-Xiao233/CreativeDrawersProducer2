@@ -3,6 +3,7 @@ package net.yxiao233.cdp2.common.integration.ftbquests;
 import dev.ftb.mods.ftblibrary.config.ConfigGroup;
 import dev.ftb.mods.ftblibrary.icon.Icon;
 import dev.ftb.mods.ftbquests.quest.Quest;
+import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.Task;
 import dev.ftb.mods.ftbquests.quest.task.TaskType;
@@ -19,21 +20,23 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.yxiao233.cdp2.CreativeDrawersProducer2;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ChemicalQuestTask extends Task {
     private ChemicalStack stack;
-    private long amount;
     public ChemicalQuestTask(long id, Quest quest) {
         super(id, quest);
         this.stack = ChemicalStack.EMPTY;
-        this.amount = 1L;
     }
 
     @Override
     public long getMaxProgress() {
-        return this.amount;
+        return this.stack.getAmount();
     }
 
     @Override
@@ -43,9 +46,6 @@ public class ChemicalQuestTask extends Task {
         config.add("chemical",new ChemicalStackConfig(true,false),this.stack,(v) ->{
             this.stack = v;
         },ChemicalStack.EMPTY);
-        config.addLong("amount", this.amount, (v) ->{
-            this.amount = v;
-        }, 1L, 1L, Long.MAX_VALUE);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class ChemicalQuestTask extends Task {
     public void writeData(CompoundTag nbt, HolderLookup.Provider provider) {
         super.writeData(nbt, provider);
         nbt.put("chemical", this.stack.saveOptional(provider));
-        nbt.putLong("amount",this.amount);
     }
 
 
@@ -65,31 +64,24 @@ public class ChemicalQuestTask extends Task {
     public void readData(CompoundTag nbt, HolderLookup.Provider provider) {
         super.readData(nbt,provider);
         this.stack = ChemicalStack.parseOptional(provider,nbt.getCompound("chemical"));
-        this.amount = nbt.getLong("amount");
     }
     @Override
     public void writeNetData(RegistryFriendlyByteBuf buffer) {
         super.writeNetData(buffer);
         ChemicalStack.OPTIONAL_STREAM_CODEC.encode(buffer,this.stack);
-        buffer.writeLong(this.amount);
     }
 
     @Override
     public void readNetData(RegistryFriendlyByteBuf buffer) {
         super.readNetData(buffer);
         this.stack = ChemicalStack.OPTIONAL_STREAM_CODEC.decode(buffer);
-        this.amount = buffer.readLong();
-    }
-
-    @Override
-    public int autoSubmitOnPlayerTick() {
-        return 5;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public Component getAltTitle() {
         Component name = Component.translatable(this.stack.getTranslationKey());
+        long amount = this.stack.getAmount();
         return amount == 1 ? name : Component.literal(amount + "x ").append(name);
     }
 
@@ -102,7 +94,6 @@ public class ChemicalQuestTask extends Task {
 
     @Override
     public void submitTask(TeamData teamData, ServerPlayer player, ItemStack craftedItem) {
-        //TODO 未知原因: 只能在新建好任务后大/小退游戏后才能正常检测
         AtomicLong amount = new AtomicLong();
         for(int i = 0; i < player.getInventory().items.size(); ++i) {
             ItemStack stack = player.getInventory().items.get(i);
@@ -122,6 +113,25 @@ public class ChemicalQuestTask extends Task {
             teamData.setProgress(this,this.getMaxProgress());
         }else{
             teamData.resetProgress(this);
+        }
+    }
+
+    @SuppressWarnings("removal")
+    @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
+    public static class Handler {
+        @SubscribeEvent
+        public static void onPlayerTick(PlayerTickEvent.Post event) {
+            if (!(event.getEntity() instanceof ServerPlayer player)) return;
+            if (player.level().getGameTime() % 5 != 0) return;
+            ServerQuestFile file = ServerQuestFile.INSTANCE;
+            if (file == null) return;
+            file.getTeamData(player).ifPresent(teamData -> {
+                for (Task task : file.collect(ChemicalQuestTask.class, t -> true)) {
+                    if (!teamData.isCompleted(task) && teamData.canStartTasks(task.getQuest())) {
+                        task.submitTask(teamData, player, ItemStack.EMPTY);
+                    }
+                }
+            });
         }
     }
 }

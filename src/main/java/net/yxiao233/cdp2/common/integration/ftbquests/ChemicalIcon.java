@@ -9,6 +9,9 @@ import mekanism.client.render.MekanismRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class ChemicalIcon extends Icon implements IResourceIcon {
     private final ChemicalStack stack;
     public ChemicalIcon(ChemicalStack stack){
@@ -21,6 +24,12 @@ public class ChemicalIcon extends Icon implements IResourceIcon {
             GuiUtils.drawTiledSprite(guiGraphics, x, y, h, w, h, MekanismRenderer.getChemicalTexture(stack), 16, 16, 100, GuiUtils.TilingDirection.UP_RIGHT);
             MekanismRenderer.resetColor(guiGraphics);
         }
+    }
+
+    private String formatAmount(long amount){
+        NumberFormat formatter = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
+        formatter.setMaximumFractionDigits(1);
+        return formatter.format(amount);
     }
 
     @Override
