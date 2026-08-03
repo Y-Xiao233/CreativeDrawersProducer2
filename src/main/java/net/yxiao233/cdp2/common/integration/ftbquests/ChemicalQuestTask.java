@@ -2,6 +2,9 @@ package net.yxiao233.cdp2.common.integration.ftbquests;
 
 import dev.ftb.mods.ftblibrary.config.ConfigGroup;
 import dev.ftb.mods.ftblibrary.icon.Icon;
+import dev.ftb.mods.ftblibrary.ui.Button;
+import dev.ftb.mods.ftbquests.FTBQuests;
+import dev.ftb.mods.ftbquests.integration.RecipeModHelper;
 import dev.ftb.mods.ftbquests.quest.Quest;
 import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import dev.ftb.mods.ftbquests.quest.TeamData;
@@ -11,7 +14,9 @@ import mekanism.api.chemical.ChemicalStack;
 import mekanism.common.attachments.containers.chemical.AttachedChemicals;
 import mekanism.common.item.ItemGaugeDropper;
 import mekanism.common.item.block.ItemBlockChemicalTank;
+import mekanism.common.registries.MekanismBlocks;
 import mekanism.common.registries.MekanismDataComponents;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -24,7 +29,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.util.JeiUtil;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ChemicalQuestTask extends Task {
@@ -91,6 +98,14 @@ public class ChemicalQuestTask extends Task {
         return new ChemicalIcon(this.stack);
     }
 
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void onButtonClicked(Button button, boolean canClick) {
+        button.playClickSound();
+        if (!stack.isEmpty()) {
+            JeiUtil.openRecipeGui(RecipeIngredientRole.OUTPUT,stack);
+        }
+    }
 
     @Override
     public void submitTask(TeamData teamData, ServerPlayer player, ItemStack craftedItem) {

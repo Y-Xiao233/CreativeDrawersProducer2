@@ -1,6 +1,9 @@
 package net.yxiao233.cdp2.util;
 
+import mekanism.api.chemical.ChemicalStack;
+import mekanism.client.recipe_viewer.jei.MekanismJEIHelper;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -15,5 +18,11 @@ public class JeiUtil {
         IJeiRuntime runtime = CDPJeiPlugin.getRuntime();
         Optional<ITypedIngredient<ItemStack>> typedOpt = runtime.getIngredientManager().createTypedIngredient(VanillaTypes.ITEM_STACK, stack);
         typedOpt.ifPresent(ingredient -> runtime.getRecipesGui().show(runtime.getJeiHelpers().getFocusFactory().createFocus(role, typedOpt.get())));
+    }
+
+    public static void openRecipeGui(RecipeIngredientRole role, ChemicalStack stack){
+        IJeiRuntime runtime = CDPJeiPlugin.getRuntime();
+        Optional<IIngredientType<ChemicalStack>> typedOpt = Optional.of(MekanismJEIHelper.INSTANCE.getChemicalStackHelper().getIngredientType());
+        typedOpt.ifPresent(ingredient -> runtime.getRecipesGui().show(runtime.getJeiHelpers().getFocusFactory().createFocus(role,ingredient,stack)));
     }
 }
