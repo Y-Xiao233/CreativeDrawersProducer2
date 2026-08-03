@@ -3,10 +3,7 @@ package net.yxiao233.cdp2.common.integration.ftbquests;
 import dev.ftb.mods.ftblibrary.config.ConfigGroup;
 import dev.ftb.mods.ftblibrary.icon.Icon;
 import dev.ftb.mods.ftblibrary.ui.Button;
-import dev.ftb.mods.ftbquests.FTBQuests;
-import dev.ftb.mods.ftbquests.integration.RecipeModHelper;
 import dev.ftb.mods.ftbquests.quest.Quest;
-import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.Task;
 import dev.ftb.mods.ftbquests.quest.task.TaskType;
@@ -14,7 +11,6 @@ import mekanism.api.chemical.ChemicalStack;
 import mekanism.common.attachments.containers.chemical.AttachedChemicals;
 import mekanism.common.item.ItemGaugeDropper;
 import mekanism.common.item.block.ItemBlockChemicalTank;
-import mekanism.common.registries.MekanismBlocks;
 import mekanism.common.registries.MekanismDataComponents;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.core.HolderLookup;
@@ -25,13 +21,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.util.JeiUtil;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ChemicalQuestTask extends Task {
@@ -108,6 +99,11 @@ public class ChemicalQuestTask extends Task {
     }
 
     @Override
+    public int autoSubmitOnPlayerTick() {
+        return 5;
+    }
+
+    @Override
     public void submitTask(TeamData teamData, ServerPlayer player, ItemStack craftedItem) {
         AtomicLong amount = new AtomicLong();
         for(int i = 0; i < player.getInventory().items.size(); ++i) {
@@ -126,27 +122,27 @@ public class ChemicalQuestTask extends Task {
         }
         if(amount.get() >= this.getMaxProgress()){
             teamData.setProgress(this,this.getMaxProgress());
-        }else{
-            teamData.resetProgress(this);
+        }else if(amount.get() > teamData.getProgress(this)){
+            teamData.setProgress(this,amount.get());
         }
     }
 
-    @SuppressWarnings("removal")
-    @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
-    public static class Handler {
-        @SubscribeEvent
-        public static void onPlayerTick(PlayerTickEvent.Post event) {
-            if (!(event.getEntity() instanceof ServerPlayer player)) return;
-            if (player.level().getGameTime() % 5 != 0) return;
-            ServerQuestFile file = ServerQuestFile.INSTANCE;
-            if (file == null) return;
-            file.getTeamData(player).ifPresent(teamData -> {
-                for (Task task : file.collect(ChemicalQuestTask.class, t -> true)) {
-                    if (!teamData.isCompleted(task) && teamData.canStartTasks(task.getQuest())) {
-                        task.submitTask(teamData, player, ItemStack.EMPTY);
-                    }
-                }
-            });
-        }
-    }
+//    @SuppressWarnings("removal")
+//    @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
+//    public static class Handler {
+//        @SubscribeEvent
+//        public static void onPlayerTick(PlayerTickEvent.Post event) {
+//            if (!(event.getEntity() instanceof ServerPlayer player)) return;
+//            if (player.level().getGameTime() % 5 != 0) return;
+//            ServerQuestFile file = ServerQuestFile.INSTANCE;
+//            if (file == null) return;
+//            file.getTeamData(player).ifPresent(teamData -> {
+//                for (Task task : file.collect(ChemicalQuestTask.class, t -> true)) {
+//                    if (!teamData.isCompleted(task) && teamData.canStartTasks(task.getQuest())) {
+//                        task.submitTask(teamData, player, ItemStack.EMPTY);
+//                    }
+//                }
+//            });
+//        }
+//    }
 }
