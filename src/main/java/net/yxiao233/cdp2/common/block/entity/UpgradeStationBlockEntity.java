@@ -32,9 +32,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.INBTSerializable;
@@ -53,6 +56,7 @@ import net.yxiao233.cdp2.misc.UpgradableTypes;
 import net.yxiao233.cdp2.misc.UpgradePointManager;
 import net.yxiao233.cdp2.mixin.mekanism.TileComponentUpgradeAccessor;
 import net.yxiao233.cdp2.util.LDLibUtil;
+import org.apache.commons.lang3.tuple.Pair;
 import org.appliedenergistics.yoga.YogaEdge;
 import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.jetbrains.annotations.NotNull;
@@ -94,7 +98,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     @DescSynced
     @Persisted(key = "progress")
     public int progress;
-    public int maxProgress = 100;
+    public int maxProgress = 10;
     @DescSynced
     @Persisted(key = "show_range")
     private boolean showRange = true;
@@ -347,7 +351,9 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             player = level.getPlayerByUUID(ownerUUID);
         }
         if(!level.isClientSide()){
-            updateMekanismUpgrade();
+            if(level.getGameTime() % 20 == 0){
+                updateMekanismUpgrade();
+            }
             handle();
         }
     }
@@ -368,32 +374,49 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     }
 
     public void updateMekanismUpgrade(){
-        AABB boundary = getBoundary();
         if(level == null){
             return;
         }
-        Set<BlockPos> positions = new HashSet<>();
-        BlockPos.betweenClosedStream((int) boundary.minX, (int) boundary.minY, (int) boundary.minZ, (int) boundary.maxX, (int) boundary.maxY, (int) boundary.maxZ).forEach(pos -> {
-            positions.add(pos.immutable());
-        });
-
-        positions.forEach(pos ->{
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if(blockEntity instanceof IUpgradeTile upgradeTile){
-                TILES.put(pos,upgradeTile);
+        int range = getRange();
+        int radius = (range / 16) + 1;
+        List<Pair<BlockPos, BlockEntity>> blockEntities = getBlockEntities(getChunksInRadius(radius));
+        blockEntities.forEach(entry ->{
+            if(entry.getRight() instanceof IUpgradeTile upgradeTile){
+                TILES.put(entry.getLeft(),upgradeTile);
             }else{
-                TILES.remove(pos);
+                TILES.remove(entry.getLeft());
             }
         });
 
         TILES.forEach((pos, tile) -> {
-            if(boundary.contains(pos.getX(), pos.getY(), pos.getZ())){
+            if(getBoundary().contains(pos.getX(), pos.getY(), pos.getZ())){
                 applyMekanismUpgrade(tile);
             }else{
                 removeMekanismUpgrade(tile);
                 TILES.remove(pos);
             }
         });
+    }
+
+    private List<Pair<BlockPos, BlockEntity>> getBlockEntities(List<LevelChunk> chunks){
+        List<Pair<BlockPos, BlockEntity>> entities = new ArrayList<>();
+        chunks.forEach(chunk -> {
+            chunk.getBlockEntities().forEach((pos, entity) -> {
+                entities.add(Pair.of(pos,entity));
+            });
+        });
+        return entities;
+    }
+
+    private List<LevelChunk> getChunksInRadius(int radius){
+        List<LevelChunk> chunks = new ArrayList<>();
+        ChunkPos centerPos = level.getChunkAt(this.worldPosition).getPos();
+        for (int x = centerPos.x - radius; x <= centerPos.x + radius; x++) {
+            for (int z = centerPos.z - radius; z <= centerPos.z + radius; z++) {
+                chunks.add(level.getChunk(x,z));
+            }
+        }
+        return chunks;
     }
 
     public void applyMekanismUpgrade(IUpgradeTile tile){
