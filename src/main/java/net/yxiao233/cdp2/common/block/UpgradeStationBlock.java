@@ -71,8 +71,6 @@ public class UpgradeStationBlock extends CDPMachineEntityBlock<UpgradeStationBlo
                     if(tag != null && tag.contains("entity_data")){
                         upgradeStationBlockEntity.deserializeNBT(server.registryAccess(),tag.getCompound("entity_data"));
                     }
-                }else if(upgradeStationBlockEntity.getOwner() == null && placer != null){
-                    upgradeStationBlockEntity.setOwner(placer.getUUID());
                 }
             }
         }

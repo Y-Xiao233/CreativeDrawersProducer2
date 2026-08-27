@@ -29,13 +29,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
@@ -106,9 +104,8 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     @Persisted(key = "show_information")
     private boolean showInformation = true;
     @DescSynced
-    @Persisted(key = "owner")
-    private UUID ownerUUID = null;
-    private Player player;
+    @Persisted(key = "total_point")
+    private int totalPoint = 0;
 
     public UpgradeStationBlockEntity(BlockPos pos, BlockState blockState) {
         super(CDPBlock.UPGRADE_STATION.asBlockEntityType(), pos, blockState);
@@ -117,10 +114,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     @Override
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        if(this.getOwner() == null){
-            this.setOwner(holder.player.getUUID());
-            player = holder.player;
-        }
         var root = LDLibUtil.createTabWithBackground();
 
         mainTab(holder,root);
@@ -145,7 +138,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     @SuppressWarnings("deprecation")
     private void mainTab(BlockUIMenuType.BlockUIHolder holder, TabView tabView){
         var tabMain = LDLibUtil.createBaseRoot();
-        Label point = pointDisplay(holder.player);
+        Label point = pointDisplay();
         UIElement information = LDLibUtil.createBaseRoot();
 
         for (int i = 1; i <= CreativeShardTier.values().length; i++) {
@@ -171,9 +164,8 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     @SuppressWarnings("deprecation")
     private void upgradeTab(String id, UpgradePointManager manager, BlockUIMenuType.BlockUIHolder holder, TabView tabView, HoverTipCallBack descriptionHoverTip, @Nullable HoverTipCallBack upgradeTierTip){
-        Player player = holder.player;
         var upgradeTab = LDLibUtil.createBaseRoot();
-        Label pointDisplay = pointDisplay(player);
+        Label pointDisplay = pointDisplay();
         UIElement information = LDLibUtil.createBaseRoot();
 
         int baseGap = 25;
@@ -200,7 +192,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
                 int point = manager.getPoint(key);
                 int delta = 1;
                 manager.updatePoint(key,Math.max(0,point - delta));
-                addTotalPoint(player,point - manager.getPoint(key));
+                addTotalPoint(point - manager.getPoint(key));
             }).layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,-0.8f)).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
                 if(showInformation){
                     event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.decrease"));
@@ -211,9 +203,9 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             Button increase = (Button) new Button().setText("+").setOnServerClick(event -> {
                 int point = manager.getPoint(key);
                 int delta = 1;
-                int maxAdd = Math.min(delta,getTotalPoint(player));
+                int maxAdd = Math.min(delta,getTotalPoint());
                 manager.updatePoint(key,Math.min(manager.getMax(key),point + maxAdd));
-                addTotalPoint(player,-(manager.getPoint(key) - point));
+                addTotalPoint(-(manager.getPoint(key) - point));
             }).layout(layoutStyle -> layoutStyle.setPosition(YogaEdge.TOP,-0.8f)).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
                 if(showInformation){
                     event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.increase"));
@@ -257,7 +249,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         });
 
         Button reset = (Button) new Button().setText(" ").setOnServerClick(event -> {
-            addTotalPoint(player,manager.resetAll());
+            addTotalPoint(manager.resetAll());
         }).addEventListener(UIEvents.HOVER_TOOLTIPS,event -> {
             if(showInformation){
                 event.hoverTooltips = HoverTooltips.empty().append(Component.translatable("gui.cdp2.reset"));
@@ -287,7 +279,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
     private void creativeDebugButton(BlockUIMenuType.BlockUIHolder holder, UIElement root){
         if(holder.player.isCreative()){
             UIElement testTotalPoint = new UIElement().layout(layoutStyle -> layoutStyle.flexDirection(YogaFlexDirection.ROW));
-            testTotalPoint.addChildren(new Button().setText("- point").setOnServerClick(event -> addTotalPoint(holder.player,-1)),LDLibUtil.flex(2),new Button().setText("+ point").setOnServerClick(event -> addTotalPoint(holder.player,1)));
+            testTotalPoint.addChildren(new Button().setText("- point").setOnServerClick(event -> addTotalPoint(-1)),LDLibUtil.flex(2),new Button().setText("+ point").setOnServerClick(event -> addTotalPoint(1)));
             root.addChild(testTotalPoint);
         }
     }
@@ -311,34 +303,23 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         return showRangeButton;
     }
 
-    private Label pointDisplay(Player player){
+    private Label pointDisplay(){
         Label pointDisplay = (Label) new Label()
                 .textStyle(textStyle -> textStyle.textAlignHorizontal(Horizontal.CENTER))
-                .setText(Component.translatable("gui.cdp2.total_points",getTotalPoint(player)))
+                .setText(Component.translatable("gui.cdp2.total_points",getTotalPoint()))
                 .layout(layoutStyle -> layoutStyle.height(22).paddingAll(7).gapAll(5))
                 .style(basicStyle -> basicStyle.background(Sprites.BORDER));
-        pointDisplay.bind(DataBindingBuilder.componentS2C(() -> Component.translatable("gui.cdp2.total_points",getTotalPoint(player))).build());
+        pointDisplay.bind(DataBindingBuilder.componentS2C(() -> Component.translatable("gui.cdp2.total_points",getTotalPoint())).build());
         return pointDisplay;
     }
 
-    public void addTotalPoint(Player player, int delta){
-        CompoundTag data = player.getPersistentData();
-        if(data.contains("total_point")){
-            int old = data.getInt("total_point");
-            data.putInt("total_point",old + delta);
-        }else{
-            data.putInt("total_point",delta);
-        }
+    public void addTotalPoint(int delta){
+        totalPoint += delta;
+        setChanged();
     }
 
-    public int getTotalPoint(Player player){
-        CompoundTag data = player.getPersistentData();
-        if(data.contains("total_point")){
-            return data.getInt("total_point");
-        }else{
-            data.putInt("total_point",0);
-            return 0;
-        }
+    public int getTotalPoint(){
+        return totalPoint;
     }
 
     public boolean isShowRange() {
@@ -347,9 +328,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if(player == null && ownerUUID != null){
-            player = level.getPlayerByUUID(ownerUUID);
-        }
         if(!level.isClientSide()){
             if(level.getGameTime() % 20 == 0){
                 updateMekanismUpgrade();
@@ -364,10 +342,10 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
             progress = 0;
             return;
         }
-        if(progress >= maxProgress && stack.getItem() instanceof CreativeShardItem shardItem && player != null){
+        if(progress >= maxProgress && stack.getItem() instanceof CreativeShardItem shardItem){
             progress = 0;
             stack.setCount(stack.getCount() - 1);
-            addTotalPoint(player,shardItem.getTier());
+            addTotalPoint(shardItem.getTier());
             return;
         }
         progress = Math.min(++ progress, maxProgress);
@@ -496,13 +474,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         return basic.getPoint("range");
     }
 
-    public void setOwner(UUID ownerUUID){
-        this.ownerUUID = ownerUUID;
-    }
-
-    public UUID getOwner() {
-        return ownerUUID;
-    }
 
     public AABB getBoundary(){
         BlockPos pos = getBlockPos();
@@ -555,6 +526,6 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
 
     @FunctionalInterface
     public interface HoverTipCallBack{
-        void accept(UpgradePointManager manager,  String key, UIEvent event);
+        void accept(UpgradePointManager manager, String key, UIEvent event);
     }
 }
