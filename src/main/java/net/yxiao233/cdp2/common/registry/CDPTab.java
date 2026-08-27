@@ -9,7 +9,7 @@ import net.yxiao233.cdp2.api.registry.CDPCreativeModeTabDeferredRegister;
 
 public class CDPTab {
     public static final  DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreativeDrawersProducer2.MODID);
-    public static final CDPCreativeModeTabDeferredRegister DRAWER_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("drawer",() -> CDPBlock.DIAMOND_CREATIVE_DRAWER.getBlockDeferredHolder().getItemRegister());
+    public static final CDPCreativeModeTabDeferredRegister DRAWER_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("drawer",() -> CDPBlock.VOID_MATTER_CREATIVE_DRAWER.getBlockDeferredHolder().getItemRegister());
     public static final CDPCreativeModeTabDeferredRegister MACHINE_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("machine", () -> CDPBlock.UPGRADE_STATION.getBlockDeferredHolder().getItemRegister());
     public static final CDPCreativeModeTabDeferredRegister CONTENT_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("content", () -> CDPItem.SHARDS.values().stream().toList().getFirst());
     public static final CDPCreativeModeTabDeferredRegister MYSTICAL_AGRICULTURE_TAB = CDPCreativeModeTabDeferredRegister.registrySimpleTab("mystical_agriculture", () -> CDPItem.INFINITE_ESSENCE);

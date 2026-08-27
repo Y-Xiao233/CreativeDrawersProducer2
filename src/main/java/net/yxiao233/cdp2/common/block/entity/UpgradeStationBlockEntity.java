@@ -360,7 +360,10 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         List<Pair<BlockPos, BlockEntity>> blockEntities = getBlockEntities(getChunksInRadius(radius));
         blockEntities.forEach(entry ->{
             if(entry.getRight() instanceof IUpgradeTile upgradeTile){
-                TILES.put(entry.getLeft(),upgradeTile);
+                BlockPos pos = entry.getLeft();
+                if(getBoundary().contains(pos.getX(), pos.getY(), pos.getZ())){
+                    TILES.put(entry.getLeft(),upgradeTile);
+                }
             }else{
                 TILES.remove(entry.getLeft());
             }
