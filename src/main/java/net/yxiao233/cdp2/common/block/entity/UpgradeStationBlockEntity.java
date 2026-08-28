@@ -404,7 +404,7 @@ public class UpgradeStationBlockEntity extends CDPMachineBlockEntity implements 
         mekanism.getMap().forEach((name, pointPair) ->{
             Upgrade upgrade = Upgrade.valueOf(name.toUpperCase());
             int point = pointPair.getPoint();
-            if(tile.supportsUpgrade(upgrade) && point > 0){
+            if(tile.supportsUpgrade(upgrade) && point >= 0){
                 TileComponentUpgrade component = tile.getComponent();
                 int installed = component.getUpgrades(upgrade);
 
