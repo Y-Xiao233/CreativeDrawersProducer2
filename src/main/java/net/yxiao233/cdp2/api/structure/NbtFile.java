@@ -27,27 +27,21 @@ import java.util.Optional;
 public class NbtFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(NbtFile.class);
     private final CompoundTag nbt;
-    public NbtFile(ResourceLocation location){
-        this.nbt = readFromLocation(location);
+    public static final String LOCATION_ASSETS = "assets";
+    public static final String LOCATION_DATA = "data";
+    public NbtFile(String location, String nameSpace, String path, String fileName){
+        this.nbt = readFromPath(location,nameSpace,path,fileName);
     }
 
-    public NbtFile(String nameSpace, String path){
-        this.nbt = readFromPath(nameSpace, path);
-    }
-
-    public CompoundTag readFromLocation(ResourceLocation location){
-        return readFromPath(location.getNamespace(), location.getPath());
-    }
-
-    public CompoundTag readFromPath(String nameSpace, String path){
-        String classpath = "/assets/" + nameSpace + "/structure/" + path + ".nbt";
+    public CompoundTag readFromPath(String location, String nameSpace, String path, String fileName){
+        String classpath = "/" + location + "/" + nameSpace + "/" + path + "/" + fileName + ".nbt";
         try (InputStream is = getClass().getResourceAsStream(classpath)) {
             if (is != null) {
                 return NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
             }
         } catch (IOException ignored) {}
 
-        Path kubejsPath = Path.of("kubejs/assets/" + nameSpace + "/structure/" + path + ".nbt");
+        Path kubejsPath = Path.of("kubejs/" + location + "/" + nameSpace + "/" + path + "/" + fileName + ".nbt");
         if (Files.exists(kubejsPath)) {
             try (InputStream is = Files.newInputStream(kubejsPath)) {
                 return NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
@@ -55,11 +49,13 @@ public class NbtFile {
                 LOGGER.error("Failed to read KubeJS NBT: {}", kubejsPath, e);
             }
         }
-
-        LOGGER.error("NBT file not found: {} (tried classpath, kubejs/assets/cdp2/structure/, kubejs/assets/cdp2/structures/)", path);
+        System.out.println(kubejsPath);
         return null;
     }
 
+    public CompoundTag getNbt() {
+        return nbt;
+    }
 
     public List<Pair<BlockPos, BlockState>> getBlocks(){
         List<Pair<BlockPos, BlockState>> result = new ArrayList<>();

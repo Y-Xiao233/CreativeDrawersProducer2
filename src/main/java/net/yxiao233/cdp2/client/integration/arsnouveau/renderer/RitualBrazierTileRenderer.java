@@ -43,11 +43,11 @@ public class RitualBrazierTileRenderer extends CDPBaseBlockEntityRenderer<Ritual
     private NbtFile getNbtFile(StructureRitual ritual){
         if(ritual.nbtPath.equals(ritualPath)){
             if(CACHE == null){
-                CACHE = new NbtFile("cdp2",ritual.nbtPath);
+                CACHE = new NbtFile(NbtFile.LOCATION_DATA,"cdp2","ritual_structure",ritual.nbtPath);
                 ritualPath = ritual.nbtPath;
             }
         }else{
-            CACHE = new NbtFile("cdp2",ritual.nbtPath);
+            CACHE = new NbtFile(NbtFile.LOCATION_DATA,"cdp2","ritual_structure",ritual.nbtPath);
             ritualPath = ritual.nbtPath;
         }
         return CACHE;

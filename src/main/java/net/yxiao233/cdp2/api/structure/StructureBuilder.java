@@ -3,8 +3,6 @@ package net.yxiao233.cdp2.api.structure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtAccounter;
-import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -14,10 +12,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,29 +21,12 @@ public class StructureBuilder {
 
     public CompoundTag nbtContext;
 
-    public StructureBuilder(String path){
-        this.nbtContext = CACHE.computeIfAbsent(path, this::readNbt);
+    public StructureBuilder(String fileName){
+        this.nbtContext = CACHE.computeIfAbsent(fileName, this::readNbt);
     }
 
-    public CompoundTag readNbt(String path){
-        String classpath = "/assets/cdp2/structure/" + path + ".nbt";
-        try (InputStream is = getClass().getResourceAsStream(classpath)) {
-            if (is != null) {
-                return NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
-            }
-        } catch (IOException ignored) {}
-
-        Path kubejsPath = Path.of("kubejs/assets/cdp2/structure/" + path + ".nbt");
-        if (Files.exists(kubejsPath)) {
-            try (InputStream is = Files.newInputStream(kubejsPath)) {
-                return NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
-            } catch (IOException e) {
-                LOGGER.error("Failed to read KubeJS NBT: {}", kubejsPath, e);
-            }
-        }
-
-        LOGGER.error("NBT file not found: {} (tried classpath, kubejs/assets/cdp2/structure/, kubejs/assets/cdp2/structures/)", path);
-        return null;
+    public CompoundTag readNbt(String fileName){
+        return new NbtFile(NbtFile.LOCATION_DATA,"cdp2","ritual_structure",fileName).getNbt();
     }
 
     public StructureTemplate getStructureTemplate(ServerLevel level){
