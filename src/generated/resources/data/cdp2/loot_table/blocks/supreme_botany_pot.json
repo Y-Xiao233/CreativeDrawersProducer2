@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:block",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
+    "type": "minecraft:block",
+    "pools": [
         {
-          "condition": "minecraft:survives_explosion"
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:survives_explosion"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "cdp2:supreme_botany_pot"
+                }
+            ],
+            "rolls": 1.0
         }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "cdp2:supreme_botany_pot"
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "cdp2:blocks/supreme_botany_pot"
+    ],
+    "random_sequence": "cdp2:blocks/supreme_botany_pot"
 }

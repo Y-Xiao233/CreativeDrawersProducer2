@@ -1,12 +1,12 @@
 {
-  "values": [
-    "cdp2:cosmic_hopper_botany_pot",
-    "cdp2:infinite_botany_pot",
-    "cdp2:absolute_botany_pot",
-    "cdp2:supreme_botany_pot",
-    "cdp2:infinite_hopper_botany_pot",
-    "cdp2:absolute_hopper_botany_pot",
-    "cdp2:supreme_hopper_botany_pot",
-    "cdp2:cosmic_botany_pot"
-  ]
+    "values": [
+        "cdp2:cosmic_hopper_botany_pot",
+        "cdp2:infinite_botany_pot",
+        "cdp2:absolute_botany_pot",
+        "cdp2:supreme_botany_pot",
+        "cdp2:infinite_hopper_botany_pot",
+        "cdp2:absolute_hopper_botany_pot",
+        "cdp2:supreme_hopper_botany_pot",
+        "cdp2:cosmic_botany_pot"
+    ]
 }

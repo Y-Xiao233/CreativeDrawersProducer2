@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "cdp2:block/frame"
+    "variants": {
+        "": {
+            "model": "cdp2:block/frame"
+        }
     }
-  }
 }

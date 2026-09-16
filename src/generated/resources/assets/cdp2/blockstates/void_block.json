@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "cdp2:block/void_block"
+    "variants": {
+        "": {
+            "model": "cdp2:block/void_block"
+        }
     }
-  }
 }

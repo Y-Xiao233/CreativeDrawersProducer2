@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "cdp2:block/frame"
-  }
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+        "all": "cdp2:block/frame"
+    }
 }

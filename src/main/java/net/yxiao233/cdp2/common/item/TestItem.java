@@ -17,11 +17,6 @@ public class TestItem extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext context) {
-        Level level = context.getLevel();
-        if(level instanceof ServerLevel serverLevel){
-            BlockPos placePos = context.getClickedPos().relative(context.getClickedFace());
-            new StructureBuilder("test").buildStructure(serverLevel, placePos);
-        }
         return InteractionResult.SUCCESS;
     }
 }

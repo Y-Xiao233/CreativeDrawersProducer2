@@ -1,11 +1,11 @@
-// 1.21.1	2026-03-07T19:39:20.220722	cdp2 - ItemModel
-cd18baed2fbc351fef1a0bc2e14e9457a8104434 assets/cdp2/models/item/absolute_essence.json
-96a6790751c959d4f20dbffb3525590230dd607e assets/cdp2/models/item/cosmic_essence.json
-fc20dffc74c33196a093cc89ce4c20174ebe8988 assets/cdp2/models/item/creative_shard_1.json
-20d5c24f7f989134fe064f6a58eb84e15f666f83 assets/cdp2/models/item/creative_shard_2.json
-263a07cd054f8d6aae5f162f22b6554ccd6c3bc7 assets/cdp2/models/item/creative_shard_3.json
-5484c7d9bbd573a617fc4ce7b297af896b3f4eb2 assets/cdp2/models/item/creative_shard_4.json
-ec38b79807cfe5e80a46f95393430e5e8c9a9e60 assets/cdp2/models/item/infinite_essence.json
-704e48ae85da3a9c067c3eefb0f515ac1636a7de assets/cdp2/models/item/supreme_essence.json
-83e486d66bf072a18007bbd43d19217d0bfac373 assets/cdp2/models/item/void_matter.json
-a9e2516c722945309195c2bb967552b0ebe9272d assets/cdp2/models/item/void_omni_tool.json
+// 1.21.1	2026-09-14T14:56:32.6261975	cdp2 - ItemModel
+c064f15e4717c304780aa9c72de373050921737a assets/cdp2/models/item/absolute_essence.json
+ed6762854bcd637091fc7552d8afb998bed5cb4a assets/cdp2/models/item/cosmic_essence.json
+14243dca427e84eb19367a0f5e3ef156f803b271 assets/cdp2/models/item/creative_shard_1.json
+ee950005bc22bc9ab1b1818520bceb6a03560749 assets/cdp2/models/item/creative_shard_2.json
+73ba611302da2e056a7aab4f42bc6111ea0ae670 assets/cdp2/models/item/creative_shard_3.json
+a0dd89db497717bc97c102faec6c774268acf4e0 assets/cdp2/models/item/creative_shard_4.json
+2ef46d2a233119abc436957d51fece159be0fea9 assets/cdp2/models/item/infinite_essence.json
+5bc229ac899860e0f40700acb026f3ebbee0a805 assets/cdp2/models/item/supreme_essence.json
+014cd7136cf9dcbda2957b152c26666e458a7a24 assets/cdp2/models/item/void_matter.json
+3018ba32b39b2d1843605c32a6e1ca286666f318 assets/cdp2/models/item/void_omni_tool.json

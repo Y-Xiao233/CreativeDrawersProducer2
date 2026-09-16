@@ -1,22 +1,22 @@
 {
-  "values": [
-    "cdp2:upgrade_station",
-    "cdp2:cosmic_hopper_botany_pot",
-    "cdp2:infinite_botany_pot",
-    "cdp2:absolute_botany_pot",
-    "cdp2:supreme_botany_pot",
-    "cdp2:infinite_hopper_botany_pot",
-    "cdp2:absolute_hopper_botany_pot",
-    "cdp2:supreme_hopper_botany_pot",
-    "cdp2:cosmic_botany_pot",
-    "cdp2:void_block",
-    "cdp2:void_sieve",
-    "cdp2:void_crafting_table",
-    "cdp2:frame",
-    "cdp2:void_matter_creative_drawer",
-    "cdp2:apple_creative_drawer",
-    "cdp2:prosperity_shard_creative_drawer",
-    "cdp2:oak_log_creative_drawer",
-    "cdp2:flux_infusion_enchantment_factory"
-  ]
+    "values": [
+        "cdp2:upgrade_station",
+        "cdp2:cosmic_hopper_botany_pot",
+        "cdp2:infinite_botany_pot",
+        "cdp2:absolute_botany_pot",
+        "cdp2:supreme_botany_pot",
+        "cdp2:infinite_hopper_botany_pot",
+        "cdp2:absolute_hopper_botany_pot",
+        "cdp2:supreme_hopper_botany_pot",
+        "cdp2:cosmic_botany_pot",
+        "cdp2:void_block",
+        "cdp2:void_sieve",
+        "cdp2:void_crafting_table",
+        "cdp2:frame",
+        "cdp2:flux_infusion_enchantment_factory",
+        "cdp2:void_matter_creative_drawer",
+        "cdp2:apple_creative_drawer",
+        "cdp2:prosperity_shard_creative_drawer",
+        "cdp2:oak_log_creative_drawer"
+    ]
 }
