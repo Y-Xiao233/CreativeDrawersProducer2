@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -52,6 +53,8 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         //void sieve
         fourWayBlockState(CDPBlock.VOID_SIEVE.getBlock());
         fourWayBlockState(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock());
+        onlyItem(CDPBlock.VOID_SIEVE.getBlock());
+        onlyItem(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock());
         //void block
         cubeAll(CDPBlock.VOID_BLOCK);
         //void crafting table
@@ -108,14 +111,20 @@ public class CDPBlockStateProvider extends BlockStateProvider {
     }
 
     private <T extends Block> void fourWayBlockState(T block){
-        fourWayBlockState((Block & IRotatableBlock) block,BuiltInRegistries.BLOCK.getKey(block).getPath());
+        Property<?> property = block.getStateDefinition().getProperty(RotationHandler.FACING_HORIZONTAL.getName());
+        if(property instanceof DirectionProperty directionProperty) {
+            fourWayBlockState(block, directionProperty, BuiltInRegistries.BLOCK.getKey(block).getPath());
+        }
     }
     private <T extends Block & IRotatableBlock> void fourWayBlockState(T block, String modelPath){
-        fourWayBlockState(block,ResourceLocation.fromNamespaceAndPath(CreativeDrawersProducer2.MODID, "block/" + modelPath));
+        fourWayBlockState(block, RotationHandler.FACING_HORIZONTAL, modelPath);
     }
 
-    private <T extends Block & IRotatableBlock> void fourWayBlockState(T block, ResourceLocation modelPath){
-        Property<Direction> property = RotationHandler.FACING_HORIZONTAL;
+    private <T extends Block> void fourWayBlockState(T block, DirectionProperty property, String modelPath){
+        fourWayBlockState(block, property, ResourceLocation.fromNamespaceAndPath(CreativeDrawersProducer2.MODID, "block/" + modelPath));
+    }
+
+    private <T extends Block> void fourWayBlockState(T block, DirectionProperty property, ResourceLocation modelPath){
         getVariantBuilder(block)
                 .partialState().with(property, Direction.NORTH)
                 .modelForState()

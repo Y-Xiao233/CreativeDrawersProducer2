@@ -1,0 +1,11 @@
+{
+    "type": "cdp2:unknown_type",
+    "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+            "type": "minecraft:fixed",
+            "biome": "cdp2:unknown"
+        },
+        "settings": "cdp2:unknown"
+    }
+}
