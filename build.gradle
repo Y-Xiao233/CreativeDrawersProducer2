@@ -119,6 +119,12 @@ repositories{
         }
     }
 
+    //ponder / flywheel
+    maven { url = "https://maven.createmod.net" }
+
+    // NeoForge config api port, needed by ponder
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" }
+
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
     }
@@ -144,8 +150,6 @@ dependencies {
     implementation "curse.maven:ex-pattern-provider-892005:8025439"
     //advanced ae
     implementation "curse.maven:advancedae-1084104:7849217"
-    //ae2lt
-    implementation "curse.maven:ae2-lightning-tech-1527395:8458199"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"
@@ -155,6 +159,11 @@ dependencies {
     implementation("maven.modrinth:industrial-foregoing:${industrialforegoing_version}")
     //ifs
     implementation "curse.maven:industrial-foregoing-simulation-1489811:7784864"
+
+    //ponder (forbidden arcanus datagen needs its PonderPlugin interface)
+    implementation "net.createmod.ponder:Ponder-NeoForge-1.21.1:1.0.56"
+    //flywheel (ponder dependency)
+    implementation "dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.4"
 
     //mekanism
     implementation "curse.maven:mekanism-268560:7621971"
@@ -208,6 +217,8 @@ dependencies {
 
     //patchouli
     implementation "curse.maven:patchouli-306770:7730942"
+    //patchouli provider (actually additions datagen)
+    implementation "xyz.brassgoggledcoders:PatchouliProvider:1.21.1-1.0.11-Snapshot.5"
 
     //actually additions
     implementation "curse.maven:actually-additions-228404:7676502"
