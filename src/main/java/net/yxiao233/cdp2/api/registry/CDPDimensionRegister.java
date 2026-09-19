@@ -37,12 +37,12 @@ public class CDPDimensionRegister {
             new DimensionType.MonsterSettings(false,false, ConstantInt.of(0),0)
     );
     private static final DimensionType DEFAULT_NOISE_TYPE = new DimensionType(
-            OptionalLong.of(6000),
+            OptionalLong.of(18000),
             true,false,false,false,1.0,true,false,
             -64,256,256,
             BlockTags.INFINIBURN_OVERWORLD,
             BuiltinDimensionTypes.OVERWORLD_EFFECTS,
-            1.0f,
+            0.0f,
             new DimensionType.MonsterSettings(false,false, ConstantInt.of(0),0)
     );
     private static final ArrayList<CDPDimensionRegister> DIMENSIONS = new ArrayList<>();

@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
+import net.yxiao233.cdp2.common.registry.CDPBlock;
 
 import java.util.List;
 
@@ -51,13 +52,13 @@ public class CDPNoiseSettings {
     public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context){
         context.register(UNKNOWN, new NoiseGeneratorSettings(
                 NoiseSettings.create(MIN_Y,HEIGHT,1,2),
-                ModBlocks.DARKSTONE.get().defaultBlockState(),
+                CDPBlock.UNKNOWN_BLOCK.asBlockState(),
                 ModuleCore.ETHER.getSourceFluid().get().defaultFluidState().createLegacyBlock(),
                 createRouter(context.lookup(Registries.NOISE)),
                 SURFACE_RULE,
                 List.of(),
                 SEA_LEVEL,
-                false,
+                true,
                 false,
                 false,
                 false

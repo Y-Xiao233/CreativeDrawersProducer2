@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
@@ -37,6 +39,12 @@ public class CDPBlockDeferredRegister implements ItemLike {
     public static CDPBlockDeferredRegister registrySimple(String name, Supplier<? extends Block> sup, @Nullable Item.Properties itemProperties){
         DeferredHolder<Block,Block> block = registryBlock(name,sup);
         CDPItemDeferredRegister item = registryItem(name,block,itemProperties);
+        return new CDPBlockDeferredRegister(block,item);
+    }
+
+    public static CDPBlockDeferredRegister registrySimple(String name){
+        DeferredHolder<Block,Block> block = registryBlock(name,() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+        CDPItemDeferredRegister item = registryItem(name,block,new Item.Properties());
         return new CDPBlockDeferredRegister(block,item);
     }
 

@@ -61,6 +61,8 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         stateAndItem(CDPBlock.VOID_CRAFTING_TABLE.asBlock());
         //frame
         cubeAll(CDPBlock.FRAME);
+        //unknown
+        cubeAll(CDPBlock.UNKNOWN_BLOCK);
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){

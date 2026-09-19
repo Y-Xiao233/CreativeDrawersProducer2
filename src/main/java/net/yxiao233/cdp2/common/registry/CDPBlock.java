@@ -75,6 +75,7 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister IMPERIUM_CROP = registerCropBlock("imperium_crop", CDPCrops.IMPERIUM);
     public static final CDPBlockDeferredRegister SUPREMIUM_CROP = registerCropBlock("supremium_crop", CDPCrops.SUPREMIUM);
     public static final CDPBlockDeferredRegister INSANIUM_CROP = registerCropBlock("insanium_crop", CDPCrops.INSANIUM);
+    public static final CDPBlockDeferredRegister UNKNOWN_BLOCK = CDPBlockDeferredRegister.registrySimple("unknown_block");
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());

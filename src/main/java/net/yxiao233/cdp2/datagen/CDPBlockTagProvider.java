@@ -32,6 +32,7 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
                 .add(CDPBlock.VOID_CRAFTING_TABLE.asBlock())
                 .add(CDPBlock.FRAME.asBlock())
                 .add(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock())
+                .add(CDPBlock.UNKNOWN_BLOCK.asBlock())
                 .add(drawers);
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
