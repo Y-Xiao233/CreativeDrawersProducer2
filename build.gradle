@@ -150,6 +150,8 @@ dependencies {
     implementation "curse.maven:ex-pattern-provider-892005:8025439"
     //advanced ae
     implementation "curse.maven:advancedae-1084104:7849217"
+    //ae2lt
+    implementation "curse.maven:ae2-lightning-tech-1527395:8458199"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"
