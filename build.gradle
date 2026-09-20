@@ -150,8 +150,10 @@ dependencies {
     implementation "curse.maven:ex-pattern-provider-892005:8025439"
     //advanced ae
     implementation "curse.maven:advancedae-1084104:7849217"
+    //thunderbolt
+    implementation "curse.maven:thunderbolt-core-reborn-1703745:8929985"
     //ae2lt
-    implementation "curse.maven:ae2-lightning-tech-1527395:8458199"
+    implementation "curse.maven:ae2-lightning-tech-reborn-1703763:8930743"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"
