@@ -3,8 +3,69 @@
     "generator": {
         "type": "minecraft:noise",
         "biome_source": {
-            "type": "minecraft:fixed",
-            "biome": "cdp2:unknown"
+            "type": "minecraft:multi_noise",
+            "biomes": [
+                {
+                    "biome": "cdp2:myrkhal",
+                    "parameters": {
+                        "continentalness": [
+                            -1.0,
+                            1.0
+                        ],
+                        "depth": [
+                            -1.0,
+                            1.0
+                        ],
+                        "erosion": [
+                            -1.5,
+                            -0.25
+                        ],
+                        "humidity": [
+                            -1.0,
+                            1.0
+                        ],
+                        "offset": 0.0,
+                        "temperature": [
+                            -1.0,
+                            1.0
+                        ],
+                        "weirdness": [
+                            -1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
+                    "biome": "cdp2:quorveth",
+                    "parameters": {
+                        "continentalness": [
+                            -1.0,
+                            1.0
+                        ],
+                        "depth": [
+                            -1.0,
+                            1.0
+                        ],
+                        "erosion": [
+                            -1.0,
+                            1.0
+                        ],
+                        "humidity": [
+                            -1.0,
+                            1.0
+                        ],
+                        "offset": 0.1,
+                        "temperature": [
+                            -1.0,
+                            1.0
+                        ],
+                        "weirdness": [
+                            -1.0,
+                            1.0
+                        ]
+                    }
+                }
+            ]
         },
         "settings": "cdp2:unknown"
     }

@@ -18,6 +18,9 @@
   "block.cdp2.flux_infusion_enchantment_factory": "Flux Infusion Enchantment Factory",
   "block.cdp2.unknown_block": "Unknown Block",
 
+  "biome.cdp2.quorveth": "Quorveth",
+  "biome.cdp2.myrkhal": "Myrkhal",
+
   "item.cdp2.random_creative_drawer": "Random Creative Drawer",
   "item.cdp2.creative_shard_1": "Creative Shard Tier 1",
   "item.cdp2.creative_shard_2": "Creative Shard Tier 2",

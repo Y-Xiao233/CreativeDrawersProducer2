@@ -33,6 +33,7 @@ public class CreativeDrawersProducer2{
     public CreativeDrawersProducer2(IEventBus modEventBus, ModContainer modContainer) {
         CDPItem.init(modEventBus); 
         CDPBlock.init(modEventBus);
+        CDPFeature.init(modEventBus);
         CDPTab.init(modEventBus);
         CDPDataComponentTypes.DATA_COMPONENTS.register(modEventBus);
         CDPRecipe.init(modEventBus);

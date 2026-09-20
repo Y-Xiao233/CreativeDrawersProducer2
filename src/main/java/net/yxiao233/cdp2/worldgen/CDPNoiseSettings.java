@@ -1,12 +1,14 @@
 package net.yxiao233.cdp2.worldgen;
 
-import com.buuz135.industrial.module.ModuleCore;
-import com.stal111.forbidden_arcanus.core.init.ModBlocks;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
@@ -17,7 +19,6 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
-import net.yxiao233.cdp2.common.registry.CDPBlock;
 
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class CDPNoiseSettings {
     private static final double JAGGED_SCALE = 1500.0;
     private static final double RIVER_WIDTH = 0.10;
     private static final double DENSITY_SCALE = 0.1;
+    private static final double CAVE_THRESHOLD = 0.6;
+    private static final double CAVE_DISABLE = 8.0;
 
     public static final ResourceKey<NoiseGeneratorSettings> UNKNOWN = ResourceKey.create(Registries.NOISE_SETTINGS, CreativeDrawersProducer2.makeId("unknown"));
 
@@ -46,14 +49,21 @@ public class CDPNoiseSettings {
             SurfaceRules.ifTrue(
                     SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.bottom()),
                     SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())
+            ),
+            SurfaceRules.ifTrue(
+                    SurfaceRules.abovePreliminarySurface(),
+                    SurfaceRules.ifTrue(
+                            SurfaceRules.ON_FLOOR,
+                            SurfaceRules.state(blockState("malum:blighted_earth"))
+                    )
             )
     );
 
     public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context){
         context.register(UNKNOWN, new NoiseGeneratorSettings(
                 NoiseSettings.create(MIN_Y,HEIGHT,1,2),
-                CDPBlock.UNKNOWN_BLOCK.asBlockState(),
-                ModuleCore.ETHER.getSourceFluid().get().defaultFluidState().createLegacyBlock(),
+                blockState("malum:twisted_rock"),
+                Blocks.AIR.defaultBlockState(),
                 createRouter(context.lookup(Registries.NOISE)),
                 SURFACE_RULE,
                 List.of(),
@@ -122,13 +132,29 @@ public class CDPNoiseSettings {
                 DensityFunctions.constant(PEAK_LIMIT)
         );
 
-        DensityFunction density = DensityFunctions.mul(
+        DensityFunction surfaceDensity = DensityFunctions.mul(
                 DensityFunctions.add(
                         height,
                         DensityFunctions.yClampedGradient(MIN_Y,MIN_Y + HEIGHT,-MIN_Y,-(MIN_Y + HEIGHT))
                 ),
                 DensityFunctions.constant(DENSITY_SCALE)
         );
+
+        DensityFunction caveNoise = DensityFunctions.noise(noises.getOrThrow(Noises.CAVE_CHEESE),1.0,1.0);
+        DensityFunction caveMask = DensityFunctions.yClampedGradient(16,48,1.0,0.0);
+        DensityFunction caveDensity = DensityFunctions.add(
+                DensityFunctions.mul(
+                        DensityFunctions.add(DensityFunctions.constant(CAVE_THRESHOLD),DensityFunctions.mul(caveNoise,DensityFunctions.constant(-1.0))),
+                        caveMask
+                ),
+                DensityFunctions.mul(
+                        DensityFunctions.add(DensityFunctions.constant(1.0),DensityFunctions.mul(caveMask,DensityFunctions.constant(-1.0))),
+                        DensityFunctions.constant(CAVE_DISABLE)
+                )
+        );
+
+        DensityFunction bottomSolid = DensityFunctions.yClampedGradient(MIN_Y,MIN_Y + 8,4.0,-4.0);
+        DensityFunction density = DensityFunctions.max(DensityFunctions.min(surfaceDensity,caveDensity),bottomSolid);
 
         return new NoiseRouter(
                 zero,
@@ -154,5 +180,13 @@ public class CDPNoiseSettings {
                 DensityFunctions.max(function,DensityFunctions.constant(min)),
                 DensityFunctions.constant(max)
         );
+    }
+
+    private static BlockState blockState(String id){
+        Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(id));
+        if(block == Blocks.AIR){
+            throw new IllegalStateException("Missing block: " + id);
+        }
+        return block.defaultBlockState();
     }
 }

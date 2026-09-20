@@ -1,5 +1,7 @@
 package net.yxiao233.cdp2.api.registry;
 
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -9,7 +11,10 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.FixedBiomeSource;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -51,20 +56,22 @@ public class CDPDimensionRegister {
     private final ResourceKey<DimensionType> dimensionType;
     private final DimensionType type;
     private final ResourceKey<Biome> biome;
+    private final List<Pair<Climate.ParameterPoint,ResourceKey<Biome>>> biomeParameters;
     private final List<FlatLayerInfo> info;
     private final ResourceKey<NoiseGeneratorSettings> noiseSettings;
-    private CDPDimensionRegister(ResourceKey<Level> level, ResourceKey<LevelStem> levelStem, ResourceKey<DimensionType> dimensionType, DimensionType type, ResourceKey<Biome> biome, List<FlatLayerInfo> info, ResourceKey<NoiseGeneratorSettings> noiseSettings){
+    private CDPDimensionRegister(ResourceKey<Level> level, ResourceKey<LevelStem> levelStem, ResourceKey<DimensionType> dimensionType, DimensionType type, ResourceKey<Biome> biome, List<Pair<Climate.ParameterPoint,ResourceKey<Biome>>> biomeParameters, List<FlatLayerInfo> info, ResourceKey<NoiseGeneratorSettings> noiseSettings){
         this.level = level;
         this.levelStem = levelStem;
         this.dimensionType = dimensionType;
         this.type = type;
         this.biome = biome;
+        this.biomeParameters = biomeParameters == null ? null : List.copyOf(biomeParameters);
         this.info = List.copyOf(info);
         this.noiseSettings = noiseSettings;
         DIMENSIONS.add(this);
     }
     public static CDPDimensionRegister registryFlat(String name, DimensionType type, ResourceKey<Biome> biome, List<FlatLayerInfo> info){
-        return new CDPDimensionRegister(registryLevel(name),registryLevelStem(name),registryType(name),type,biome,info,null);
+        return new CDPDimensionRegister(registryLevel(name),registryLevelStem(name),registryType(name),type,biome,null,info,null);
     }
 
     public static CDPDimensionRegister registryDefault(String name, ResourceKey<Biome> biome, List<FlatLayerInfo> info){
@@ -72,11 +79,35 @@ public class CDPDimensionRegister {
     }
 
     public static CDPDimensionRegister registryNoise(String name, DimensionType type, ResourceKey<Biome> biome, ResourceKey<NoiseGeneratorSettings> noiseSettings){
-        return new CDPDimensionRegister(registryLevel(name),registryLevelStem(name),registryType(name),type,biome,List.of(),noiseSettings);
+        return new CDPDimensionRegister(registryLevel(name),registryLevelStem(name),registryType(name),type,biome,null,List.of(),noiseSettings);
     }
 
     public static CDPDimensionRegister registryNoise(String name, ResourceKey<Biome> biome, ResourceKey<NoiseGeneratorSettings> noiseSettings){
         return registryNoise(name,DEFAULT_NOISE_TYPE,biome,noiseSettings);
+    }
+
+    public static CDPDimensionRegister registryNoise(String name, DimensionType type, List<Pair<Climate.ParameterPoint,ResourceKey<Biome>>> biomeParameters, ResourceKey<NoiseGeneratorSettings> noiseSettings){
+        return new CDPDimensionRegister(registryLevel(name),registryLevelStem(name),registryType(name),type,null,biomeParameters,List.of(),noiseSettings);
+    }
+
+    public static CDPDimensionRegister registryNoise(String name, List<Pair<Climate.ParameterPoint,ResourceKey<Biome>>> biomeParameters, ResourceKey<NoiseGeneratorSettings> noiseSettings){
+        return registryNoise(name,DEFAULT_NOISE_TYPE,biomeParameters,noiseSettings);
+    }
+
+    public static List<Pair<Climate.ParameterPoint,ResourceKey<Biome>>> singleBiome(ResourceKey<Biome> biome){
+        return List.of(Pair.of(allClimate(),biome));
+    }
+
+    public static Climate.ParameterPoint allClimate(){
+        return allClimate(0.0f);
+    }
+
+    public static Climate.ParameterPoint allClimate(float offset){
+        return Climate.parameters(span(-1.0f,1.0f),span(-1.0f,1.0f),span(-1.0f,1.0f),span(-1.0f,1.0f),span(-1.0f,1.0f),span(-1.0f,1.0f),offset);
+    }
+
+    private static Climate.Parameter span(float min, float max){
+        return Climate.Parameter.span(min,max);
     }
 
     private static ResourceKey<Level> registryLevel(String name){
@@ -103,10 +134,7 @@ public class CDPDimensionRegister {
         DIMENSIONS.forEach(holder ->{
             ChunkGenerator generator;
             if(holder.noiseSettings != null){
-                generator = new NoiseBasedChunkGenerator(
-                        new FixedBiomeSource(biomes.getOrThrow(holder.biome)),
-                        noiseSettings.getOrThrow(holder.noiseSettings)
-                );
+                generator = new NoiseBasedChunkGenerator(createBiomeSource(biomes,holder),noiseSettings.getOrThrow(holder.noiseSettings));
             }else{
                 FlatLevelGeneratorSettings settings = new FlatLevelGeneratorSettings(
                         Optional.of(HolderSet.empty()),
@@ -125,6 +153,15 @@ public class CDPDimensionRegister {
 
             context.register(holder.levelStem,stem);
         });
+    }
+
+    private static BiomeSource createBiomeSource(HolderGetter<Biome> biomes, CDPDimensionRegister holder){
+        if(holder.biomeParameters == null){
+            return new FixedBiomeSource(biomes.getOrThrow(holder.biome));
+        }
+        List<Pair<Climate.ParameterPoint,Holder<Biome>>> parameters = new ArrayList<>(holder.biomeParameters.size());
+        holder.biomeParameters.forEach(entry -> parameters.add(Pair.of(entry.getFirst(),biomes.getOrThrow(entry.getSecond()))));
+        return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(parameters));
     }
 
     public ResourceKey<DimensionType> getDimensionType() {

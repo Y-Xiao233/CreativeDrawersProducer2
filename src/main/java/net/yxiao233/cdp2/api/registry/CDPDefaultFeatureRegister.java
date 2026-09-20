@@ -31,7 +31,7 @@ public class CDPDefaultFeatureRegister {
         return new CDPDefaultFeatureRegister(c,p,b);
     }
     public static CDPDefaultFeatureRegister registryDefault(String name, CDPBlockDeferredRegister replaceBlock){
-        return registry(name,replaceBlock, CDPBiomes.UNKNOWN);
+        return registry(name,replaceBlock, CDPBiomes.QUORVETH);
     }
 
     public static CDPDefaultFeatureRegister registryDefault(CDPBlockDeferredRegister replaceBlock){

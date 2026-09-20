@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:random_selector",
+    "config": {
+        "default": "cdp2:soulwood_tree",
+        "features": [
+            {
+                "chance": 0.35,
+                "feature": "cdp2:soulwood_tree"
+            },
+            {
+                "chance": 0.5,
+                "feature": "cdp2:azure_runewood_tree"
+            },
+            {
+                "chance": 1.0,
+                "feature": "cdp2:runewood_tree"
+            }
+        ]
+    }
+}

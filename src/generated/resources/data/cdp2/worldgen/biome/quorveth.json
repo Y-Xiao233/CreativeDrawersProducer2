@@ -15,7 +15,22 @@
         "water_color": 4159204,
         "water_fog_color": 329011
     },
-    "features": [],
+    "features": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+            "cdp2:river_fluid"
+        ],
+        [
+            "cdp2:trees"
+        ]
+    ],
     "has_precipitation": false,
     "spawn_costs": {},
     "spawners": {

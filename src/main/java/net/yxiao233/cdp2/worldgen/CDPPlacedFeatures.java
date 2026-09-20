@@ -9,5 +9,7 @@ public class CDPPlacedFeatures {
     public static void bootstrap(BootstrapContext<PlacedFeature> context){
         CDPBaseFeature.init();
         CDPPlacedFeatureRegister.registry(context);
+        CDPTreeFeatures.bootstrapPlaced(context);
+        CDPRiverFeatures.bootstrapPlaced(context);
     }
 }

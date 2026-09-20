@@ -9,5 +9,7 @@ public class CDPConfigureFeatures {
     public static void boostrap(BootstrapContext<ConfiguredFeature<?,?>> context){
         CDPBaseFeature.init();
         CDPConfigureFeatureRegister.registry(context);
+        CDPTreeFeatures.bootstrapConfigured(context);
+        CDPRiverFeatures.bootstrapConfigured(context);
     }
 }

@@ -250,6 +250,29 @@ dependencies {
     implementation "curse.maven:ftb-teams-forge-404468:7878281"
     //ftb quests
     implementation "curse.maven:ftb-quests-forge-289412:8534556"
+
+
+    //lionfish api
+    implementation "curse.maven:lionfish-api-1001614:8345326"
+    //L_Ender's Cataclysm
+    implementation "curse.maven:lendercataclysm-551586:8706841"
+
+    //datapack anvil
+    implementation "curse.maven:datapack-anvil-432817:7380481"
+    //element craft
+    implementation "curse.maven:elemental-craft-395158:7789218"
+
+    //lodestone
+    implementation "curse.maven:lodestone-616457:7264731"
+    //malum
+    implementation "curse.maven:malum-484064:7307339"
+    //jei malum
+    implementation "curse.maven:jei-malum-1598608:8372979"
+
+    //natures compass
+    implementation "curse.maven:natures-compass-252848:7892954"
+    //explorers compass
+    implementation "curse.maven:explorers-compass-491794:7892943"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
