@@ -27,6 +27,7 @@ import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.Ritual;
 import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.RitualInput;
 import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.result.CreateItemResult;
 import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.result.RitualResult;
+import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.result.TransmuteInputResult;
 import com.stal111.forbidden_arcanus.common.block.entity.forge.ritual.result.UpgradeTierResult;
 import com.stal111.forbidden_arcanus.common.item.enhancer.EnhancerDefinition;
 import com.stal111.forbidden_arcanus.common.item.enhancer.EnhancerHelper;
@@ -405,6 +406,13 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
             return outputs.size() == 1
                     && outputs.getFirst().what() instanceof AEItemKey key
                     && ItemStack.isSameItemSameComponents(key.toStack(1), create.result());
+        }
+        if (result instanceof TransmuteInputResult transmute) {
+            // The main input is transmuted into the result, keeping its components (damage, enchantments...), so only
+            // the item type can be compared here.
+            return outputs.size() == 1
+                    && outputs.getFirst().what() instanceof AEItemKey key
+                    && key.getItem() == transmute.result().value();
         }
         if (result instanceof UpgradeTierResult upgrade) {
             if (outputs.isEmpty()) {
