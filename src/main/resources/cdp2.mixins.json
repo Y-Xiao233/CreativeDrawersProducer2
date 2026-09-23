@@ -23,6 +23,7 @@
     "ae2lt.OverloadProcessingRecipeMixin",
     "arsnouveau.ItemRegistryMixin",
     "arsnouveau.RitualRegistryMixin",
+    "forbiddenarcanus.HephaestusForgeBlockEntityMixin",
     "forbiddenarcanus.RitualManagerMixin",
     "ifs.SimulatedMobDuplicatorTileMixin",
     "industrialforegoing.DissolutionChamberCategoryMixin",

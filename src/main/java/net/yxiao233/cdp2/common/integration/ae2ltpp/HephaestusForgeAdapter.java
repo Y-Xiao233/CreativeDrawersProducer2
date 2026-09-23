@@ -79,8 +79,12 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
     private static final int PRIORITY = 100;
     private static final int PEDESTAL_HORIZONTAL_RANGE = 4;
     private static final int PEDESTAL_VERTICAL_RANGE = 2;
+    private static final int PEDESTAL_POSITION_CACHE_TICKS = 20;
     private static final ResourceLocation RITUAL_RECIPE_ID = ResourceLocation.fromNamespaceAndPath("forbidden_arcanus", "ritual");
     private static final Map<GlobalPos, PendingUpgrade> PENDING_UPGRADES = new ConcurrentHashMap<>();
+    private static final Map<GlobalPos, CachedPositions> PEDESTAL_POSITION_CACHE = new ConcurrentHashMap<>();
+    private static long ritualCacheTick = Long.MIN_VALUE;
+    private static List<Ritual> ritualCache = List.of();
 
     private enum Handle {
         INSTANCE
@@ -456,15 +460,36 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
     }
 
     private static List<PedestalBlockEntity> pedestals(ServerLevel level, BlockPos origin) {
-        List<PedestalBlockEntity> list = new ArrayList<>();
+        GlobalPos key = GlobalPos.of(level.dimension(), origin);
+        long tick = level.getGameTime();
+        CachedPositions cached = PEDESTAL_POSITION_CACHE.get(key);
+        List<BlockPos> positions;
+        if (cached != null && tick - cached.tick() < PEDESTAL_POSITION_CACHE_TICKS) {
+            positions = cached.positions();
+        } else {
+            positions = scanPedestalPositions(level, origin);
+            PEDESTAL_POSITION_CACHE.put(key, new CachedPositions(tick, positions));
+        }
+
+        List<PedestalBlockEntity> result = new ArrayList<>(positions.size());
+        for (BlockPos pos : positions) {
+            if (level.isLoaded(pos) && level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
+                result.add(pedestal);
+            }
+        }
+        return result;
+    }
+
+    private static List<BlockPos> scanPedestalPositions(ServerLevel level, BlockPos origin) {
+        List<BlockPos> list = new ArrayList<>();
         BlockPos from = origin.offset(-PEDESTAL_HORIZONTAL_RANGE, -PEDESTAL_VERTICAL_RANGE, -PEDESTAL_HORIZONTAL_RANGE);
         BlockPos to = origin.offset(PEDESTAL_HORIZONTAL_RANGE, PEDESTAL_VERTICAL_RANGE, PEDESTAL_HORIZONTAL_RANGE);
         for (BlockPos pos : BlockPos.betweenClosed(from, to)) {
             if (pos.equals(origin) || !level.isLoaded(pos)) {
                 continue;
             }
-            if (level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
-                list.add(pedestal);
+            if (level.getBlockEntity(pos) instanceof PedestalBlockEntity) {
+                list.add(pos.immutable());
             }
         }
         return list;
@@ -482,6 +507,17 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static List<Ritual> rituals(ServerLevel level) {
+        long tick = level.getGameTime();
+        if (tick == ritualCacheTick) {
+            return ritualCache;
+        }
+        ritualCache = computeRituals(level);
+        ritualCacheTick = tick;
+        return ritualCache;
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static List<Ritual> computeRituals(ServerLevel level) {
         // Forbidden Arcanus JS (and KubeJS) turn rituals into recipes of type forbidden_arcanus:ritual and make the
         // forge resolve them through the RecipeManager. Prefer those so scripts/datapack-added rituals are seen too.
         RecipeType<?> recipeType = BuiltInRegistries.RECIPE_TYPE.get(RITUAL_RECIPE_ID);
@@ -517,5 +553,8 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
     }
 
     private record PendingUpgrade(GenericStack output, int targetTier) {
+    }
+
+    private record CachedPositions(long tick, List<BlockPos> positions) {
     }
 }
