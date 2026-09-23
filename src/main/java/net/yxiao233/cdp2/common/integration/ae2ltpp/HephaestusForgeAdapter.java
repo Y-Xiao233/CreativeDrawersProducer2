@@ -35,9 +35,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.common.util.FakePlayer;
@@ -75,6 +78,7 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
     private static final int PRIORITY = 100;
     private static final int PEDESTAL_HORIZONTAL_RANGE = 4;
     private static final int PEDESTAL_VERTICAL_RANGE = 2;
+    private static final ResourceLocation RITUAL_RECIPE_ID = ResourceLocation.fromNamespaceAndPath("forbidden_arcanus", "ritual");
     private static final Map<GlobalPos, PendingUpgrade> PENDING_UPGRADES = new ConcurrentHashMap<>();
 
     private enum Handle {
@@ -103,8 +107,8 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
         if (!(be instanceof HephaestusForgeBlockEntity forge) || !isIdle(forge, level, mainPos)) {
             return null;
         }
-        for (Holder.Reference<Ritual> holder : rituals(level)) {
-            if (resultMatches(pattern, holder.value())) {
+        for (Ritual ritual : rituals(level)) {
+            if (resultMatches(pattern, ritual)) {
                 return new BindingResult(Handle.INSTANCE, BindingMode.REAL);
             }
         }
@@ -150,8 +154,7 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
         int forgeTier = forgeTier(level, mainPos);
         HephaestusForgeLevel forgeLevel = forgeLevel(level, mainPos);
         MEStorage storage = grid.getStorageService().getInventory();
-        for (Holder.Reference<Ritual> holder : rituals(level)) {
-            Ritual ritual = holder.value();
+        for (Ritual ritual : rituals(level)) {
             if (!resultMatches(pattern, ritual)) {
                 continue;
             }
@@ -469,8 +472,25 @@ public final class HephaestusForgeAdapter implements MultiblockAdapter {
                 : HephaestusForgeLevel.ONE;
     }
 
-    private static List<Holder.Reference<Ritual>> rituals(ServerLevel level) {
-        return level.registryAccess().lookupOrThrow(FARegistries.RITUAL).listElements().toList();
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static List<Ritual> rituals(ServerLevel level) {
+        // Forbidden Arcanus JS (and KubeJS) turn rituals into recipes of type forbidden_arcanus:ritual and make the
+        // forge resolve them through the RecipeManager. Prefer those so scripts/datapack-added rituals are seen too.
+        RecipeType<?> recipeType = BuiltInRegistries.RECIPE_TYPE.get(RITUAL_RECIPE_ID);
+        if (recipeType != null) {
+            List<Ritual> fromRecipes = new ArrayList<>();
+            List<RecipeHolder<?>> holders = (List<RecipeHolder<?>>) (List) level.getRecipeManager().getAllRecipesFor((RecipeType) recipeType);
+            for (RecipeHolder<?> holder : holders) {
+                Object value = holder.value();
+                if (value instanceof Ritual ritual) {
+                    fromRecipes.add(ritual);
+                }
+            }
+            if (!fromRecipes.isEmpty()) {
+                return fromRecipes;
+            }
+        }
+        return level.registryAccess().lookupOrThrow(FARegistries.RITUAL).listElements().map(Holder.Reference::value).toList();
     }
 
     @Nullable

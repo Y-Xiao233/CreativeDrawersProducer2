@@ -235,6 +235,8 @@ dependencies {
     implementation "curse.maven:valhelsia-core-416935:6296775"
     //forbidden arcanus
     implementation "curse.maven:forbidden-arcanus-309858:6875895"
+    //forbidden arcanus js
+    implementation "curse.maven:forbidden-arcanus-js-1346176:7632263"
 
     //placebo
     implementation "curse.maven:placebo-283644:8463693"
