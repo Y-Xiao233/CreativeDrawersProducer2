@@ -141,6 +141,8 @@ dependencies {
     //ae2
     implementation "curse.maven:applied-energistics-2-223794:7027323"
     implementation "curse.maven:guideme-1173950:7127444"
+    //ae2 jei integration
+    implementation "curse.maven:ae2-jei-integration-1074338:7727898"
 
     //ae2cs
     implementation "curse.maven:ae2-crystal-science-1435174:8068871"
@@ -154,6 +156,8 @@ dependencies {
     implementation "curse.maven:thunderbolt-core-reborn-1703745:8929985"
     //ae2lt
     implementation "curse.maven:ae2-lightning-tech-reborn-1703763:8930743"
+    //ae2ltpp
+    implementation "curse.maven:ae2lt-packaged-pattern-provider-1572723:8929486"
 
     //titanium
     implementation "curse.maven:titanium-287342:6875285"

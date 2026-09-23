@@ -33,6 +33,7 @@
   "item.cdp2.void_matter": "§8虚空物质",
   "item.cdp2.void_omni_tool": "§8虚空全能工具",
   "item.cdp2.configuration_card": "配置卡",
+  "item.cdp2.hephaestus_forge_packaged_core": "赫菲斯托斯锻炉封包核心",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
@@ -118,5 +119,13 @@
   "ftbquests.task.cdp2.chemical.amount": "数量",
   "ftbquests.task.cdp2.chemical.chemical": "化学品",
   "ftbquests.task.cdp2.chemical.all": "所有化学品",
-  "ftbquests.task.cdp2.chemical.inventory": "物品栏"
+  "ftbquests.task.cdp2.chemical.inventory": "物品栏",
+
+  "key_type.cdp2.forbidden_essence": "精华",
+  "key.cdp2.forbidden_blood_essence": "血",
+  "key.cdp2.forbidden_souls_essence": "灵魂",
+  "key.cdp2.forbidden_experience_essence": "经验",
+  "key.cdp2.forbidden_aureal_essence": "耀金",
+
+  "config.jade.plugin_cdp2.cdp_essence_crop_block": "精华作物"
 }

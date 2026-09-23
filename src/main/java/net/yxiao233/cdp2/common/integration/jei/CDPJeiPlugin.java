@@ -1,12 +1,14 @@
 package net.yxiao233.cdp2.common.integration.jei;
 
 import com.hrznstudio.titanium.util.RecipeUtil;
+import com.stal111.forbidden_arcanus.common.block.entity.forge.essence.EssenceType;
 import dev.shadowsoffire.apothic_enchanting.compat.InfusionRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -19,6 +21,9 @@ import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.integration.jei.category.ChemicalFromCellInfoCategory;
 import net.yxiao233.cdp2.common.integration.jei.category.CreativeDrawerInfoCategory;
+import net.yxiao233.cdp2.common.integration.jei.converter.ForbiddenEssenceConverter;
+import net.yxiao233.cdp2.common.integration.jei.converter.CDPIngredientTypes;
+import net.yxiao233.cdp2.common.integration.jei.converter.ForbiddenEssenceStack;
 import net.yxiao233.cdp2.common.recipe.CreativeDrawerInfo;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
@@ -26,6 +31,7 @@ import net.yxiao233.cdp2.common.registry.CDPRecipe;
 import net.yxiao233.cdp2.common.integration.botanypot.BotanyPotJei;
 import net.yxiao233.cdp2.common.integration.jei.category.VoidSieveCategory;
 import org.jetbrains.annotations.NotNull;
+import tamaized.ae2jeiintegration.api.integrations.jei.IngredientConverters;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,11 +51,24 @@ public class CDPJeiPlugin implements IModPlugin {
         runtime = jeiRuntime;
 
         jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, Collections.singletonList(CDPItem.TEST.asStack()));
+        IngredientConverters.register(new ForbiddenEssenceConverter(CDPIngredientTypes.ESSENCE_TYPE));
     }
 
     public static IJeiRuntime getRuntime(){
         return runtime;
     }
+
+    @Override
+    @SuppressWarnings("removal")
+    public void registerIngredients(@NotNull IModIngredientRegistration registration) {
+        registration.register(CDPIngredientTypes.ESSENCE_TYPE,List.of(
+                new ForbiddenEssenceStack(EssenceType.AUREAL,1),
+                new ForbiddenEssenceStack(EssenceType.BLOOD,1),
+                new ForbiddenEssenceStack(EssenceType.SOULS,1),
+                new ForbiddenEssenceStack(EssenceType.EXPERIENCE,1)
+        ),new CDPIngredientTypes.EssenceStackHelper(),new CDPIngredientTypes.EssenceStackRenderer());
+    }
+
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {

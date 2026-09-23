@@ -33,6 +33,7 @@
   "item.cdp2.void_matter": "§8Void Matter",
   "item.cdp2.void_omni_tool": "§8Void Omni Tool",
   "item.cdp2.configuration_card": "Configuration Card",
+  "item.cdp2.hephaestus_forge_packaged_core": "Hephaestus Forge Packaged Core",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
@@ -117,5 +118,14 @@
   "ftbquests.task.cdp2.chemical.amount": "Amount",
   "ftbquests.task.cdp2.chemical.chemical": "Chemical",
   "ftbquests.task.cdp2.chemical.all": "All Chemicals",
-  "ftbquests.task.cdp2.chemical.inventory": "Inventory"
+  "ftbquests.task.cdp2.chemical.inventory": "Inventory",
+
+
+  "key_type.cdp2.forbidden_essence": "Essence",
+  "key.cdp2.forbidden_blood_essence": "Blood",
+  "key.cdp2.forbidden_souls_essence": "Souls",
+  "key.cdp2.forbidden_experience_essence": "Experience",
+  "key.cdp2.forbidden_aureal_essence": "Aureal",
+
+  "config.jade.plugin_cdp2.cdp_essence_crop_block": "Essence Crop"
 }

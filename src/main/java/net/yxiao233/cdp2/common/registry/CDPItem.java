@@ -2,6 +2,7 @@ package net.yxiao233.cdp2.common.registry;
 
 import com.blakebr0.mysticalagriculture.api.crop.CropTier;
 import com.blakebr0.mysticalagriculture.item.EssenceItem;
+import com.moakiee.ae2lt.packaged.item.MultiblockAdapterItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -10,11 +11,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
+import net.yxiao233.cdp2.common.integration.ae2ltpp.HephaestusForgeAdapter;
 import net.yxiao233.cdp2.common.item.*;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCropTier;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 public class CDPItem{
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, CreativeDrawersProducer2.MODID);
@@ -27,6 +30,7 @@ public class CDPItem{
     public static final CDPItemDeferredRegister VOID_MATTER = CDPItemDeferredRegister.registrySimpleItem("void_matter").addToTab(CDPTab.CONTENT_TAB);
     public static final CDPItemDeferredRegister VOID_OMNI_TOOL = CDPItemDeferredRegister.registryItem("void_omni_tool", () -> new VoidOmniToolItem(Tiers.NETHERITE)).addToTab(CDPTab.CONTENT_TAB);
     public static final CDPItemDeferredRegister TEST = CDPItemDeferredRegister.registryItem("test", TestItem::new);
+    public static CDPItemDeferredRegister FORGE_CORE = CDPItemDeferredRegister.registryItem("hephaestus_forge_packaged_core", () -> new MultiblockAdapterItem(new Item.Properties(), HephaestusForgeAdapter.ADAPTER_ID, Set.of(HephaestusForgeAdapter.ADAPTER_ID))).addToTab(CDPTab.CONTENT_TAB);
     static CDPItemDeferredRegister registerEssence(CropTier cropTier){
         return CDPItemDeferredRegister.registryItem(cropTier.getName() + "_essence",() -> new EssenceItem(cropTier)).addToTab(CDPTab.CONTENT_TAB).addToTab(CDPTab.MYSTICAL_AGRICULTURE_TAB);
     }
