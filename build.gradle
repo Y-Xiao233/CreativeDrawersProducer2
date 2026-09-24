@@ -281,6 +281,9 @@ dependencies {
     implementation "curse.maven:natures-compass-252848:7892954"
     //explorers compass
     implementation "curse.maven:explorers-compass-491794:7892943"
+
+    //productivebees
+    implementation "curse.maven:productivebees-377897:8022994"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

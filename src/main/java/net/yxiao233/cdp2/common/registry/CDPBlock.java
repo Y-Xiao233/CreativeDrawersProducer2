@@ -31,15 +31,13 @@ import net.yxiao233.cdp2.common.block.UpgradeStationBlock;
 import net.yxiao233.cdp2.common.block.VoidCraftingTableBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
 import net.yxiao233.cdp2.common.block.entity.UpgradeStationBlockEntity;
-import net.yxiao233.cdp2.common.integration.industrialforegoing.block.FluxInfusionEnchantmentFactoryBlock;
-import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.FluxInfusionEnchantmentFactoryEntity;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.*;
+import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.*;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCrops;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPEssenceCropBlock;
 import net.yxiao233.cdp2.common.item.UpgradeStationBlockItem;
 import net.yxiao233.cdp2.common.integration.botanypot.block.entity.CDPBotanyPotBlockEntity;
 import net.yxiao233.cdp2.common.integration.botanypot.CDPPotTier;
-import net.yxiao233.cdp2.common.integration.industrialforegoing.block.entity.VoidSieveBlockEntity;
-import net.yxiao233.cdp2.common.integration.industrialforegoing.block.VoidSieveEntityBlock;
 import net.yxiao233.cdp2.common.integration.mysticalagriculture.CDPCropTier;
 
 import java.util.Arrays;
@@ -76,6 +74,10 @@ public class CDPBlock {
     public static final CDPBlockDeferredRegister SUPREMIUM_CROP = registerCropBlock("supremium_crop", CDPCrops.SUPREMIUM);
     public static final CDPBlockDeferredRegister INSANIUM_CROP = registerCropBlock("insanium_crop", CDPCrops.INSANIUM);
     public static final CDPBlockDeferredRegister UNKNOWN_BLOCK = CDPBlockDeferredRegister.registrySimple("unknown_block");
+    public static final BlockWithTile BREEDING_CHAMBER = registerIF("breeding_chamber", BreedingChamberBlock::new, BreedingChamberBlockEntity::new);
+    public static final BlockWithTile BEE_SPAWNER = registerIF("bee_spawner", BeeSpawnerBlock::new, BeeSpawnerBlockEntity::new);
+    public static final BlockWithTile BEE_FISHING_DEVICE = registerIF("bee_fishing_device", BeeFishingDeviceBlock::new, BeeFishingDeviceBlockEntity::new);
+    public static final BlockWithTile BEE_CONVERTER = registerIF("bee_converter", BeeConverterBlock::new, BeeConverterBlockEntity::new);
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());

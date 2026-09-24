@@ -17,6 +17,10 @@
   "block.cdp2.frame": "框架方块",
   "block.cdp2.flux_infusion_enchantment_factory": "通量自动灌注附魔机",
   "block.cdp2.unknown_block": "未知方块",
+  "block.cdp2.breeding_chamber": "工业繁殖箱",
+  "block.cdp2.bee_converter": "工业蜜蜂转化器",
+  "block.cdp2.bee_fishing_device": "工业蜜蜂捕获器",
+  "block.cdp2.bee_spawner": "工业蜜蜂生成器",
 
   "biome.cdp2.quorveth": "库尔维斯",
   "biome.cdp2.myrkhal": "米尔卡尔",

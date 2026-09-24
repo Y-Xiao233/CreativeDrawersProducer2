@@ -63,6 +63,15 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         cubeAll(CDPBlock.FRAME);
         //unknown
         cubeAll(CDPBlock.UNKNOWN_BLOCK);
+        //productivebees
+        fourWayBlockState(CDPBlock.BEE_CONVERTER.getBlock());
+        onlyItem(CDPBlock.BEE_CONVERTER.getBlock());
+        fourWayBlockState(CDPBlock.BEE_FISHING_DEVICE.getBlock());
+        onlyItem(CDPBlock.BEE_FISHING_DEVICE.getBlock());
+        fourWayBlockState(CDPBlock.BEE_SPAWNER.getBlock());
+        onlyItem(CDPBlock.BEE_SPAWNER.getBlock());
+        fourWayBlockState(CDPBlock.BREEDING_CHAMBER.getBlock());
+        onlyItem(CDPBlock.BREEDING_CHAMBER.getBlock());
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){

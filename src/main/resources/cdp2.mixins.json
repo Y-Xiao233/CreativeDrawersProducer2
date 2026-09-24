@@ -46,7 +46,11 @@
     "naturesaura.AltarCategoryMixin",
     "naturesaura.AnimalSpawnerCategoryMixin",
     "naturesaura.OfferingCategoryMixin",
-    "naturesaura.TreeRitualCategoryMixin"
+    "naturesaura.TreeRitualCategoryMixin",
+    "productivebees.BeeBreedingRecipeCategoryMixin",
+    "productivebees.BeeConversionRecipeCategoryMixin",
+    "productivebees.BeeFishingRecipeCategoryMixin",
+    "productivebees.BeeSpawningRecipeCategoryMixin"
   ],
   "client": [
   ],

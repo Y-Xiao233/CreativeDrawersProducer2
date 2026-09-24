@@ -31,6 +31,10 @@ public class CDPBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(CDPBlock.FRAME.asBlock());
         this.dropSelf(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.getBlock());
         this.dropSelf(CDPBlock.UNKNOWN_BLOCK.asBlock());
+        this.dropSelf(CDPBlock.BREEDING_CHAMBER.getBlock());
+        this.dropSelf(CDPBlock.BEE_CONVERTER.getBlock());
+        this.dropSelf(CDPBlock.BEE_FISHING_DEVICE.getBlock());
+        this.dropSelf(CDPBlock.BEE_SPAWNER.getBlock());
     }
 
     @Override

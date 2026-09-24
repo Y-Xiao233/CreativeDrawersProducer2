@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "subfacing=east": {
+            "model": "cdp2:block/bee_fishing_device",
+            "y": 90
+        },
+        "subfacing=north": {
+            "model": "cdp2:block/bee_fishing_device"
+        },
+        "subfacing=south": {
+            "model": "cdp2:block/bee_fishing_device",
+            "y": 180
+        },
+        "subfacing=west": {
+            "model": "cdp2:block/bee_fishing_device",
+            "y": 270
+        }
+    }
+}

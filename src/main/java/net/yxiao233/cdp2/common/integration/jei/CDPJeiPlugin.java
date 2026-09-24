@@ -2,6 +2,7 @@ package net.yxiao233.cdp2.common.integration.jei;
 
 import com.hrznstudio.titanium.util.RecipeUtil;
 import com.stal111.forbidden_arcanus.common.block.entity.forge.essence.EssenceType;
+import cy.jdkdigital.productivebees.compat.jei.ProductiveBeesJeiPlugin;
 import dev.shadowsoffire.apothic_enchanting.compat.InfusionRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -95,6 +96,10 @@ public class CDPJeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(CDPBlock.VOID_SIEVE,CDPRecipeType.VOID_SIEVE);
         registration.addRecipeCatalyst(CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY, InfusionRecipeCategory.TYPE);
         CDPBlock.CREATIVE_DRAWERS_MAP.values().forEach(register -> registration.addRecipeCatalyst(register.asItem(),CDPRecipeType.DRAWER_INFO));
+        registration.addRecipeCatalyst(CDPBlock.BEE_CONVERTER, ProductiveBeesJeiPlugin.BEE_CONVERSION_TYPE);
+        registration.addRecipeCatalyst(CDPBlock.BEE_SPAWNER, ProductiveBeesJeiPlugin.BEE_SPAWNING_TYPE);
+        registration.addRecipeCatalyst(CDPBlock.BEE_FISHING_DEVICE, ProductiveBeesJeiPlugin.BEE_FISHING_TYPE);
+        registration.addRecipeCatalyst(CDPBlock.BREEDING_CHAMBER, ProductiveBeesJeiPlugin.BEE_BREEDING_TYPE);
     }
 
     private void addDrawerInfoRecipe(IRecipeRegistration registration){

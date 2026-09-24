@@ -1,0 +1,6 @@
+{
+  "parent": "industrialforegoing:block/base_block",
+  "textures": {
+    "north": "cdp2:block/bee_fishing_device_front"
+  }
+}

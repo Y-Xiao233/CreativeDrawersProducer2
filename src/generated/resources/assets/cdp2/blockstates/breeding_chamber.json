@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "subfacing=east": {
+            "model": "cdp2:block/breeding_chamber",
+            "y": 90
+        },
+        "subfacing=north": {
+            "model": "cdp2:block/breeding_chamber"
+        },
+        "subfacing=south": {
+            "model": "cdp2:block/breeding_chamber",
+            "y": 180
+        },
+        "subfacing=west": {
+            "model": "cdp2:block/breeding_chamber",
+            "y": 270
+        }
+    }
+}

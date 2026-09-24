@@ -1,8 +1,12 @@
-// 1.21.1	2026-09-20T00:07:45.2265942	Loot Tables
+// 1.21.1	2026-09-24T19:32:34.7629716	Loot Tables
 d95e4cd56d422566a6dcce90e69e47017aea3565 data/cdp2/loot_table/blocks/absolute_botany_pot.json
 7d9f10b7058306256a3f41d59fad37bec03a078a data/cdp2/loot_table/blocks/absolute_farmland.json
 ac20856c0513a01bbf7ddfc5f62fe008dce8ec63 data/cdp2/loot_table/blocks/absolute_hopper_botany_pot.json
 4c0b261799de90760222641c2e71c20888383cb0 data/cdp2/loot_table/blocks/apple_creative_drawer.json
+b45bda8de1f4c72c3aa347c79e6d2bffab0a5a51 data/cdp2/loot_table/blocks/bee_converter.json
+99d109d1e243311939b05d59c431c61104ce3354 data/cdp2/loot_table/blocks/bee_fishing_device.json
+b2decb3dcab0df4b767dba9ead83a99d2461aff1 data/cdp2/loot_table/blocks/bee_spawner.json
+0b75818b4849c02492269f4d47e46d25ccaf530d data/cdp2/loot_table/blocks/breeding_chamber.json
 7ae7c8b98b51d33354c2c7394a482a916ec8d7e7 data/cdp2/loot_table/blocks/cosmic_botany_pot.json
 3749b08fd28a39c492831c540021db10a9f440d5 data/cdp2/loot_table/blocks/cosmic_farmland.json
 874e1bc62949dd4d10d178b0c0d37624ca344c3e data/cdp2/loot_table/blocks/cosmic_hopper_botany_pot.json

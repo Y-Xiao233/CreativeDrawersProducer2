@@ -17,6 +17,10 @@
   "block.cdp2.frame": "Frame Block",
   "block.cdp2.flux_infusion_enchantment_factory": "Flux Infusion Enchantment Factory",
   "block.cdp2.unknown_block": "Unknown Block",
+  "block.cdp2.breeding_chamber": "Industrial Breeding Chamber",
+  "block.cdp2.bee_converter": "Industrial Bee Converter",
+  "block.cdp2.bee_fishing_device": "Industrial Bee Fishing Device",
+  "block.cdp2.bee_spawner": "Industrial Bee Spawner",
 
   "biome.cdp2.quorveth": "Quorveth",
   "biome.cdp2.myrkhal": "Myrkhal",

@@ -2,6 +2,7 @@ package net.yxiao233.cdp2.common.event;
 
 import com.hrznstudio.titanium.block.tile.ActiveTile;
 import com.hrznstudio.titanium.block.tile.PoweredTile;
+import com.hrznstudio.titanium.module.BlockWithTile;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,14 +16,16 @@ import net.yxiao233.cdp2.api.block.entity.ICapabilitiesBlockEntity;
 import net.yxiao233.cdp2.api.capabilities.ItemCapability;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 @SuppressWarnings({"removal","unused"})
 @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class RegisterCapabilitiesHandler {
 
     @SubscribeEvent
     public static void onRegister(RegisterCapabilitiesEvent event){
-        registerIF(event,CDPBlock.VOID_SIEVE.type());
-        registerIF(event,CDPBlock.FLUX_INFUSION_ENCHANTMENT_FACTORY.type());
+        collectAndRegistryAllIF(event,CDPBlock.class);
 //        register(event,CDPBlock.UPGRADE_STATION.getBlockEntityType());
         CDPBlock.CREATIVE_DRAWERS_MAP.forEach((location, drawer) -> {
             register(event,drawer.getBlockEntityType());
@@ -33,6 +36,21 @@ public class RegisterCapabilitiesHandler {
                 return side == Direction.DOWN ? new SidedInvWrapper(blockEntity, Direction.DOWN) : null;
             });
         });
+    }
+
+    private static void collectAndRegistryAllIF(RegisterCapabilitiesEvent event, Class<?> clazz){
+        for (Field field : clazz.getFields()) {
+            if(Modifier.isStatic(field.getModifiers())){
+                try {
+                    Object o = field.get(null);
+                    if(o instanceof BlockWithTile tile){
+                        registerIF(event,tile.type());
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     public static void registerIF(RegisterCapabilitiesEvent event, Holder<BlockEntityType<?>> type){
