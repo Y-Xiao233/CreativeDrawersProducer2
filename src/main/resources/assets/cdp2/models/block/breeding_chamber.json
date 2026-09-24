@@ -1,0 +1,6 @@
+{
+  "parent": "industrialforegoing:block/base_block",
+  "textures": {
+    "up": "cdp2:block/breeding_chamber_top"
+  }
+}
