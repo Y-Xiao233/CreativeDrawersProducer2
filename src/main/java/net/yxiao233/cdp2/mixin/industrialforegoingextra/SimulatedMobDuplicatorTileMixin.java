@@ -1,4 +1,4 @@
-package net.yxiao233.cdp2.mixin.ifs;
+package net.yxiao233.cdp2.mixin.industrialforegoingextra;
 
 import com.buuz135.industrial.item.MobImprisonmentToolItem;
 import com.hrznstudio.titanium.component.inventory.SidedInventoryComponent;
@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yxiao233.cdp2.common.integration.kubejs.event.BlockModifyEvent;
-import net.yxiao233.ifs.common.tile.SimulatedMobDuplicatorTile;
+import net.yxiao233.industrialforegoingextra.common.tile.SimulatedMobDuplicatorTile;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

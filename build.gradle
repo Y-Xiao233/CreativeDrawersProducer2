@@ -165,8 +165,8 @@ dependencies {
     implementation "curse.maven:functional-storage-556861:7061714"
     //industrial foregoing
     implementation("maven.modrinth:industrial-foregoing:${industrialforegoing_version}")
-    //ifs
-    implementation "curse.maven:industrial-foregoing-simulation-1489811:7784864"
+    //industrialforegoingextra
+    implementation "curse.maven:industrial-foregoing-extra-1702552:8919867"
 
     //ponder (forbidden arcanus datagen needs its PonderPlugin interface)
     implementation "net.createmod.ponder:Ponder-NeoForge-1.21.1:1.0.56"

@@ -13,9 +13,9 @@ import net.yxiao233.cdp2.api.block.entity.VoidProcessingTile;
 import net.yxiao233.cdp2.common.recipe.VoidSieveRecipe;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPRecipe;
-import net.yxiao233.ifs.api.item.AddonType;
-import net.yxiao233.ifs.api.item.FortuneAddonItem;
-import net.yxiao233.ifs.util.AugmentInventoryHelper;
+import net.yxiao233.industrialforegoingextra.api.addon.IFEAddonType;
+import net.yxiao233.industrialforegoingextra.common.item.IFEFortuneAddonItem;
+import net.yxiao233.industrialforegoingextra.util.AugmentInventoryHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntity>{
@@ -96,7 +96,7 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
             VoidSieveRecipe sieveRecipe = recipe;
             sieveRecipe.outputs.forEach(output ->{
                 if(level != null && level.getRandom().nextFloat() <= output.chance()){
-                    int fortune = AugmentInventoryHelper.getAugmentTier(this, AddonType.FORTUNE);
+                    int fortune = AugmentInventoryHelper.getAugmentTier(this, IFEAddonType.FORTUNE);
                     ItemStack outputStack = getFinalOutputStack(fortune, output.item().copy());
                     ItemHandlerHelper.insertItem(this.output,outputStack,false);
                 }
@@ -119,7 +119,7 @@ public class VoidSieveBlockEntity extends VoidProcessingTile<VoidSieveBlockEntit
 
     @Override
     public boolean canAcceptAugment(ItemStack augment) {
-        return augment.getItem() instanceof FortuneAddonItem ? AugmentInventoryHelper.canAccept(this, augment) : super.canAcceptAugment(augment);
+        return augment.getItem() instanceof IFEFortuneAddonItem ? AugmentInventoryHelper.canAccept(this, augment) : super.canAcceptAugment(augment);
     }
 
     public ItemStack getBlockForDisplay(){

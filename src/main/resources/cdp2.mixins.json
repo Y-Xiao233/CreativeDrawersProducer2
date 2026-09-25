@@ -25,7 +25,7 @@
     "arsnouveau.RitualRegistryMixin",
     "forbiddenarcanus.HephaestusForgeBlockEntityMixin",
     "forbiddenarcanus.RitualManagerMixin",
-    "ifs.SimulatedMobDuplicatorTileMixin",
+    "industrialforegoingextra.SimulatedMobDuplicatorTileMixin",
     "industrialforegoing.DissolutionChamberCategoryMixin",
     "industrialforegoing.FluidExtractorCategoryMixin",
     "industrialforegoing.LaserDrillFluidCategoryMixin",
