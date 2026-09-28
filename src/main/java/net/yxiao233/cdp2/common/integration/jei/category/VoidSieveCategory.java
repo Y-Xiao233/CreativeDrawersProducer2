@@ -13,8 +13,13 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.yxiao233.cdp2.api.jei.CDPBaseCategory;
+import net.yxiao233.cdp2.api.jei.CDPJeiCategory;
 import net.yxiao233.cdp2.api.recipe.ChanceIngredient;
 import net.yxiao233.cdp2.api.recipe.ChanceItemStack;
 import net.yxiao233.cdp2.client.gui.AllGuiTextures;
@@ -23,24 +28,25 @@ import net.yxiao233.cdp2.common.registry.CDPBlock;
 import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.integration.jei.CDPRecipeType;
 import net.yxiao233.cdp2.common.registry.CDPRecipe;
-import net.yxiao233.cdp2.util.RecipeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
+@CDPJeiCategory
+public class VoidSieveCategory extends CDPBaseCategory<RecipeHolder<VoidSieveRecipe>> {
     public static final Component TITLE = Component.translatable("block.cdp2.void_sieve");
     public VoidSieveCategory(IGuiHelper helper) {
         super(helper, CDPRecipeType.VOID_SIEVE, TITLE, CDPBlock.VOID_SIEVE.asItem(), 160, 82);
     }
 
     @Override
-    public @Nullable ResourceLocation getRegistryName(@NotNull VoidSieveRecipe recipe) {
-        return RecipeUtil.getRecipeId(CDPRecipe.VOID_SIEVE.asType(), recipe);
+    @SuppressWarnings("unchecked")
+    public @Nullable <I extends RecipeInput, R extends Recipe<I>> RecipeType<R> getRecipe() {
+        return (RecipeType<R>) CDPRecipe.VOID_SIEVE.asType();
     }
 
     @Override
-    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull VoidSieveRecipe voidSieveRecipe, @NotNull IFocusGroup iFocusGroup) {
-        ChanceIngredient chanceIngredient = voidSieveRecipe.input;
+    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull RecipeHolder<VoidSieveRecipe> voidSieveRecipe, @NotNull IFocusGroup iFocusGroup) {
+        ChanceIngredient chanceIngredient = voidSieveRecipe.value().input;
         if(chanceIngredient.chance() >= 1){
             builder.addInputSlot(43,32).addIngredients(chanceIngredient.sizedIngredient().ingredient()).setBackground(drawSlot(chanceIngredient.chance()),-1,-1);
         }else{
@@ -49,8 +55,8 @@ public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
 
         int x = 103;
         int y = 17;
-        for (int i = 0; i < voidSieveRecipe.outputs.size(); i++) {
-            ChanceItemStack chanceItemStack = voidSieveRecipe.outputs.get(i);
+        for (int i = 0; i < voidSieveRecipe.value().outputs.size(); i++) {
+            ChanceItemStack chanceItemStack = voidSieveRecipe.value().outputs.get(i);
             if(i % 3 == 0 && i != 0){
                 x = 103;
                 y += 18;
@@ -67,7 +73,7 @@ public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
     }
 
     @Override
-    public void draw(@NotNull VoidSieveRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull RecipeHolder<VoidSieveRecipe> recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         //Output
         int x = 102;
         int y = 16;
@@ -76,8 +82,8 @@ public class VoidSieveCategory extends CDPBaseCategory<VoidSieveRecipe> {
                 x = 102;
                 y += 18;
             }
-            if(recipe.outputs.size() > i){
-                double chance = recipe.outputs.get(i).chance();
+            if(recipe.value().outputs.size() > i){
+                double chance = recipe.value().outputs.get(i).chance();
                 if(chance >= 1){
                     AllGuiTextures.BASIC_SLOT.render(guiGraphics,x,y);
                 }else{

@@ -104,6 +104,10 @@
   "jei.cdp2.creative_drawer_info": "Creative Drawer Info",
   "jei.cdp2.chemical_from_cell_info": "Chemical From Cell",
   "jei.cdp2.needed_aura": "Needed Aura: %s",
+  "jei.cdp2.gas_burning": "Gas Burning",
+  "jei.cdp2.gas_burning.burn_tick": "Burn Tick: %s tick",
+  "jei.cdp2.gas_burning.energy_per_tick": "Energy: %s FE/tick",
+  "jei.cdp2.gas_burning.energy_density": "Density: %s FE/mb",
 
   "upgrade.type.cdp2.energy": "Energy",
   "upgrade.type.cdp2.speed": "Speed",

@@ -174,7 +174,15 @@ dependencies {
     implementation "dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.4"
 
     //mekanism
-    implementation "curse.maven:mekanism-268560:7621971"
+    implementation "curse.maven:mekanism-268560:7904058"
+    //mekanism generators
+    implementation "curse.maven:mekanism-generators-268566:7904061"
+    //mekanism extra
+    implementation "curse.maven:mekanism-extras-1026040:8677677"
+    //mekanism more machine
+    implementation "curse.maven:mekanism-more-machine-1275257:8724947"
+    //mekanism unleashed
+    implementation "curse.maven:mekanism-unleashed-1072209:6487994"
 
     //ldlib
     implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all")
@@ -200,12 +208,6 @@ dependencies {
     implementation "curse.maven:mystical-agriculture-246640:7397787"
     //mystical agradditions
     implementation "curse.maven:mystical-agradditions-256247:7397775"
-
-    //mekanism extra
-    implementation "curse.maven:mekanism-extras-1026040:7628313"
-
-    //mekanism unleashed
-    implementation "curse.maven:mekanism-unleashed-1072209:6487994"
 
     //curios
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
