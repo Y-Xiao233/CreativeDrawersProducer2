@@ -1,6 +1,7 @@
 package net.yxiao233.cdp2.common.event;
 
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -43,6 +44,7 @@ public class PlayerEvent {
             }
             if(blockEntity instanceof IRightClickedHandler handler && CreativeDrawerBlockEntity.getHitDirection(event.getLevel(),event.getEntity()) == blockDirection){
                 handler.onRightClicked(event.getEntity(),blockEntity);
+                event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(true);
             }
         }else if(blockState.getBlock() instanceof CDPMachineEntityBlock<?> machine){
@@ -54,8 +56,10 @@ public class PlayerEvent {
             if(blockEntity instanceof IRightClickedHandler handler){
                 if(stack.isEmpty() || !(stack.getItem() instanceof BlockItem)) {
                     handler.onRightClicked(event.getEntity(),blockEntity);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
                 }else{
                     handler.onRightClicked(event.getEntity(),blockEntity);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
                     event.setCanceled(true);
                 }
             }

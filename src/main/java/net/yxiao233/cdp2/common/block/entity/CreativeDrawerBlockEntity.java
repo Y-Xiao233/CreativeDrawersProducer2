@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 
 public class CreativeDrawerBlockEntity extends CDPCapabilitiesBlockEntity implements ITickableBlockEntity, ILeftClickHandler, IRightClickedHandler {
     private final BlockCapabilityMap capabilityMap = BlockCapabilityMap.create()
-            .add(new ItemCapability(new BigItemStackHandler(1,Integer.MAX_VALUE){
+            .add(new ItemCapability<>(new BigItemStackHandler(1,Integer.MAX_VALUE){
                 @Override
                 protected void onContentsChanged(int slot) {
                     setChanged();
