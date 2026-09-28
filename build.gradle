@@ -279,6 +279,9 @@ dependencies {
 
     //productivebees
     implementation "curse.maven:productivebees-377897:8022994"
+
+    //just dire things
+    implementation "curse.maven:just-dire-things-1002348:7463040"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
