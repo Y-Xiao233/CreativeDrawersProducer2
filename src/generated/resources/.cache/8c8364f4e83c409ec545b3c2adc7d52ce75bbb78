@@ -1,4 +1,5 @@
-// 1.21.1	2026-09-14T14:56:32.6307959	Tags for minecraft:item mod id vanilla
+// 1.21.1	2026-09-30T23:05:25.2636393	Tags for minecraft:item mod id vanilla
 64d84f749ff7b41d30c1d385f26bbee5e98aabde data/cdp2/tags/item/botany_pots.json
 f93594db0f0cc0f01b190f524e30ee97ff1d81c5 data/cdp2/tags/item/creative_drawers.json
 949a98d25479cf9305ac7d8ef24d704381481966 data/cdp2/tags/item/creative_shards.json
+100e6f3ba881fb2318434cfa85b8c25b1b67b33b data/c/tags/item/ores.json

@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:add_features",
+    "biomes": "cdp2:myrkhal",
+    "features": "cdp2:twisted_brilliant_stone_placed",
+    "step": "underground_ores"
+}

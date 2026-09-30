@@ -22,6 +22,9 @@
         "cdp2:void_matter_creative_drawer",
         "cdp2:apple_creative_drawer",
         "cdp2:prosperity_shard_creative_drawer",
-        "cdp2:oak_log_creative_drawer"
+        "cdp2:oak_log_creative_drawer",
+        "cdp2:twisted_cthonic_gold_ore",
+        "cdp2:twisted_soulstone_ore",
+        "cdp2:twisted_brilliant_stone"
     ]
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-30T20:01:13.4943055	Block States: cdp2
+// 1.21.1	2026-09-30T23:05:25.2688911	Block States: cdp2
 0f7ca1be6d5dbc9a00872ebbaa0532a70d5c18dc assets/cdp2/blockstates/absolute_botany_pot.json
 7ba02fb84c93765c88845012c0e373f2bb85a4ef assets/cdp2/blockstates/absolute_farmland.json
 0368d52e0320bf630c8bfdadd20adde4288d3144 assets/cdp2/blockstates/absolute_hopper_botany_pot.json
@@ -20,6 +20,9 @@ cd19bced713404eedd1288f3bd8a1e7b65978a01 assets/cdp2/blockstates/infinite_botany
 ba7fe8f865d82ccbe71ab0d6835085b0f843cf51 assets/cdp2/blockstates/supreme_botany_pot.json
 7ba02fb84c93765c88845012c0e373f2bb85a4ef assets/cdp2/blockstates/supreme_farmland.json
 4a19ead99cdbadc018362497d225970a07c03a18 assets/cdp2/blockstates/supreme_hopper_botany_pot.json
+57b80e5939e5f4bf48809ae0d9d44e9bb78e12c2 assets/cdp2/blockstates/twisted_brilliant_stone.json
+1b18bca576cf4565925e79d353def2887d6d7337 assets/cdp2/blockstates/twisted_cthonic_gold_ore.json
+a3129e76991f77a9510c942bd3a93aebe1890826 assets/cdp2/blockstates/twisted_soulstone_ore.json
 04ab446c7e2479311763c98a8e3fb2a9862ed7fe assets/cdp2/blockstates/unknown_block.json
 63fc30cba3a6cc83e7a2a14ab51da50d4cf59d15 assets/cdp2/blockstates/upgrade_station.json
 838b4633facd6208de1012211e366deb16798d19 assets/cdp2/blockstates/void_block.json
@@ -36,6 +39,9 @@ d3b3fddb9c2c91a243ed3a963d53da1eea476574 assets/cdp2/models/block/infinite_hoppe
 aae9a8bb8f7887655af34c426cb7d953a8664e0b assets/cdp2/models/block/liquid_unknown.json
 c3b25d66d9f6ae6e14f3fd9d00963cfdbe24935f assets/cdp2/models/block/supreme_botany_pot.json
 3a544c26fbe03580ec9b3e63c3e94e563ea45529 assets/cdp2/models/block/supreme_hopper_botany_pot.json
+0bd2bb5c0d5fa51d5a3e417c2fd86ba4ab389b8c assets/cdp2/models/block/twisted_brilliant_stone.json
+80ad2e0891afb2e02d944651723038e2a3b8bf68 assets/cdp2/models/block/twisted_cthonic_gold_ore.json
+354dd1b4f02e1e622d971f4c3214c7fda076e501 assets/cdp2/models/block/twisted_soulstone_ore.json
 757d6e0b4f27761d5a20e5b572075a140bbffe8c assets/cdp2/models/block/unknown_block.json
 39647a5060701ec6acf1ec79f648ba7d125e89a0 assets/cdp2/models/block/void_block.json
 0381ca19e24ebab4cdc33d306fa329699431106b assets/cdp2/models/item/absolute_botany_pot.json
@@ -60,6 +66,9 @@ cbc02d9e7f789969db40687b70450274fe8f12b6 assets/cdp2/models/item/random_creative
 2a38091452d070604f41d72516c3439e43dc4392 assets/cdp2/models/item/supreme_botany_pot.json
 cd3a632dcbfc89063765bfbb67b779ba1b54e82e assets/cdp2/models/item/supreme_farmland.json
 d682f43a8f21527bdc780c8fff00e14e918dfa6f assets/cdp2/models/item/supreme_hopper_botany_pot.json
+743d1b112115362f1f0ebebd0c56097f7878634e assets/cdp2/models/item/twisted_brilliant_stone.json
+71f0db470fc6d7e1089afa5059f3d626ce2adb45 assets/cdp2/models/item/twisted_cthonic_gold_ore.json
+a1152098d9104ed9146980f5c14fab4ea0592072 assets/cdp2/models/item/twisted_soulstone_ore.json
 170c4ea7b7c9e638b2c436bfc4d6053bbfec4ed1 assets/cdp2/models/item/unknown_block.json
 1c141517729063c31c2d5cc4ea2c6a77abda3e5e assets/cdp2/models/item/upgrade_station.json
 e0225567eb55c9642a57053c6b8743bac42d1781 assets/cdp2/models/item/void_block.json

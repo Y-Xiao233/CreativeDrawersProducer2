@@ -1,5 +1,7 @@
-// 1.21.1	2026-09-24T19:32:34.760594	Tags for minecraft:block mod id cdp2
+// 1.21.1	2026-09-30T23:09:57.2741429	Tags for minecraft:block mod id cdp2
 64d84f749ff7b41d30c1d385f26bbee5e98aabde data/cdp2/tags/block/botany_pots.json
 f93594db0f0cc0f01b190f524e30ee97ff1d81c5 data/cdp2/tags/block/creative_drawers.json
-feccfaef783729faebd740a15f5a4168a12778ae data/minecraft/tags/block/mineable/pickaxe.json
+100e6f3ba881fb2318434cfa85b8c25b1b67b33b data/c/tags/block/ores.json
+94a9bfbaa616cbb27bd3867e0b132efe211f3b7e data/minecraft/tags/block/mineable/pickaxe.json
 6e05514b01c7e1beaceed4595f5d4fd51392b2b7 data/minecraft/tags/block/mineable/shovel.json
+100e6f3ba881fb2318434cfa85b8c25b1b67b33b data/minecraft/tags/block/needs_stone_tool.json

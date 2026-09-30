@@ -78,6 +78,18 @@ public class CDPBlock {
     public static final BlockWithTile BEE_SPAWNER = registerIF("bee_spawner", BeeSpawnerBlock::new, BeeSpawnerBlockEntity::new);
     public static final BlockWithTile BEE_FISHING_DEVICE = registerIF("bee_fishing_device", BeeFishingDeviceBlock::new, BeeFishingDeviceBlockEntity::new);
     public static final BlockWithTile BEE_CONVERTER = registerIF("bee_converter", BeeConverterBlock::new, BeeConverterBlockEntity::new);
+    //twisted ores (unknown dimension)
+    public static final CDPBlockDeferredRegister TWISTED_CTHONIC_GOLD_ORE = registerOre("twisted_cthonic_gold_ore");
+    public static final CDPBlockDeferredRegister TWISTED_SOULSTONE_ORE = registerOre("twisted_soulstone_ore");
+    public static final CDPBlockDeferredRegister TWISTED_BRILLIANT_STONE = registerOre("twisted_brilliant_stone");
+
+    /**
+     * Mining level stone (minecraft:needs_stone_tool) and pickaxe required, same hardness/resistance as the gold ore.
+     * The drops are defined in the loot tables (no experience).
+     */
+    static CDPBlockDeferredRegister registerOre(String name){
+        return CDPBlockDeferredRegister.registrySimple(name,() -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_ORE)),new Item.Properties()).addToTab(CDPTab.CONTENT_TAB);
+    }
 
     static <T extends BlockEntity> CDPBlockEntityDeferredRegister<T> registrySimple(String name, BlockSupplier<?> blockSupplier, BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier){
         return CDPBlockEntityDeferredRegister.registrySimple(name,() -> blockSupplier.create(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)),blockEntitySupplier,new Item.Properties());

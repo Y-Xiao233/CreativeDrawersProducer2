@@ -74,6 +74,10 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         onlyItem(CDPBlock.BEE_SPAWNER.getBlock());
         fourWayBlockState(CDPBlock.BREEDING_CHAMBER.getBlock());
         onlyItem(CDPBlock.BREEDING_CHAMBER.getBlock());
+        //twisted ores
+        cubeAll(CDPBlock.TWISTED_CTHONIC_GOLD_ORE);
+        cubeAll(CDPBlock.TWISTED_SOULSTONE_ORE);
+        cubeAll(CDPBlock.TWISTED_BRILLIANT_STONE);
         //fluids
         fluidBlock(CDPFluid.LIQUID_UNKNOWN);
     }

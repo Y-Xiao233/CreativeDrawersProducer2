@@ -3,6 +3,7 @@ package net.yxiao233.cdp2.api.registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.yxiao233.cdp2.common.registry.CDPBiomes;
 
 import java.util.List;
@@ -28,6 +29,20 @@ public class CDPDefaultFeatureRegister {
         CDPConfigureFeatureRegister c = configureFeature(name,rules,size);
         CDPPlacedFeatureRegister p = placedFeature(name,c,count,min,max);
         CDPBiomeModifiersRegister b = defaultBiomeModifiers(name,biome,p);
+        return new CDPDefaultFeatureRegister(c,p,b);
+    }
+
+    /**
+     * Same as {@link #registry(String, ResourceKey, List, int, int, int, int)} but with free placement modifiers and
+     * several biomes (one biome modifier per biome is generated).
+     */
+    public static CDPDefaultFeatureRegister registry(String name, List<ResourceKey<Biome>> biomes, List<OreConfiguration.TargetBlockState> rules, int size, List<PlacementModifier> modifiers){
+        CDPConfigureFeatureRegister c = configureFeature(name,rules,size);
+        CDPPlacedFeatureRegister p = CDPPlacedFeatureRegister.registrySimple(name + "_placed",c.getConfiguredFeature(),modifiers);
+        CDPBiomeModifiersRegister b = null;
+        for(ResourceKey<Biome> biome : biomes){
+            b = CDPBiomeModifiersRegister.registrySimple("add_" + name + "_to_" + biome.location().getPath(),biome,p.getPlacedFeature());
+        }
         return new CDPDefaultFeatureRegister(c,p,b);
     }
     public static CDPDefaultFeatureRegister registryDefault(String name, CDPBlockDeferredRegister replaceBlock){

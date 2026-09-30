@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
@@ -23,6 +24,11 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         Block[] drawers = DataGenUtil.blockEntityMapForBlocks(CDPBlock.CREATIVE_DRAWERS_MAP);
         Block[] pots = DataGenUtil.typedBlockEntityMapForBlocks(CDPBlock.POTS_MAP);
+        Block[] ores = {
+                CDPBlock.TWISTED_CTHONIC_GOLD_ORE.asBlock(),
+                CDPBlock.TWISTED_SOULSTONE_ORE.asBlock(),
+                CDPBlock.TWISTED_BRILLIANT_STONE.asBlock()
+        };
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(CDPBlock.UPGRADE_STATION.asBlock())
@@ -37,7 +43,14 @@ public class CDPBlockTagProvider extends BlockTagsProvider {
                 .add(CDPBlock.BEE_SPAWNER.getBlock())
                 .add(CDPBlock.BEE_FISHING_DEVICE.getBlock())
                 .add(CDPBlock.BEE_CONVERTER.getBlock())
-                .add(drawers);
+                .add(drawers)
+                .add(ores);
+
+        this.tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(ores);
+
+        this.tag(Tags.Blocks.ORES)
+                .add(ores);
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(CDPBlock.ABSOLUTE_FARMLAND.asBlock())

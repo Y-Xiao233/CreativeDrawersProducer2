@@ -1,5 +1,6 @@
 package net.yxiao233.cdp2.datagen;
 
+import com.sammy.malum.registry.common.item.MalumItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -35,6 +36,10 @@ public class CDPBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(CDPBlock.BEE_CONVERTER.getBlock());
         this.dropSelf(CDPBlock.BEE_FISHING_DEVICE.getBlock());
         this.dropSelf(CDPBlock.BEE_SPAWNER.getBlock());
+        //twisted ores: silk touch drops the block itself, otherwise the malum raw material (no experience)
+        this.add(CDPBlock.TWISTED_CTHONIC_GOLD_ORE.asBlock(),this.createOreDrop(CDPBlock.TWISTED_CTHONIC_GOLD_ORE.asBlock(),MalumItems.CTHONIC_GOLD_FRAGMENT.get()));
+        this.add(CDPBlock.TWISTED_SOULSTONE_ORE.asBlock(),this.createOreDrop(CDPBlock.TWISTED_SOULSTONE_ORE.asBlock(),MalumItems.RAW_SOULSTONE.get()));
+        this.add(CDPBlock.TWISTED_BRILLIANT_STONE.asBlock(),this.createOreDrop(CDPBlock.TWISTED_BRILLIANT_STONE.asBlock(),MalumItems.RAW_BRILLIANCE.get()));
     }
 
     @Override

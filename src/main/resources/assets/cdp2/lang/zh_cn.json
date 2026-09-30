@@ -22,6 +22,9 @@
   "block.cdp2.bee_fishing_device": "工业蜜蜂捕获器",
   "block.cdp2.bee_spawner": "工业蜜蜂生成器",
   "block.cdp2.liquid_unknown": "未知流体",
+  "block.cdp2.twisted_cthonic_gold_ore": "扭曲深岩珍金矿石",
+  "block.cdp2.twisted_soulstone_ore": "扭曲灵魂石矿石",
+  "block.cdp2.twisted_brilliant_stone": "扭曲经验晶矿石",
 
   "dimension.cdp2.unknown": "未知领域",
   "biome.cdp2.quorveth": "库尔维斯",
