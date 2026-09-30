@@ -284,6 +284,11 @@ dependencies {
 
     //just dire things
     implementation "curse.maven:just-dire-things-1002348:7463040"
+
+    //kiwi
+    implementation "curse.maven:kiwi-303657:8423062"
+    //lychee
+    implementation "curse.maven:lychee-567403:8824871"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

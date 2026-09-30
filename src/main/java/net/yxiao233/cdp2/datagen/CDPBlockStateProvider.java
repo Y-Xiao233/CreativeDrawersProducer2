@@ -18,11 +18,13 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.block.property.IRotatableBlock;
 import net.yxiao233.cdp2.api.block.property.RotationHandler;
+import net.yxiao233.cdp2.api.fluid.BaseFluidInstance;
 import net.yxiao233.cdp2.api.registry.CDPBlockDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPBlockEntityDeferredRegister;
 import net.yxiao233.cdp2.api.registry.CDPItemDeferredRegister;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.registry.CDPBlock;
+import net.yxiao233.cdp2.common.registry.CDPFluid;
 import net.yxiao233.cdp2.common.registry.CDPItem;
 import net.yxiao233.cdp2.common.integration.botanypot.block.CDPBotanyPotEntityBlock;
 
@@ -72,6 +74,22 @@ public class CDPBlockStateProvider extends BlockStateProvider {
         onlyItem(CDPBlock.BEE_SPAWNER.getBlock());
         fourWayBlockState(CDPBlock.BREEDING_CHAMBER.getBlock());
         onlyItem(CDPBlock.BREEDING_CHAMBER.getBlock());
+        //fluids
+        fluidBlock(CDPFluid.LIQUID_UNKNOWN);
+    }
+
+    /**
+     * Fluid blocks are invisible blocks: their appearance comes from the fluid renderer.
+     * They still need a blockstate and a model (with only a particle texture, like vanilla's
+     * water/lava) or the block would bake to the missing model and be displayed as the
+     * magenta/black checkerboard cube by anything that renders the block directly (JEI/EMI...).
+     */
+    private void fluidBlock(BaseFluidInstance instance){
+        Block block = instance.getBlockFluid();
+        String path = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        ModelFile model = models().getBuilder("block/" + path)
+                .texture("particle", CDPFluid.stillTexture(instance.getFluidName()));
+        getVariantBuilder(block).partialState().modelForState().modelFile(model).addModel();
     }
 
     private void cubeAll(DeferredHolder<Block,Block> registryObject){
