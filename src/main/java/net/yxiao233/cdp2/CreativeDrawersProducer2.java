@@ -55,6 +55,7 @@ public class CreativeDrawersProducer2{
         CDPFeature.init(modEventBus);
         CDPTab.init(modEventBus);
         CDPDataComponentTypes.DATA_COMPONENTS.register(modEventBus);
+        CDPAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         CDPRecipe.init(modEventBus);
         modEventBus.addListener(CreativeDrawersProducer2::onRegistry);
         modEventBus.addListener(CreativeModeTabEvent::onBuild);
