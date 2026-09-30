@@ -1,7 +1,6 @@
 package net.yxiao233.cdp2.util;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,6 +10,9 @@ import net.yxiao233.cdp2.common.registry.CDPAttachmentTypes;
 
 public class PlayerUtil {
     public static void teleportTo(Player player, ResourceKey<Level> dimension){
+        if(player.isCreative() || player.isSpectator()){
+            return;
+        }
         CompoundTag data = player.getData(CDPAttachmentTypes.PLAYER_EXTRA_DATA);
         if(data.contains("can_go_to_other_dimensions") && !data.getBoolean("can_go_to_other_dimensions")){
             if(player instanceof ServerPlayer serverPlayer){
