@@ -20,8 +20,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.yxiao233.cdp2.common.registry.CDPTab;
-import net.yxiao233.industrialforegoingextra.IndustrialForegoingExtra;
 import org.jetbrains.annotations.NotNull;
 
 public class BaseFluidInstance {
@@ -44,8 +42,7 @@ public class BaseFluidInstance {
         this.flowingFluid = helper.registerGeneric(Registries.FLUID, name + "_flowing", () -> new Flowing(this));
         this.blockFluid = helper.registerGeneric(Registries.BLOCK, name, () -> new LiquidBlock((FlowingFluid)this.sourceFluid.get(), Properties.of().replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).liquid().sound(SoundType.EMPTY).noLootTable()));
         this.bucketFluid = helper.registerGeneric(Registries.ITEM, name + "_bucket", () -> {
-            BucketItem item = new BucketItem((Fluid)this.sourceFluid.get(), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
-            return item;
+            return new BucketItem((Fluid) this.sourceFluid.get(), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
         });
     }
 
