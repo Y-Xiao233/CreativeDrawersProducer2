@@ -16,6 +16,8 @@ import net.yxiao233.cdp2.api.block.IRightClickedHandler;
 import net.yxiao233.cdp2.api.block.property.RotationHandler;
 import net.yxiao233.cdp2.common.block.CreativeDrawerBlock;
 import net.yxiao233.cdp2.common.block.entity.CreativeDrawerBlockEntity;
+import net.yxiao233.cdp2.common.registry.CDPDimension;
+import net.yxiao233.cdp2.util.PlayerUtil;
 
 @SuppressWarnings({"removal","unused"})
 @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
@@ -64,5 +66,10 @@ public class PlayerEvent {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerRespawnEvent event){
+        PlayerUtil.teleportTo(event.getEntity(), CDPDimension.UNKNOWN.getLevel());
     }
 }
