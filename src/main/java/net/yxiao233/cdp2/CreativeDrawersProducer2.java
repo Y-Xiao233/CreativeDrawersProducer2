@@ -1,6 +1,7 @@
 package net.yxiao233.cdp2;
 
 import appeng.api.client.AEKeyRendering;
+import com.hrznstudio.titanium.module.ModuleController;
 import com.moakiee.ae2lt.packaged.logic.multiblock.AdapterRegistration;
 import com.moakiee.ae2lt.packaged.logic.multiblock.MultiblockAdapterRegistry;
 import com.mojang.logging.LogUtils;
@@ -43,13 +44,14 @@ import org.slf4j.Logger;
 import java.util.Map;
 
 @Mod(CreativeDrawersProducer2.MODID)
-public class CreativeDrawersProducer2{
+public class CreativeDrawersProducer2 extends ModuleController {
     public static final String MODID = "cdp2";
     public static final Logger LOGGER = LogUtils.getLogger();
     private static boolean frozenCreativeDrawer = false;
     private static boolean loadKubeJSWhiteList = false;
     public static boolean hideNeededAura = false;
     public CreativeDrawersProducer2(IEventBus modEventBus, ModContainer modContainer) {
+        super(modContainer);
         CDPItem.init(modEventBus); 
         CDPBlock.init(modEventBus);
         CDPFeature.init(modEventBus);
@@ -61,6 +63,7 @@ public class CreativeDrawersProducer2{
         modEventBus.addListener(CreativeModeTabEvent::onBuild);
         modEventBus.addListener(CreativeDrawersProducer2::commonSetup);
         modEventBus.addListener(CDPAEKeyType::register);
+
         CDPTaskTypes.init();
     }
 
@@ -80,6 +83,11 @@ public class CreativeDrawersProducer2{
         }
 
         MultiblockAdapterRegistry.register(AdapterRegistration.of(HephaestusForgeAdapter.ADAPTER_ID, new HephaestusForgeAdapter()));
+    }
+
+    @Override
+    protected void initModules() {
+        new CDPFluid().generateFeatures(this.getRegistries());
     }
 
     @SuppressWarnings({"removal","deprecation"})

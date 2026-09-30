@@ -21,6 +21,7 @@
   "block.cdp2.bee_converter": "Industrial Bee Converter",
   "block.cdp2.bee_fishing_device": "Industrial Bee Fishing Device",
   "block.cdp2.bee_spawner": "Industrial Bee Spawner",
+  "block.cdp2.liquid_unknown": "Liquid Unknown",
 
 
   "dimension.cdp2.unknown": "Unknown",
@@ -40,6 +41,10 @@
   "item.cdp2.void_omni_tool": "§8Void Omni Tool",
   "item.cdp2.configuration_card": "Configuration Card",
   "item.cdp2.hephaestus_forge_packaged_core": "Hephaestus Forge Packaged Core",
+  "item.cdp2.liquid_unknown_bucket": "Liquid Unknown Bucket",
+
+
+  "fluid_type.cdp2.liquid_unknown": "Liquid Unknown",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",

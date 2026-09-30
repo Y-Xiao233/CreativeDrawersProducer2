@@ -1,6 +1,5 @@
 package net.yxiao233.cdp2.worldgen;
 
-import com.buuz135.industrial.module.ModuleCore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
@@ -8,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.yxiao233.cdp2.common.registry.CDPFluid;
 
 public class CDPRiverFluidFeature extends Feature<NoneFeatureConfiguration> {
     private static final int SEA_LEVEL = 40;
@@ -20,7 +20,7 @@ public class CDPRiverFluidFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context){
         WorldGenLevel level = context.level();
         ChunkPos chunkPos = new ChunkPos(context.origin());
-        BlockState gas = ModuleCore.ETHER.getSourceFluid().get().defaultFluidState().createLegacyBlock();
+        BlockState gas = CDPFluid.LIQUID_UNKNOWN.getSourceFluid().get().defaultFluidState().createLegacyBlock();
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
         for(int dx = 0; dx < 16; dx++){

@@ -21,6 +21,7 @@
   "block.cdp2.bee_converter": "工业蜜蜂转化器",
   "block.cdp2.bee_fishing_device": "工业蜜蜂捕获器",
   "block.cdp2.bee_spawner": "工业蜜蜂生成器",
+  "block.cdp2.liquid_unknown": "未知流体",
 
   "dimension.cdp2.unknown": "未知领域",
   "biome.cdp2.quorveth": "库尔维斯",
@@ -39,6 +40,10 @@
   "item.cdp2.void_omni_tool": "§8虚空全能工具",
   "item.cdp2.configuration_card": "配置卡",
   "item.cdp2.hephaestus_forge_packaged_core": "赫菲斯托斯锻炉封包核心",
+  "item.cdp2.liquid_unknown_bucket": "未知流体桶",
+
+
+  "fluid_type.cdp2.liquid_unknown": "未知流体",
 
   "cropTier.cdp2.absolute": "7",
   "cropTier.cdp2.supreme": "8",
