@@ -42,6 +42,7 @@
     "mekanism.ItemUpgradeMixin",
     "mekanism.TileComponentUpgradeAccessor",
     "mekanism.TileComponentUpgradeMixin",
+    "minecraft.ServerChunkCacheMixin",
     "minecraft.WitherSkullBlockMixin",
     "mysticalagriculture.AwakeningCategoryMixin",
     "mysticalagriculture.EnchanterCategoryMixin",

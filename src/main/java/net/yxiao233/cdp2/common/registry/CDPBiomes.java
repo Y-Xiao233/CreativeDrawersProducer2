@@ -10,9 +10,13 @@ import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.worldgen.CDPRiverFeatures;
 import net.yxiao233.cdp2.worldgen.CDPTreeFeatures;
 
+import java.util.List;
+
 public class CDPBiomes {
     public static final ResourceKey<Biome> QUORVETH = ResourceKey.create(Registries.BIOME, CreativeDrawersProducer2.makeId("quorveth"));
     public static final ResourceKey<Biome> MYRKHAL = ResourceKey.create(Registries.BIOME, CreativeDrawersProducer2.makeId("myrkhal"));
+    /** Every biome of the unknown dimension, see {@link CDPDimension#UNKNOWN} */
+    public static final List<ResourceKey<Biome>> UNKNOWN_BIOMES = List.of(QUORVETH,MYRKHAL);
 
     public static void boostrap(BootstrapContext<Biome> context){
         context.register(QUORVETH,createBiome(context,0x78A7FF,0x77AB2F,0x77AB2F,0xC0D8FF));

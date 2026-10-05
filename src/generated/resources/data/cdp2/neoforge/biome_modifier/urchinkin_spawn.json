@@ -1,0 +1,13 @@
+{
+    "type": "neoforge:add_spawns",
+    "biomes": [
+        "cdp2:quorveth",
+        "cdp2:myrkhal"
+    ],
+    "spawners": {
+        "type": "cataclysm:urchinkin",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 100
+    }
+}

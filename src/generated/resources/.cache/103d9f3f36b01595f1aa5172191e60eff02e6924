@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-30T23:05:25.2675914	Registries
+// 1.21.1	2026-10-05T21:14:16.0838524	Registries
 26b0c73d7e2aa2619a0c196e8b39acf2146dc1f9 data/cdp2/dimension/unknown.json
 6b26dcb228eb9be0df1fe64f25ca805e67c60185 data/cdp2/dimension_type/unknown_type.json
 21e7589a19084964836a45a891f66bee9e4595be data/cdp2/neoforge/biome_modifier/add_twisted_brilliant_stone_to_myrkhal.json
@@ -7,6 +7,7 @@
 96950804c2919a287950d6a3dedde4b9faf8f207 data/cdp2/neoforge/biome_modifier/add_twisted_cthonic_gold_ore_to_quorveth.json
 74b9b07335ccd5cddeb7b3364f15f1ce3e457c07 data/cdp2/neoforge/biome_modifier/add_twisted_soulstone_ore_to_myrkhal.json
 59229db5fc74d2ebcba15947b68a14916c75e58d data/cdp2/neoforge/biome_modifier/add_twisted_soulstone_ore_to_quorveth.json
+f4b806d2008b941b1f6fabb99cce841faab6f207 data/cdp2/neoforge/biome_modifier/urchinkin_spawn.json
 9f462b6af5f95682ee1245a324321d373f8b2deb data/cdp2/worldgen/biome/myrkhal.json
 887e6d0496e9514048450337d9f960124ed30fa0 data/cdp2/worldgen/biome/quorveth.json
 08f57f584ceeafd3baa3ca1918c47c12c1587d6a data/cdp2/worldgen/configured_feature/river_fluid.json
