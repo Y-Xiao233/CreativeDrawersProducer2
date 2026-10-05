@@ -14,7 +14,7 @@ import net.yxiao233.cdp2.common.registry.CDPSpawns;
  * Spawn rules of the unknown dimension's mobs (see {@link CDPSpawns}):
  * <ul>
  *     <li>the light level is ignored</li>
- *     <li>they only spawn underground, any cave below the surface is valid</li>
+ *     <li>they only spawn underground, below Y {@link #UNDERGROUND_MAX_Y}</li>
  *     <li>a cave only holds a few of them, see {@link #MAX_URCHINKIN_NEARBY}</li>
  * </ul>
  * The dimension also ignores the doMobSpawning game rule, but that is done in
@@ -24,6 +24,11 @@ import net.yxiao233.cdp2.common.registry.CDPSpawns;
 @SuppressWarnings("removal")
 @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class SpawnEvent {
+    /**
+     * Underground means "below this Y". The lowest terrain of the unknown dimension is its river bed at Y 34 (see
+     * {@code CDPNoiseSettings}), so everything below Y 30 is guaranteed to be under the surface.
+     */
+    private static final int UNDERGROUND_MAX_Y = 30;
     /**
      * The vanilla monster cap (70 per player) is shared by every monster type, but this dimension has a single one, so
      * it would fill the whole cap on its own. This adds a local cap on top of it: once this many urchinkin are within
@@ -59,8 +64,9 @@ public class SpawnEvent {
         if(!isUnknownDimension(level)){
             return;
         }
-        //Underground only: below the terrain surface of the column, so any cave or tunnel works, the surface does not
-        if(level.canSeeSky(event.getEntity().blockPosition())){
+        //Underground only: anything at or above Y 30 is the surface (or above it), no matter if a tree or a ledge
+        //hides the sky, so the block position is used instead of the sky light
+        if(event.getEntity().getBlockY() >= UNDERGROUND_MAX_Y){
             event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
             return;
         }
