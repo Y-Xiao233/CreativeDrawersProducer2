@@ -24,6 +24,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), CDPBlockLootTablesProvider.create(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new CDPMalumDataProvider(packOutput));
+        generator.addProvider(event.includeServer(), new CDPCataclysmDataProvider(packOutput));
         generator.addProvider(event.includeClient(), new CDPBlockStateProvider(packOutput,existingFileHelper));
         generator.addProvider(event.includeClient(), new CDPWorldGenProvider(packOutput,lookupProvider));
         generator.addProvider(event.includeClient(), new CDPItemModelProvider(packOutput,existingFileHelper));
