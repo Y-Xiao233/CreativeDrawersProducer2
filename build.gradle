@@ -331,3 +331,43 @@ idea {
         downloadJavadoc = true
     }
 }
+
+//Productive Bees ships Productive Lib as a jar-in-jar (META-INF/jarjar/productivelib-*.jar) and NeoForge does not put
+//nested jars onto the compile classpath, so classes like CentrifugeRecipe cannot be resolved while compiling.
+//This extracts the nested jar and puts it on the compile only classpath; at runtime the game loads the nested jar.
+//An own configuration is used so reading it here cannot depend on the classpath this task feeds into.
+configurations {
+    productiveBees {
+        canBeConsumed = false
+        canBeResolved = true
+    }
+}
+
+dependencies {
+    productiveBees "curse.maven:productivebees-377897:8022994"
+}
+
+var productiveLibDir = layout.buildDirectory.dir("productiveLib")
+var extractProductiveLib = tasks.register("extractProductiveLib") {
+    var beesJars = configurations.productiveBees.filter { it.name.startsWith("productivebees-") && it.name.endsWith(".jar") }
+    inputs.files(beesJars)
+    outputs.dir(productiveLibDir)
+    doLast {
+        var target = productiveLibDir.get().asFile
+        target.mkdirs()
+        beesJars.files.each { outer ->
+            new java.util.zip.ZipFile(outer).withCloseable { zip ->
+                zip.entries().findAll { it.name.startsWith("META-INF/jarjar/") && it.name.endsWith(".jar") }.each { entry ->
+                    var nested = new File(target, entry.name.substring("META-INF/jarjar/".length()))
+                    zip.getInputStream(entry).withCloseable { input ->
+                        nested.withOutputStream { output -> input.transferTo(output) }
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compileOnly files(extractProductiveLib).asFileTree.matching { include "*.jar" }
+}
