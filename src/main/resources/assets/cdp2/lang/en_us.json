@@ -76,6 +76,7 @@
   "tooltip.cdp2.essence_output": "%s Output: %s",
   "tooltip.cdp2.mob_imprisonment_tool.enable": "This entity can be obtained in the Mob Duplicator",
   "tooltip.cdp2.mob_imprisonment_tool.disable": "This entity can't be obtained in the Mob Duplicator",
+  "tooltip.cdp2.need_item_activate": "Need to use %d to activate",
 
   "message.cdp2.mek_upgrade": "Need to use Upgrade Station to upgrade this machine",
   "message.cdp2.configuration_card.error": "Configuration information error, please reset and try again",
