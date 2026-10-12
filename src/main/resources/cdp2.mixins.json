@@ -57,6 +57,7 @@
     "mekanism.TileComponentUpgradeMixin",
     "minecraft.LivingEntityMixin",
     "minecraft.ServerChunkCacheMixin",
+    "minecraft.StructureTemplateMixin",
     "minecraft.WitherSkullBlockMixin",
     "mysticalagriculture.AwakeningCategoryMixin",
     "mysticalagriculture.EnchanterCategoryMixin",

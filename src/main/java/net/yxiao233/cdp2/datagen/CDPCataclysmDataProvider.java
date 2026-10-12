@@ -45,12 +45,6 @@ public class CDPCataclysmDataProvider implements DataProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput cache){
-        //TODO temporary: load the mixin target so its transformation runs during datagen, delete after checking
-        try{
-            Class.forName("com.hollingsworth.arsnouveau.common.ritual.RitualMobCapture",false,CDPCataclysmDataProvider.class.getClassLoader());
-        }catch(ClassNotFoundException ignored){
-        }
-
         List<CompletableFuture<?>> futures = new ArrayList<>(STRUCTURE_BIOMES.size());
         STRUCTURE_BIOMES.forEach((tag,biome) -> futures.add(DataProvider.saveStable(cache,biomeTag(biome),this.biomeTags.json(tag))));
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
