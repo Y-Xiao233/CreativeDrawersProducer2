@@ -4,10 +4,12 @@ import com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.IABossMonste
 import com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.Internal_Animation_Monster;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.yxiao233.cdp2.common.integration.cataclysm.CDPCataclysmBosses;
 import net.yxiao233.cdp2.common.integration.cataclysm.CDPCataclysmItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -47,6 +49,18 @@ public abstract class NetheriteMonstrosityEntityMixin {
     )
     private void cdp2$blockAutomaticAwaken(boolean awaken, CallbackInfo ci){
         if(awaken && !cdp2$awakeningByItem){
+            ci.cancel();
+        }
+    }
+
+    /** An asleep monstrosity must not run the defeat logic either (loot, boss respawner) */
+    @Inject(
+            method = "AfterDefeatBoss",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void cdp2$noDefeatRewardsWhileAsleep(LivingEntity defeated, CallbackInfo ci){
+        if(CDPCataclysmBosses.isAsleep((LivingEntity)(Object)this)){
             ci.cancel();
         }
     }
