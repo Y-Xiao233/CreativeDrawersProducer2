@@ -71,7 +71,8 @@
     "productivebees.BeeBreedingRecipeCategoryMixin",
     "productivebees.BeeConversionRecipeCategoryMixin",
     "productivebees.BeeFishingRecipeCategoryMixin",
-    "productivebees.BeeSpawningRecipeCategoryMixin"
+    "productivebees.BeeSpawningRecipeCategoryMixin",
+    "productivebees.CentrifugeRecipeCategoryMixin"
   ],
   "client": [
   ],
