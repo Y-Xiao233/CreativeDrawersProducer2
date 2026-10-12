@@ -23,6 +23,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.yxiao233.cdp2.CreativeDrawersProducer2;
 import net.yxiao233.cdp2.api.renderer.tooltip.CataclysmItemTooltipComponent;
+import net.yxiao233.cdp2.common.integration.cataclysm.CDPCataclysmBosses;
 import net.yxiao233.cdp2.common.integration.cataclysm.CDPCataclysmItems;
 import net.yxiao233.cdp2.util.ReflectionUtil;
 
@@ -48,13 +49,15 @@ public class CataclysmRenderGuiEvent {
             Entity entity = entityHitResult.getEntity();
             String key = CDPCataclysmItems.keyOf(entity.getType());
             if(key != null){
-                renderHUDTooltip(minecraft,key,guiGraphics);
+                if(CDPCataclysmBosses.isAsleep(entity)){
+                    renderHUDTooltip(minecraft,key,guiGraphics);
+                }
             }
         }else if(minecraft.hitResult instanceof BlockHitResult blockHitResult){
             BlockPos blockPos = blockHitResult.getBlockPos();
             Block block = level.getBlockState(blockPos).getBlock();
-            String key = CDPCataclysmItems.DOOR_OF_SEAL;
-            if(BuiltInRegistries.BLOCK.getKey(block).toString().equals(key)){
+            String key = CDPCataclysmItems.blockKeyOf(block);
+            if(key != null){
                 renderHUDTooltip(minecraft,key,guiGraphics);
             }
         }

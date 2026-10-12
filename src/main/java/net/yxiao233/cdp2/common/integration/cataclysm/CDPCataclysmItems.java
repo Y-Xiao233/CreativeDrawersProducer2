@@ -1,8 +1,10 @@
 package net.yxiao233.cdp2.common.integration.cataclysm;
 
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -26,6 +28,7 @@ public class CDPCataclysmItems {
     public static final String ANCIENT_REMNANT = "cataclysm:ancient_remnant";
     /** Required to activate Ignis (the altar of fire and its boss respawner), vanilla: {@code cataclysm:burning_ashes} */
     public static final String IGNIS = "cataclysm:ignis";
+    public static final String ALTAR_OF_FIRE = "cataclysm:altar_of_fire";
 
     private static final Map<String,Item> ITEMS = new ConcurrentHashMap<>();
 
@@ -43,13 +46,24 @@ public class CDPCataclysmItems {
 
     @Nullable
     public static Item get(@Nullable String key){
-        return key == null ? null : ITEMS.get(key);
+        return key == null ? null : (key.equals(ALTAR_OF_FIRE) ? ITEMS.get(IGNIS) : ITEMS.get(key));
     }
 
     /** The configured item, or {@code fallback} when nothing is configured for that key */
     public static Item get(@Nullable String key, Item fallback){
         Item item = get(key);
         return item == null ? fallback : item;
+    }
+
+    @Nullable
+    public static String blockKeyOf(Block block){
+        String rl = BuiltInRegistries.BLOCK.getKey(block).toString();
+        if(rl.equals(DOOR_OF_SEAL)){
+            return DOOR_OF_SEAL;
+        }else if(rl.equals(ALTAR_OF_FIRE)){
+            return ALTAR_OF_FIRE;
+        }
+        return null;
     }
 
     /** The configuration key of the boss a boss respawner spawns, or null for an unknown boss */
