@@ -23,6 +23,7 @@
     "ae2lt.OverloadExecutionServiceMixin",
     "ae2lt.OverloadProcessingRecipeMixin",
     "arsnouveau.ItemRegistryMixin",
+    "arsnouveau.RitualMobCaptureMixin",
     "arsnouveau.RitualRegistryMixin",
     "cataclysm.AltarOfFireBlockEntityMixin",
     "cataclysm.AncientRemnantEntityMixin",
