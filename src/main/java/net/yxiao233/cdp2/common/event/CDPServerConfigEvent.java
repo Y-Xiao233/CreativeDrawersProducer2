@@ -10,13 +10,9 @@ import net.yxiao233.cdp2.common.integration.cataclysm.CDPCataclysmItems;
 import net.yxiao233.cdp2.common.integration.kubejs.event.CDPModifyEvent;
 import net.yxiao233.cdp2.common.integration.kubejs.event.CataclysmItemModifyEvent;
 
-/**
- * Fires the KubeJS event which fills {@link CDPCataclysmItems} on server start and on every datapack / script reload,
- * so the scripts always own the whole configuration (a removed line takes effect on reload).
- */
 @SuppressWarnings("removal")
 @EventBusSubscriber(modid = CreativeDrawersProducer2.MODID, bus = EventBusSubscriber.Bus.GAME)
-public class CataclysmItemEvent {
+public class CDPServerConfigEvent {
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event){
         reload();
