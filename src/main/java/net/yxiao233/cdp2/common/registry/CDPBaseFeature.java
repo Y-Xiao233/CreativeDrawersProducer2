@@ -17,8 +17,8 @@ import java.util.List;
 public class CDPBaseFeature {
     /** The unknown dimension's underground is malum:twisted_rock, so the ores replace it (like the overworld gold ore replaces #minecraft:stone_ore_replaceables) */
     public static final RuleTest TWISTED_ROCK = new BlockMatchTest(MalumBlocks.TWISTED_ROCK.get());
-    /** Same as the overworld gold ore: 4 veins per chunk, trapezoid between Y -64 and Y 32 */
-    private static final List<PlacementModifier> GOLD_ORE_PLACEMENT = CDPOrePlacement.commonOrePlacement(4,HeightRangePlacement.triangle(VerticalAnchor.absolute(-64),VerticalAnchor.absolute(32)));
+    /** Same as the overworld gold ore (4 veins per chunk, trapezoid Y -64..32) but with four times the vein weight */
+    private static final List<PlacementModifier> GOLD_ORE_PLACEMENT = CDPOrePlacement.commonOrePlacement(16,HeightRangePlacement.triangle(VerticalAnchor.absolute(-64),VerticalAnchor.absolute(32)));
 
     public static final CDPDefaultFeatureRegister TWISTED_CTHONIC_GOLD_ORE = ore("twisted_cthonic_gold_ore",CDPBlock.TWISTED_CTHONIC_GOLD_ORE);
     public static final CDPDefaultFeatureRegister TWISTED_SOULSTONE_ORE = ore("twisted_soulstone_ore",CDPBlock.TWISTED_SOULSTONE_ORE);
